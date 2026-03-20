@@ -395,6 +395,35 @@
       codes.forEach(code => {
         code.classList.add("bg-slate-900", "text-emerald-300", "px-1.5", "py-0.5", "rounded", "text-xs", "font-mono");
       });
+      const detailsList = Array.from(root.querySelectorAll("details"));
+      detailsList.forEach(panel => {
+        panel.classList.add(
+          "mt-4",
+          "mb-4",
+          "rounded-2xl",
+          "border",
+          "border-slate-700",
+          "bg-slate-900/70",
+          "px-3",
+          "py-2.5",
+          "shadow-sm",
+          "space-y-2"
+        );
+      });
+      const summaries = Array.from(root.querySelectorAll("details > summary"));
+      summaries.forEach(summary => {
+        summary.classList.add(
+          "flex",
+          "items-center",
+          "justify-between",
+          "cursor-pointer",
+          "text-[14px]",
+          "sm:text-sm",
+          "font-semibold",
+          "text-slate-50"
+        );
+        summary.style.listStyle = "none";
+      });
     }
 
     function applyFontScale() {
