@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FMS 基础筛查 & 高阶功能容量表现测试 (Capacity SOP)</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #34495e;
+            --accent: #8e44ad;
+            --score3: #27ae60; /* 3分/优秀 - 绿 */
+            --score2: #f39c12; /* 2分/代偿 - 黄 */
+            --score1: #e67e22; /* 1分/受限 - 橙 */
+            --score0: #c0392b; /* 0分/痛或极差 - 红 */
+            --bg-light: #f9f9f9;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ecf0f1;
+        }
+        h1 {
+            text-align: center;
+            color: var(--primary);
+            border-bottom: 4px solid var(--primary);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: var(--secondary);
+            border-left: 5px solid var(--accent);
+            padding-left: 10px;
+            background: #fff;
+            padding: 10px 15px;
+            border-radius: 0 4px 4px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #fff;
+            font-size: 0.9em;
+            margin-right: 5px;
+        }
+        .b-3 { background-color: var(--score3); }
+        .b-2 { background-color: var(--score2); }
+        .b-1 { background-color: var(--score1); }
+        .b-0 { background-color: var(--score0); }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        details {
+            background: var(--bg-light);
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+        summary {
+            font-weight: bold;
+            font-size: 1.1em;
+            cursor: pointer;
+            color: var(--primary);
+            outline: none;
+            padding: 5px 0;
+        }
+        summary:hover {
+            color: var(--accent);
+        }
+        .step-box {
+            margin-left: 20px;
+            border-left: 2px dashed var(--accent);
+            padding-left: 15px;
+            margin-top: 10px;
+        }
+        .measurement {
+            font-family: monospace;
+            background: #f3e5f5;
+            color: #4a148c;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        .warning {
+            background-color: #ffebee;
+            border-left: 4px solid #f44336;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>📊 FMS基础筛查 & 高阶功能容量测试 (Capacity SOP)</h1>
+    
+    <div class="card">
+        <h2>一、 FMS 评分核心法则</h2>
+        <p>在进行任何容量(Capacity)或爆发力测试前，受试者必须通过FMS确立基础动作能力。FMS使用0-3分的评分等级，双侧测试取最低分作为该项最终得分。</p>
+        <table>
+            <tr>
+                <th>得分</th>
+                <th>像素级评判标准</th>
+                <th>干预与进阶指示</th>
+            </tr>
+            <tr>
+                <td><span class="badge b-3">3 分</span></td>
+                <td>受试者能够完美、无任何代偿地完成动作。</td>
+                <td>可安全进入负重、高阶容量与表现(Capacity/Performance)测试。</td>
+            </tr>
+            <tr>
+                <td><span class="badge b-2">2 分</span></td>
+                <td>受试者能完成动作，但在完成基本动作时产生了某种形式的代偿。</td>
+                <td>需进行纠正性训练以优化模式，施加负重前需谨慎。</td>
+            </tr>
+            <tr>
+                <td><span class="badge b-1">1 分</span></td>
+                <td>受试者无法完成动作模式，或无法保持标准起始姿势。</td>
+                <td>禁止盲目施加负重，需作为纠正性干预的最高优先级。</td>
+            </tr>
+            <tr>
+                <td><span class="badge b-0">0 分</span></td>
+                <td>测试过程中或在排除性(Clearing)测试中出现任何部位的疼痛。</td>
+                <td>立即停止该模式，转介使用SFMA进行临床医疗诊断。</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>二、 FMS 7大动作筛查与排除测试SOP</h2>
+
+        <!-- 1. 深蹲 -->
+        <details>
+            <summary>1. 深蹲评估 (Deep Squat)</summary>
+            <div class="step-box">
+                <p><strong>动作准备：</strong>双脚分开与肩同宽。双手握住木棒刚举过头顶，双肘屈曲90度，然后向上推直木棒。</p>
+                <p><strong>动作执行：</strong>保持脚跟紧贴地面，身体逐渐下降进入深蹲姿势。</p>
+                <ul>
+                    <li><span class="badge b-3">3分：</span>上半身与胫骨平行或更垂直；股骨低于水平面；膝关节与脚尖对齐；木棒在双脚正上方。</li>
+                    <li><span class="badge b-2">2分：</span>脚跟垫高(如使用测试板)后，能够达到上述3分的标准。</li>
+                    <li><span class="badge b-1">1分：</span>即使脚跟垫高，股骨也无法低于水平面，或失去腰椎中立位。</li>
+                </ul>
+            </div>
+        </details>
+
+        <!-- 2. 跨栏架步 -->
+        <details>
+            <summary>2. 跨栏架步评估 (Hurdle Step) - 需双侧测试</summary>
+            <div class="step-box">
+                <p><strong>动作准备：</strong>栏架高度调整至受试者胫骨粗隆处。脚尖在栏架正下方。木棒置于肩后。</p>
+                <p><strong>动作执行：</strong>保持脊柱和支撑腿伸展，跨过障碍物，用跨栏腿的脚跟触地后还原。</p>
+                <ul>
+                    <li><span class="badge b-3">3分：</span>髋、膝、踝在矢状面保持对齐；腰椎无明显移动；木棒与栏架保持平行。</li>
+                    <li><span class="badge b-2">2分：</span>动作完成，但髋/膝/踝未对齐，或腰椎代偿性移动，木棒与栏架不平行。</li>
+                    <li><span class="badge b-1">1分：</span>脚触碰到栏架，或完全失去平衡。</li>
+                </ul>
+            </div>
+        </details>
+
+        <!-- 3. 直线弓箭步 -->
+        <details>
+            <summary>3. 直线弓箭步评估 (In-Line Lunge) - 需双侧测试</summary>
+            <div class="step-box">
+                <p><strong>动作准备：</strong>后脚尖至前脚跟的距离等于受试者胫骨长度。木棒触及后脑、胸椎和骶骨。</p>
+                <p><strong>动作执行：</strong>后膝下沉接触前脚跟后方的测试板后站起。</p>
+                <ul>
+                    <li><span class="badge b-3">3分：</span>躯干无代偿；双脚保持在矢状面；后腿膝关节精准触碰前腿脚跟后的测试板。</li>
+                    <li><span class="badge b-2">2分：</span>躯干出现明显倾斜或移动；双脚未能保持在板上；后膝未能碰到前跟。</li>
+                    <li><span class="badge b-1">1分：</span>完全失去平衡，或无法完成下蹲动作。</li>
+                </ul>
+            </div>
+        </details>
+
+        <!-- 4. 肩关节灵活性 -->
+        <details>
+            <summary>4. 肩关节灵活性 (Shoulder Mobility) - 附碰撞排除测试</summary>
+            <div class="step-box">
+                <p><strong>基线测量：</strong>手掌长度（腕横纹到中指尖）。</p>
+                <p><strong>动作执行：</strong>双手握拳（拇指在内），同时在背后上下交汇，尽可能靠近。</p>
+                <ul>
+                    <li><span class="badge b-3">3分：</span>两拳距离 ≤ 1个手掌长度。</li>
+                    <li><span class="badge b-2">2分：</span>两拳距离 ≤ 1.5个手掌长度。</li>
+                    <li><span class="badge b-1">1分：</span>两拳距离 > 1.5个手掌长度。</li>
+                </ul>
+                <p class="warning"><strong>肩部排除测试 (痛=0分)：</strong>将手掌放在对侧肩膀上，主动抬高该侧手肘。如有任何疼痛，此项总分直接记0分。</p>
+            </div>
+        </details>
+
+        <!-- 5. ASLR -->
+        <details>
+            <summary>5. 主动直腿抬高 (ASLR) - 需双侧测试</summary>
+            <div class="step-box">
+                <p><strong>动作准备：</strong>仰卧，测试板放在膝盖下方，双臂平放于体侧。</p>
+                <p><strong>动作执行：</strong>保持脚踝背屈及膝盖伸直，尽可能高地抬起单腿。对侧腿必须保持贴板。</p>
+                <ul>
+                    <li><span class="badge b-3">3分：</span>内踝垂线落在大腿中部与髂前上棘(ASIS)之间。</li>
+                    <li><span class="badge b-2">2分：</span>内踝垂线落在大腿中部与膝关节线之间。</li>
+                    <li><span class="badge b-1">1分：</span>内踝垂线落在膝关节线以下。</li>
+                </ul>
+            </div>
+        </details>
+
+        <!-- 6. 躯干稳定性 -->
+        <details>
+            <summary>6. 躯干稳定性俯卧撑 (TSPU) - 附脊柱伸展排除测试</summary>
+            <div class="step-box">
+                <p><strong>动作准备：</strong>俯卧，双膝伸直。</p>
+                <p><strong>动作执行：</strong>保持脊柱刚性，整体撑起身体，腰椎无“滞后(塌腰)”。</p>
+                <ul>
+                    <li><span class="badge b-3">3分：</span>男性双手大拇指与前额平齐；女性与下颌平齐，完成1次标准俯卧撑。</li>
+                    <li><span class="badge b-2">2分：</span>男性双手移至下颌平齐；女性移至锁骨平齐，完成1次标准俯卧撑。</li>
+                    <li><span class="badge b-1">1分：</span>在2分的位置上也无法完成动作，或腰椎明显塌陷。</li>
+                </ul>
+                <p class="warning"><strong>脊柱伸展排除测试 (痛=0分)：</strong>俯卧姿势下，做眼镜蛇式撑起上半身(Prone Press-up)。如有疼痛记0分。</p>
+            </div>
+        </details>
+
+        <!-- 7. 旋转稳定性 -->
+        <details>
+            <summary>7. 旋转稳定性 (Rotary Stability) - 附脊柱屈曲排除测试</summary>
+            <div class="step-box">
+                <p><strong>动作准备：</strong>四足跪姿，测试板跨在双膝和双手之间。</p>
+                <p><strong>动作执行：</strong>伸展同侧手脚，然后收缩使同侧手肘碰膝盖。如不行，降级为对侧（对角线）手脚相碰。</p>
+                <ul>
+                    <li><span class="badge b-3">3分：</span>同侧手脚伸展平行于测试板，且手肘能触碰同侧膝盖，躯干无代偿。</li>
+                    <li><span class="badge b-2">2分：</span>对角线（对侧）手脚伸展平行于测试板，且手肘能触碰对侧膝盖。</li>
+                    <li><span class="badge b-1">1分：</span>对角线模式也无法完成，失去平衡。</li>
+                </ul>
+                <p class="warning"><strong>脊柱屈曲排除测试 (痛=0分)：</strong>四足跪姿，臀部后坐至脚跟(婴儿式)。如有疼痛记0分。</p>
+            </div>
+        </details>
+    </div>
+
+    <div class="card">
+        <h2>三、 高阶功能容量与表现测试 (Capacity & Performance)</h2>
+        <p>当受试者在FMS中无0分且单项均≥2分时，可进入高阶的容量筛查。以下测试精准评估爆发力、敏捷性及上下肢无氧容量。</p>
+
+        <details>
+            <summary>1. 闭链上肢稳定性测试 (CKCUEST) - 上肢容量评估</summary>
+            <div class="step-box">
+                <p><strong>测试目的：</strong>测量上肢闭链动力下的稳定性、耐力与功率输出。</p>
+                <p><strong>测试设定：</strong>在地面上贴两条运动胶带，间隔 <span class="measurement">36英寸 (约91厘米)</span>。</p>
+                <p><strong>执行动作：</strong>
+                    1. 受试者呈标准俯卧撑姿势（双手分别位于胶带外侧）。<br>
+                    2. 计时开始，受试者交替移动单手去触摸另一侧的胶带。<br>
+                    3. 尽可能快地在15秒内完成“雨刮器”式的触线移动。<br>
+                    4. 取3次测试的平均触线次数。
+                </p>
+                <p><strong>数据换算 (爆发力功率)：</strong> 功率 = [ 68% × 体重(磅) × 触线的平均次数 ] ÷ 15秒</p>
+                <p><strong>临床标准：</strong> 大学生未受伤男性棒球运动员的平均触线次数为 <span class="measurement">30.41 ± 3.87 次</span>。</p>
+            </div>
+        </details>
+
+        <details>
+            <summary>2. T形敏捷性测试 (T-Test) - 多向移动容量</summary>
+            <div class="step-box">
+                <p><strong>测试目的：</strong>测试前后、侧滑步多方向的速度、灵敏性和身体控制。</p>
+                <p><strong>测试设定：</strong>放置4个锥桶呈T形。起始点至中心锥桶(B) 10码；B向左至C锥桶 5码；B向右至D锥桶 5码。</p>
+                <p><strong>执行动作：</strong>
+                    1. 冲刺10码，右手触碰中心锥桶B。<br>
+                    2. 侧滑步向左5码，左手触碰锥桶C。<br>
+                    3. 侧滑步向右10码，右手触碰锥桶D。<br>
+                    4. 侧滑步向左5码返回中心锥桶B，左手触碰。<br>
+                    5. 倒退跑10码返回起点。
+                </p>
+                <p class="warning"><strong>犯规判定：</strong> 侧滑步时双脚交叉交叠、未用指定手触碰锥桶底部、身体未始终保持面向前方。</p>
+            </div>
+        </details>
+
+        <details>
+            <summary>3. 专业灵敏性 5-10-5 测试 (Pro Agility) - 变向容量</summary>
+            <div class="step-box">
+                <p><strong>测试目的：</strong>评估高强度的侧向加速、急停减速与变向能力。</p>
+                <p><strong>执行动作：</strong>
+                    1. 跨立于中心线。<br>
+                    2. 向右侧冲刺 5码，用右手触摸边线。<br>
+                    3. 变向，向左侧冲刺 10码，用左手触摸边线。<br>
+                    4. 再次变向，向右冲刺 5码，穿过中心起始线。<br>
+                    5. 取最好成绩，精确到0.1秒。
+                </p>
+            </div>
+        </details>
+
+        <details>
+            <summary>4. 单腿交叉跳远测试 (Crossover Hop for Distance) - 下肢对称功率</summary>
+            <div class="step-box">
+                <p><strong>测试目的：</strong>在连续跳跃中评估下肢爆发力、减速平衡及额状面侧向控制，计算下肢对称指数(LSI)。</p>
+                <p><strong>测试设定：</strong>在地面上贴一条宽15厘米的直线。</p>
+                <p><strong>执行动作：</strong>
+                    1. 单腿站立于线后。<br>
+                    2. 连续完成3次单腿跳，每次跳跃必须跨越地面的直线（形成交叉轨迹）。<br>
+                    3. 第3次落地后，必须保持稳定的单腿站立姿势，不可出现额外平衡校正（否则无效）。<br>
+                    4. 记录起跳线至脚跟的总距离。
+                </p>
+                <p><strong>数据判读 (LSI)：</strong> 肢体对称指数(LSI) = (较差侧成绩 ÷ 较好侧成绩) × 100%。在重返运动的标准中，LSI应至少达到 <span class="measurement">≥ 90%</span>。</p>
+            </div>
+        </details>
+
+        <details>
+            <summary>5. 下肢功能性测试 (LEFT) - 下肢无氧功率与耐力</summary>
+            <div class="step-box">
+                <p><strong>测试目的：</strong>高级计时无氧容量测试，评估下肢在多向复杂运动中的耐力与功率。</p>
+                <p><strong>测试设定：</strong>长30英尺、宽10英尺的菱形场地。</p>
+                <p><strong>执行动作：</strong>
+                    包含16个连续步骤的高压测试：向前冲刺、倒退冲刺、侧滑步、交叉步、数字8跑、45度和90度急停变向等。<br>
+                    （受试者需按照标准路径一气呵成跑完，测试期间观察心肺与代偿情况）
+                </p>
+                <p><strong>判读标准：</strong> 男性平均约为 <span class="measurement">100秒</span>（<90秒为优秀，>125秒不及格）；女性平均约为 <span class="measurement">135秒</span>（<120秒为优秀，>150秒不及格）。若测试失败，须重返有氧/无氧训练，不应参与极限专项训练。</p>
+            </div>
+        </details>
+    </div>
+
+</body>
+</html>

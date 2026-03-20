@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>精英水上项目：高水平运动表现测试与评估 SOP</title>
+    <style>
+        :root {
+            --primary: #0a192f;    /* 深幽蓝，国家队级别严谨感 */
+            --secondary: #172a45;  /* 模块背景蓝 */
+            --accent: #d4af37;     /* 冠军金，突出精英指标 */
+            --accent-light: #fef08a;
+            --red: #ef4444;        /* 极限红 */
+            --bg-color: #f3f4f6;
+            --text-main: #1e293b;
+            --text-light: #64748b;
+            --border-color: #cbd5e1;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(10, 25, 47, 0.1);
+        }
+
+        /* 头部排版 */
+        .header-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            color: var(--primary);
+            font-size: 32px;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            color: var(--accent);
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .meta-info {
+            background: var(--secondary);
+            color: #e2e8f0;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            border-left: 5px solid var(--accent);
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .meta-item { flex: 1; min-width: 250px; font-size: 14px; }
+        .meta-item strong { color: var(--accent); }
+
+        /* 阶段标题 */
+        h2.phase-title {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-size: 20px;
+            margin-top: 45px;
+            border-left: 6px solid var(--accent);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* 提示说明框 */
+        .instruction-box {
+            background-color: #f8fafc;
+            border: 1px solid var(--border-color);
+            padding: 15px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            color: var(--text-main);
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .alert-box {
+            background-color: #fef2f2;
+            border: 1px solid #fca5a5;
+            padding: 15px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #991b1b;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--red);
+        }
+
+        /* 表格体系 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            font-size: 14px;
+            background: #fff;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 12px 15px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        th { 
+            background-color: var(--primary); 
+            color: #ffffff; 
+            font-weight: 600; 
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+        
+        tr:nth-child(even) { background-color: #f8fafc; }
+        tr:hover { background-color: #f1f5f9; }
+        
+        td.text-left { text-align: left; }
+        td.benchmark { background-color: var(--accent-light); color: #854d0e; font-weight: bold; }
+
+        /* 输入下划线 */
+        .input-line {
+            display: inline-block;
+            border-bottom: 1px solid #000;
+            width: 60px;
+            margin: 0 5px;
+        }
+
+        /* 打印优化 */
+        @media print {
+            body { background: #fff; padding: 0; }
+            .container { box-shadow: none; padding: 0; max-width: 100%; }
+            h2.phase-title { 
+                background: #e2e8f0; 
+                color: #000; 
+                border-left: 6px solid #000; 
+                -webkit-print-color-adjust: exact; 
+                print-color-adjust: exact; 
+            }
+            th { background-color: #cbd5e1; color: #000; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            td.benchmark { background-color: #f3f4f6; color: #000; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .meta-info { background: #f8fafc; color: #000; border: 1px solid #ccc; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            table { page-break-inside: avoid; }
+            h2.phase-title { page-break-before: auto; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header-section">
+        <h1>精英水上项目测试评估 SOP</h1>
+        <div class="subtitle">高水平运动表现与生理生化监控 (Elite Performance Profiling)</div>
+    </div>
+    
+    <div class="meta-info">
+        <div class="meta-item"><strong>👥 适用梯队：</strong> 国家队、省市一线队、大学高水平校队</div>
+        <div class="meta-item"><strong>🔬 测试环境：</strong> 恒温恒湿实验室或室内训练馆 (20-22°C)</div>
+        <div class="meta-item"><strong>⏱️ 测试周期：</strong> 冬训初、冬训末、赛前6周、大赛后恢复期</div>
+        <div class="meta-item"><strong>🛠️ 核心设备：</strong> Concept2/Dansprint测功仪、便携式血乳酸分析仪 (如EKF)、测力台、心率带</div>
+    </div>
+
+    <h2 class="phase-title">📐 第一阶段：形态学与身体成分 (Anthropometric Profiling)</h2>
+    <div class="instruction-box">
+        水上项目对杠杆比例（如臂展长、坐高比例）及功率体重比要求极高。测试需在清晨空腹状态下进行。
+    </div>
+    <table>
+        <tr>
+            <th width="20%">测试项目</th>
+            <th width="30%">测试方法/仪器</th>
+            <th width="20%">实测数据</th>
+            <th width="30%">世界级标杆 (男 / 女)</th>
+        </tr>
+        <tr>
+            <td><strong>基础形态</strong></td>
+            <td class="text-left">身高 (cm) / 体重 (kg)</td>
+            <td>H: <span class="input-line"></span> W: <span class="input-line"></span></td>
+            <td class="benchmark">公开级赛艇多在 190+ / 180+ cm</td>
+        </tr>
+        <tr>
+            <td><strong>核心杠杆</strong></td>
+            <td class="text-left">臂展 (cm) / 指间距至身高比</td>
+            <td><span class="input-line"></span> cm (<span class="input-line"></span> %)</td>
+            <td class="benchmark">臂展 > 身高 (猿指数 > 1.03)</td>
+        </tr>
+        <tr>
+            <td><strong>躯干比例</strong></td>
+            <td class="text-left">坐高 (cm) / 坐高指数 (%)</td>
+            <td><span class="input-line"></span> cm (<span class="input-line"></span> %)</td>
+            <td class="benchmark">长躯干利于划水冲程</td>
+        </tr>
+        <tr>
+            <td><strong>身体成分</strong></td>
+            <td class="text-left">DEXA / ISAK 8点皮褶厚度推算</td>
+            <td>体脂率: <span class="input-line"></span> %</td>
+            <td class="benchmark">男 8-12% / 女 14-18%</td>
+        </tr>
+    </table>
+
+    <h2 class="phase-title">🩸 第二阶段：阶梯血乳酸与有氧代谢能力 (Step Lactate Profiling)</h2>
+    <div class="alert-box">
+        <strong>【操作规范】</strong> 采用 7 × 4 分钟测功仪递增负荷测试（国际赛艇黄金标准）。每阶间隔 30 秒采集指尖血或耳垂血。通过乳酸拐点确定 LT1 (基础有氧阈) 和 LT2 (无氧阈，通常为 4 mmol/L)。
+    </div>
+    <table>
+        <tr>
+            <th width="10%">阶梯</th>
+            <th width="20%">配速目标 (/500m)</th>
+            <th width="15%">输出功率 (W)</th>
+            <th width="15%">心率 (bpm)</th>
+            <th width="15%">血乳酸 (mmol/L)</th>
+            <th width="25%">RPE 主观疲劳 (1-10)</th>
+        </tr>
+        <tr>
+            <td>Step 1</td>
+            <td>目标配速 + 24秒</td>
+            <td><span class="input-line"></span></td>
+            <td><span class="input-line"></span></td>
+            <td><span class="input-line"></span></td>
+            <td><span class="input-line"></span></td>
+        </tr>
+        <tr>
+            <td>Step 2</td>
+            <td>目标配速 + 20秒</td>
+            <td><span class="input-line"></span></td>
+            <td><span class="input-line"></span></td>
+            <td><span class="input-line"></span></td>
+            <td><span class="input-line"></span></td>
+        </tr>
+        <tr>
+            <td>Step 3</td>
+            <td>目标配速 + 16秒</td>
+            <td><span class="input-line"></span></td>
+            <td><span class="input-line"></span></td>
+            <td><span class="input-line"></span></td>
+            <td><span class="input-line"></span></td>
+        </tr>
+        <tr>
+            <td>Step 4</td>
+            <td>目标配速 + 12秒</td>
+            <td><span class="input-line"></span></td>
+            <td><span class="input-line"></span></td>
+            <td><span class="input-line"></span></td>
+            <td><span class="input-line"></span></td>
+        </tr>
+        <tr>
+            <td>Step 5</td>
+            <td>目标配速 + 8秒</td>
+            <td><span class="input-line"></span></td>
+            <td><span class="input-line"></span></td>
+            <td><span class="input-line"></span></td>
+            <td><span class="input-line"></span></td>
+        </tr>
+        <tr>
+            <td>Step 6</td>
+            <td>目标配速 + 4秒</td>
+            <td><span class="input-line"></span></td>
+            <td><span class="input-line"></span></td>
+            <td><span class="input-line"></span></td>
+            <td><span class="input-line"></span></td>
+        </tr>
+        <tr>
+            <td style="color: var(--red); font-weight: bold;">Step 7 (Max)</td>
+            <td style="color: var(--red); font-weight: bold;">极限全力表现</td>
+            <td><span class="input-line"></span></td>
+            <td><span class="input-line"></span></td>
+            <td><span class="input-line"></span></td>
+            <td><span class="input-line"></span></td>
+        </tr>
+        <tr>
+            <td colspan="6" class="text-left" style="background: #fffbeb;">
+                <strong>📊 阈值数据提取：</strong> 
+                LT1 (2 mmol/L) 对应功率: <strong><span class="input-line"></span> W</strong> ；
+                LT2 (4 mmol/L) 对应功率: <strong><span class="input-line"></span> W</strong>
+            </td>
+        </tr>
+    </table>
+
+    <h2 class="phase-title">🏋️ 第三阶段：最大力量与生物力学输出 (Strength & Biomechanics)</h2>
+    <div class="instruction-box">
+        水上项目是典型的力量耐力与爆发力结合项目。<strong>卧拉（Bench Pull）</strong>是评估上肢水平划水力量的核心指标。必须通过测速仪（如 VBT 设备）监控杠铃速度。
+    </div>
+    <table>
+        <tr>
+            <th width="20%">测试动作</th>
+            <th width="25%">测试维度</th>
+            <th width="20%">实测数据 (1RM)</th>
+            <th width="15%">相对力量比</th>
+            <th width="20%">世界级标杆 (男)</th>
+        </tr>
+        <tr>
+            <td class="text-left"><strong>最大卧拉 (Bench Pull)</strong></td>
+            <td class="text-left">上肢水平拉力链 (背阔、菱形肌)</td>
+            <td><span class="input-line"></span> KG</td>
+            <td><span class="input-line"></span> × BW</td>
+            <td class="benchmark">1.3 - 1.5 × BW</td>
+        </tr>
+        <tr>
+            <td class="text-left"><strong>杠铃深蹲 (Back Squat)</strong></td>
+            <td class="text-left">下肢蹬伸绝对力量 (股四、臀大)</td>
+            <td><span class="input-line"></span> KG</td>
+            <td><span class="input-line"></span> × BW</td>
+            <td class="benchmark">1.8 - 2.0 × BW</td>
+        </tr>
+        <tr>
+            <td class="text-left"><strong>硬拉 (Deadlift)</strong></td>
+            <td class="text-left">后侧链/躯干抗屈曲传导力</td>
+            <td><span class="input-line"></span> KG</td>
+            <td><span class="input-line"></span> × BW</td>
+            <td class="benchmark">2.0 - 2.2 × BW</td>
+        </tr>
+        <tr>
+            <td class="text-left"><strong>等长收缩大腿中段拉 (IMTP)</strong></td>
+            <td class="text-left">测力台测试峰值发力率 (RFD)</td>
+            <td>PF: <span class="input-line"></span> N</td>
+            <td><span class="input-line"></span> N/kg</td>
+            <td class="benchmark">> 45 N/kg</td>
+        </tr>
+    </table>
+
+    <h2 class="phase-title">🚣 第四阶段：专项测功仪极致竞速 (Ergometer Sprint & Endurance)</h2>
+    <div class="instruction-box">
+        根据项目差异选择距离：赛艇主测 2000m（混合代谢系统）；皮划艇主测 1000m/500m/200m。以下为通用的无氧/有氧能力拆解测试。
+    </div>
+    <table>
+        <tr>
+            <th width="20%">测试项目</th>
+            <th width="30%">供能系统与专项意义</th>
+            <th width="25%">测试结果</th>
+            <th width="25%">精英指标参考</th>
+        </tr>
+        <tr>
+            <td><strong>10秒 峰值功率 (10s Peak)</strong></td>
+            <td class="text-left">磷酸原系统 (ATP-CP) / 起航爆发力</td>
+            <td>最高瓦数: <span class="input-line"></span> W</td>
+            <td class="benchmark">赛艇男 > 850W</td>
+        </tr>
+        <tr>
+            <td><strong>1分钟 全力冲刺 (1min Max)</strong></td>
+            <td class="text-left">糖酵解无氧耐力 / 冲刺与途中跑接轨</td>
+            <td>平均功率: <span class="input-line"></span> W</td>
+            <td class="benchmark">赛艇男 > 600W</td>
+        </tr>
+        <tr>
+            <td><strong>2000m 赛艇 / 1000m 划艇</strong></td>
+            <td class="text-left">黄金专项能力测试 (有氧为主，无氧为辅)</td>
+            <td>完赛时间: <span class="input-line"></span><br>平均配速: <span class="input-line"></span></td>
+            <td class="benchmark">男子公开级 < 5:50<br>女子公开级 < 6:40</td>
+        </tr>
+        <tr>
+            <td><strong>测试后恢复心率 (HRR)</strong></td>
+            <td class="text-left">迷走神经恢复能力 / 疲劳清除率</td>
+            <td>1min 降幅: <span class="input-line"></span> bpm</td>
+            <td class="benchmark">> 30-40 bpm 降幅</td>
+        </tr>
+    </table>
+
+    <div style="margin-top: 40px; border-top: 2px dashed var(--border-color); padding-top: 20px; display: flex; justify-content: space-between;">
+        <div>
+            <strong>主测教练签字：</strong> __________________
+        </div>
+        <div>
+            <strong>科研监测员签字：</strong> __________________
+        </div>
+        <div>
+            <strong>测试日期：</strong> ____年__月__日
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>水上竞技项目：运动评估与筛查标准操作流程（SOP）</title>
+    <style>
+        :root {
+            --primary: #1e3a8a;    /* 深蓝色，贴合水上项目 */
+            --secondary: #3b82f6;  /* 亮蓝色 */
+            --accent: #f59e0b;     /* 强调色/黄色 */
+            --red: #ef4444;        /* 警示红 */
+            --green: #10b981;      /* 通行绿 */
+            --bg-color: #f3f4f6;
+            --text-main: #1f2937;
+            --text-light: #6b7280;
+            --border-color: #e5e7eb;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        /* 排版标题 */
+        h1 {
+            text-align: center;
+            color: var(--primary);
+            font-size: 28px;
+            border-bottom: 3px solid var(--secondary);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        .meta-info {
+            background: #eff6ff;
+            border-left: 4px solid var(--secondary);
+            padding: 15px 20px;
+            margin-bottom: 30px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .meta-info p { margin: 5px 0; font-weight: 500; }
+
+        h2.phase-title {
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 20px;
+            margin-top: 40px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h3 { color: var(--primary); font-size: 16px; margin-top: 25px; border-left: 4px solid var(--secondary); padding-left: 10px; }
+
+        /* 提示说明框 */
+        .instruction-box {
+            background-color: #f8fafc;
+            border: 1px solid var(--border-color);
+            padding: 12px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .instruction-box strong { color: var(--text-main); }
+
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        th { background-color: #f1f5f9; color: var(--primary); font-weight: 600; text-align: center; }
+        
+        tr:hover { background-color: #f9fafb; }
+        
+        td.text-center { text-align: center; }
+
+        /* 标签卡片 */
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            color: white;
+        }
+        .badge.red { background-color: var(--red); }
+        .badge.green { background-color: var(--green); }
+        .badge.yellow { background-color: var(--accent); color: #fff; }
+
+        /* 流程图样式 */
+        .flowchart-container {
+            background: #111827;
+            color: #10b981;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+            white-space: pre;
+            line-height: 1.8;
+            font-size: 14px;
+        }
+
+        /* 公式与特殊区块 */
+        .formula-box {
+            background: #fffbeb;
+            border: 1px dashed var(--accent);
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 14px;
+            color: #92400e;
+        }
+
+        .checkbox-item { margin-right: 15px; display: inline-block; }
+
+        /* 打印样式优化：确保打印时不截断，隐藏不必要的UI */
+        @media print {
+            body { background: #fff; padding: 0; }
+            .container { box-shadow: none; padding: 0; max-width: 100%; }
+            .phase-title { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .badge { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .flowchart-container { background: #f3f4f6; color: #000; border: 1px solid #ccc; }
+            table { page-break-inside: avoid; }
+            h2.phase-title { page-break-before: auto; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🛶 水上竞技项目：运动评估与筛查标准操作流程（SOP）</h1>
+    
+    <div class="meta-info">
+        <p><strong>👥 适用对象：</strong> 皮划艇、赛艇、龙舟等水上项目运动员</p>
+        <p><strong>👨‍⚕️ 执行人员：</strong> 队医/理疗师（负责分流与SFMA）、体能教练/康复师（负责FMS、YBT与体能测试）</p>
+    </div>
+
+    <h2 class="phase-title">🛑 第一阶段：入口症状分流 (Triage Flowchart)</h2>
+    <div class="instruction-box">
+        <strong>【操作说明】</strong> 在任何测试开始前，必须对运动员进行口头询问与症状分流。
+    </div>
+    <div class="flowchart-container">
+[入口问询]：运动员目前是否有肌肉骨骼疼痛或已知未愈伤病？
+      │
+      ├─► 【是 (红灯)】 ──► 停止常规测试，直接转介队医进行【第五阶段：SFMA临床评估】
+      │
+      └─► 【否 (绿灯)】 ──► 获准进入常规筛查，执行【第二阶段：FMS基础筛查】
+    </div>
+
+    <h2 class="phase-title">🟢 第二阶段：功能动作筛查 (FMS)</h2>
+    <div class="instruction-box">
+        <strong>【操作说明】</strong> 针对无痛运动员进行7项基础动作模式与3项排除性测试。水上项目需重点关注 <strong>ASLR（主动直腿抬高）</strong>、<strong>TSPU（躯干稳定性）</strong> 和旋转稳定性。
+    </div>
+    
+    <h3>【FMS 标准评分规则表】</h3>
+    <table>
+        <tr>
+            <th width="10%">得分</th>
+            <th width="40%">评分标准说明</th>
+            <th width="50%">临床与训练建议</th>
+        </tr>
+        <tr>
+            <td class="text-center"><strong>3分</strong></td>
+            <td>能够完美、无代偿地完成标准动作</td>
+            <td>动作达标，可安全进入负重与高阶体能训练</td>
+        </tr>
+        <tr>
+            <td class="text-center"><strong>2分</strong></td>
+            <td>能完成动作，但必须利用不良力学机制或代偿</td>
+            <td>需进行纠正性训练，消除代偿前谨慎负重</td>
+        </tr>
+        <tr>
+            <td class="text-center"><span class="badge red">1分</span></td>
+            <td>即使使用代偿机制也无法完成动作</td>
+            <td><strong>高危！</strong>绝对禁止在该模式下负重，最高优先纠正</td>
+        </tr>
+        <tr>
+            <td class="text-center"><span class="badge red">0分</span></td>
+            <td>在测试中（含排除测试）出现任何疼痛</td>
+            <td>立即停止测试，转入SFMA临床诊断</td>
+        </tr>
+    </table>
+
+    <h3>【FMS 现场测试记录表】</h3>
+    <div class="instruction-box">注：双侧测试项目取最低分作为该项最终得分，若排除测试阳性（痛）则对应项直接记0分。</div>
+    <table>
+        <tr>
+            <th width="30%">测试项目</th>
+            <th width="15%">左侧得分 (0-3)</th>
+            <th width="15%">右侧得分 (0-3)</th>
+            <th width="15%">最终得分</th>
+            <th width="25%">排除性测试 (痛=0分)</th>
+        </tr>
+        <tr>
+            <td>1. 深蹲 (Deep Squat)</td>
+            <td class="text-center">--</td>
+            <td class="text-center">--</td>
+            <td></td>
+            <td>无</td>
+        </tr>
+        <tr>
+            <td>2. 跨栏架步 (Hurdle Step)</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>无</td>
+        </tr>
+        <tr>
+            <td>3. 直线弓箭步 (In-Line Lunge)</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>无</td>
+        </tr>
+        <tr>
+            <td>4. 肩关节灵活性 (Shoulder Mob.)</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>撞击测试：阳性[ ] 阴性[ ]</td>
+        </tr>
+        <tr>
+            <td>5. 主动直腿抬高 (ASLR)</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>无</td>
+        </tr>
+        <tr>
+            <td>6. 躯干稳定性俯卧撑 (TSPU)</td>
+            <td class="text-center">--</td>
+            <td class="text-center">--</td>
+            <td></td>
+            <td>脊柱伸展：阳性[ ] 阴性[ ]</td>
+        </tr>
+        <tr>
+            <td>7. 旋转稳定性 (Rotary Stab.)</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>脊柱屈曲：阳性[ ] 阴性[ ]</td>
+        </tr>
+        <tr>
+            <td colspan="3" style="text-align: right;"><strong>总分 (Max: 21)</strong></td>
+            <td colspan="2" style="font-size: 18px; font-weight: bold; color: var(--primary);">/21</td>
+        </tr>
+        <tr>
+            <td colspan="5" class="text-center" style="background: #fffbeb; color: #b45309;">
+                （水上项目需重点确保 <strong>ASLR, TSPU ≥ 2分</strong>）
+            </td>
+        </tr>
+    </table>
+
+    <h2 class="phase-title">⚖️ 第三阶段：高阶动态平衡测试 (YBT)</h2>
+    <div class="instruction-box">
+        <strong>【操作说明】</strong> 当FMS无0分且总分达标后，进行极限稳定性测试。水上项目对上下肢协同要求极高，需同时进行上肢(UQ)和下肢(LQ)测试。
+    </div>
+    
+    <div class="formula-box">
+        <strong>【YBT 标准计算公式】</strong><br>
+        • 绝对到达距离 (cm) = (测试1 + 测试2 + 测试3) / 3<br>
+        • 相对到达距离 (%) = (绝对到达距离 / 肢体长度) × 100<br>
+        • 综合得分 (Composite %) = [(前方+内后+外后) / (3 × 肢体长度)] × 100
+    </div>
+
+    <h3>【YBT 上/下肢测试数据录入表】</h3>
+    <table>
+        <tr>
+            <th colspan="5">下肢 YBT-LQ (肢长测量: ASIS至内踝)</th>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="text-center"><strong>左腿支撑 (cm)</strong></td>
+            <td class="text-center"><strong>右腿支撑 (cm)</strong></td>
+            <td class="text-center"><strong>左右差值 (cm)</strong></td>
+            <td class="text-center"><strong>风险预警阈值</strong></td>
+        </tr>
+        <tr>
+            <td>肢体长度 (Limb Length)</td>
+            <td></td>
+            <td></td>
+            <td class="text-center">--</td>
+            <td class="text-center">--</td>
+        </tr>
+        <tr>
+            <td>Anterior (前方伸展)</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>≥ 4 cm 风险成倍增加</td>
+        </tr>
+        <tr>
+            <td>Posteromedial (内后方)</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>重点关注</td>
+        </tr>
+        <tr>
+            <td>Posterolateral (外后方)</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>重点关注</td>
+        </tr>
+        <tr>
+            <td><strong>综合得分 (Composite %)</strong></td>
+            <td class="text-center">%</td>
+            <td class="text-center">%</td>
+            <td class="text-center">--</td>
+            <td class="text-center">--</td>
+        </tr>
+    </table>
+
+    <table>
+        <tr>
+            <th colspan="5">上肢 YBT-UQ (肢长: C7棘突至中指尖)</th>
+        </tr>
+        <tr>
+            <td></td>
+            <td class="text-center"><strong>左臂支撑 (cm)</strong></td>
+            <td class="text-center"><strong>右臂支撑 (cm)</strong></td>
+            <td class="text-center"><strong>左右差值 (cm)</strong></td>
+            <td class="text-center"><strong>专项意义</strong></td>
+        </tr>
+        <tr>
+            <td>肢体长度 (Limb Length)</td>
+            <td></td>
+            <td></td>
+            <td class="text-center">--</td>
+            <td class="text-center">--</td>
+        </tr>
+        <tr>
+            <td>Medial (内侧推远)</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>评估划水侧与支撑侧</td>
+        </tr>
+        <tr>
+            <td>Inferolateral (下外侧)</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>肩带与核心协同发力</td>
+        </tr>
+        <tr>
+            <td>Superolateral (上外侧)</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>躯干抗旋转与稳定</td>
+        </tr>
+        <tr>
+            <td><strong>综合得分 (Composite %)</strong></td>
+            <td class="text-center">%</td>
+            <td class="text-center">%</td>
+            <td class="text-center">--</td>
+            <td class="text-center">--</td>
+        </tr>
+    </table>
+
+    <h2 class="phase-title">⏱️ 第四阶段：专项运动表现测试</h2>
+    <div class="instruction-box">
+        <strong>【操作说明】</strong> 用于评估通过FMS和YBT（绿灯）的健康运动员的力量与专项耐力。
+    </div>
+    <table>
+        <tr>
+            <th>测试类别</th>
+            <th>测试项目</th>
+            <th>测试数据</th>
+            <th>划船专项意义</th>
+        </tr>
+        <tr>
+            <td rowspan="2" class="text-center"><strong>上肢拉力/推力</strong></td>
+            <td>最大引体向上 (Pull-ups)</td>
+            <td class="text-center">____ 次</td>
+            <td>背阔肌/肱二头肌划水力量</td>
+        </tr>
+        <tr>
+            <td>最大俯卧撑 (Push-ups)</td>
+            <td class="text-center">____ 次</td>
+            <td>前侧链对抗拉力肌群失衡</td>
+        </tr>
+        <tr>
+            <td class="text-center"><strong>末端力量</strong></td>
+            <td>握力测试 (Handgrip)</td>
+            <td class="text-center">____ KG</td>
+            <td>桨面控制核心指标</td>
+        </tr>
+        <tr>
+            <td class="text-center"><strong>专项爆发/耐力</strong></td>
+            <td>200m / 500m 测功仪 (Ergometer)</td>
+            <td class="text-center">____ 秒</td>
+            <td>水上竞速专项无氧/有氧功率</td>
+        </tr>
+    </table>
+
+    <h2 class="phase-title">⚕️ 第五阶段：选择性功能动作评估 (SFMA) - 针对疼痛/受限者</h2>
+    <div class="instruction-box">
+        <strong>【操作说明】</strong> 当患者有疼痛（第一阶段）或在FMS中得0分时，由持证医疗人员执行。
+    </div>
+    
+    <h3>【SFMA 交通信号灯决策模型】</h3>
+    <table>
+        <tr>
+            <th width="15%">诊断分类</th>
+            <th width="25%">含义</th>
+            <th width="15%">信号灯</th>
+            <th width="45%">下一步操作指令</th>
+        </tr>
+        <tr>
+            <td class="text-center"><strong>FN</strong></td>
+            <td>功能良好且无痛</td>
+            <td class="text-center"><span class="badge red">🛑 红灯</span></td>
+            <td>停止该模式突破。无需干预，问题不在这里。</td>
+        </tr>
+        <tr>
+            <td class="text-center"><strong>FP</strong></td>
+            <td>功能良好但有痛</td>
+            <td class="text-center"><span class="badge yellow">⚠️ 黄灯</span></td>
+            <td>谨慎突破。记录为疼痛刺激标记，优先处理疼痛。</td>
+        </tr>
+        <tr>
+            <td class="text-center"><strong>DP</strong></td>
+            <td>功能障碍且有痛</td>
+            <td class="text-center"><span class="badge yellow">⚠️ 黄灯</span></td>
+            <td>谨慎突破。动作受限且痛，医疗干预（消炎止痛）优先。</td>
+        </tr>
+        <tr>
+            <td class="text-center"><strong>DN</strong></td>
+            <td>功能障碍且无痛</td>
+            <td class="text-center"><span class="badge green">🟢 绿灯</span></td>
+            <td><strong>强制一路突破到底。</strong>这是寻找远处力学病因的核心，必须通过分解测试剥离代偿，找病灶。</td>
+        </tr>
+    </table>
+
+    <h3>【SFMA 顶级评估 (Top-Tier) 记录表】</h3>
+    <div class="instruction-box">对以下10项动作进行打分勾选（FN / FP / DP / DN）：</div>
+    <div style="column-count: 2; column-gap: 40px; font-size: 14px; margin-bottom: 20px;">
+        <p><strong>颈部屈曲 (Cervical Flexion)</strong><br> [ ]FN  [ ]FP  [ ]DP  [ ]DN</p>
+        <p><strong>颈部伸展 (Cervical Extension)</strong><br> [ ]FN  [ ]FP  [ ]DP  [ ]DN</p>
+        <p><strong>颈部旋转 (Cervical Rotation)</strong><br> L: [ ]FN [ ]FP [ ]DP [ ]DN<br> R: [ ]FN [ ]FP [ ]DP [ ]DN</p>
+        <p><strong>上肢模式1 (内旋/伸展 MRE)</strong><br> L: [ ]FN [ ]FP [ ]DP [ ]DN<br> R: [ ]FN [ ]FP [ ]DP [ ]DN</p>
+        <p><strong>上肢模式2 (外旋/屈曲 LRF)</strong><br> L: [ ]FN [ ]FP [ ]DP [ ]DN<br> R: [ ]FN [ ]FP [ ]DP [ ]DN</p>
+        <p><strong>多部位屈曲 (MSF - 体前屈)</strong><br> [ ]FN  [ ]FP  [ ]DP  [ ]DN</p>
+        <p><strong>多部位伸展 (MSE - 体后伸)</strong><br> [ ]FN  [ ]FP  [ ]DP  [ ]DN</p>
+        <p><strong>多部位旋转 (MSR - 躯干旋转)</strong><br> L: [ ]FN [ ]FP [ ]DP [ ]DN<br> R: [ ]FN [ ]FP [ ]DP [ ]DN</p>
+        <p><strong>单腿站立 (Single Leg Stance)</strong><br> L: [ ]FN [ ]FP [ ]DP [ ]DN<br> R: [ ]FN [ ]FP [ ]DP [ ]DN</p>
+        <p><strong>高举深蹲 (Overhead Squat)</strong><br> [ ]FN  [ ]FP  [ ]DP  [ ]DN</p>
+    </div>
+
+    <h3>【DN 模式标准分解流程图 (Breakout Logic)】</h3>
+    <div class="flowchart-container">
+对于打勾为 DN（绿灯） 的项目，严格遵循以下逻辑进行降维排查：
+
+[顶级测试 DN] ──► 改变条件1：去除负重 (例如从站立改为仰卧/俯卧)
+                     │
+                     ├─► 动作变正常(FN) ──► 诊断为：稳定性/动作控制障碍 (SMCD) ──► 处方：4x4重载训练
+                     │
+                     └─► 动作仍受限(DN) ──► 改变条件2：由医生被动移动肢体 (被动测试)
+                                           │
+                                           ├─► 被动正常(FN) ──► 诊断为：主动的动作控制障碍 (SMCD)
+                                           │
+                                           └─► 被动仍受限(DN) ──► 诊断为：真实的灵活性问题
+                                                                 (关节JMD 或 软组织TED) ──► 处方：手法松解
+    </div>
+
+    <h2 class="phase-title">🛠️ 第六阶段：纠正性运动处方制定 (3R & 4x4 Matrix)</h2>
+    <div class="instruction-box">
+        <strong>【操作说明】</strong> 基于SFMA和FMS的排查结果，遵循“灵活性优先于稳定性”的原则开具干预处方。
+        <ul style="margin-top: 5px; margin-bottom: 0;">
+            <li><strong>步骤 1：重置 (Reset)</strong> - 针对JMD/TED灵活性问题，队医使用手法、筋膜放松、关节松动术。</li>
+            <li><strong>步骤 2：强化 (Reinforce)</strong> - 使用肌内效贴布、支具或体姿教育保护新获得的活动度。</li>
+            <li><strong>步骤 3：重训 (Retrain)</strong> - 针对SMCD（稳定性障碍），通过 4x4 训练矩阵 重新编程神经肌肉控制。</li>
+        </ul>
+    </div>
+
+    <h3>【4x4 纠正性训练矩阵 (4x4 Matrix)】</h3>
+    <div class="instruction-box" style="background-color: #fef2f2; border-color: #fca5a5; color: #991b1b;">
+        <strong>要求：</strong>从低姿势、低阻力开始（如1x1），确保完美控制后，方可向高姿势、高阻力进阶（向右、向下进阶）。
+    </div>
+    <table>
+        <tr>
+            <th width="20%">姿势难度 \ 阻力类型</th>
+            <th width="20%">1. 无阻力且有辅助 (PA)</th>
+            <th width="20%">2. 无阻力 (自重)</th>
+            <th width="20%">3. 有阻力且有辅助 (PA)</th>
+            <th width="20%">4. 有阻力</th>
+        </tr>
+        <tr>
+            <td style="background:#f8fafc; font-weight:bold;">1. 无负重 (仰卧/俯卧)</td>
+            <td>1x1: 辅助下翻滚</td>
+            <td>1x2: 主动翻滚、死虫式</td>
+            <td>1x3: 辅助下抗阻卷起</td>
+            <td>1x4: 独立抗阻卷起</td>
+        </tr>
+        <tr>
+            <td style="background:#f8fafc; font-weight:bold;">2. 四足位 (抗重力)</td>
+            <td>2x1: 辅助四足位对角伸展</td>
+            <td>2x2: 鸟狗式 (Bird-Dog)</td>
+            <td>2x3: 辅助弹力带抗阻鸟狗</td>
+            <td>2x4: 弹力带抗阻鸟狗</td>
+        </tr>
+        <tr>
+            <td style="background:#f8fafc; font-weight:bold;">3. 跪姿 (单边不对称)</td>
+            <td>3x1: 辅助半跪姿控制</td>
+            <td>3x2: 半跪姿躯干转动</td>
+            <td>3x3: 辅助半跪砍树动作</td>
+            <td>3x4: 半跪姿抗阻砍树</td>
+        </tr>
+        <tr>
+            <td style="background:#f8fafc; font-weight:bold;">4. 站姿 (极限动态)</td>
+            <td>4x1: 辅助单腿触脚尖</td>
+            <td>4x2: 自重箭步蹲、单腿硬拉</td>
+            <td>4x3: 辅助站姿抗阻转体</td>
+            <td>4x4: 站姿负重抗阻爆发</td>
+        </tr>
+    </table>
+
+    <div class="formula-box" style="border-style: solid; background: #f0fdf4; border-color: var(--green); color: #166534;">
+        <strong>【处方签发标准示例】</strong><br><br>
+        • 水上项目运动员如果由于腘绳肌短缩导致 ASLR 得1分：执行 Reset（泡沫轴放松/拉伸）。<br>
+        • 若 ASLR 受限是由于核心无法稳定骨盆（仰卧被动可抬高但主动不行）：跳过Reset，直接进入 4x4 Matrix，从 1x1（无负重辅助核心激活）开始重训。
+    </div>
+
+</div>
+
+</body>
+</html>

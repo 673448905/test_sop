@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>国家水上项目：多维运动能力评估与干预标准化指导书 (SOP)</title>
+    <style>
+        :root {
+            --primary: #0a192f;    /* 深幽蓝 - 主色调 */
+            --secondary: #172a45;  /* 模块背景蓝 */
+            --accent: #d4af37;     /* 冠军金 - 强调色 */
+            --accent-light: #fef08a;
+            --red: #dc2626;        /* 医疗红灯 */
+            --green: #059669;      /* 通行绿灯 */
+            --bg-color: #f8fafc;
+            --text-main: #1e293b;
+            --text-light: #64748b;
+            --border-color: #cbd5e1;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Helvetica Neue', 'PingFang SC', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(10, 25, 47, 0.15);
+            border-top: 8px solid var(--accent);
+        }
+
+        .header { text-align: center; margin-bottom: 40px; }
+        h1 { color: var(--primary); font-size: 30px; margin: 0 0 10px 0; letter-spacing: 2px; text-transform: uppercase; }
+        .subtitle { color: var(--accent); font-size: 16px; font-weight: bold; letter-spacing: 1px; }
+
+        /* 模块标题 */
+        h2.station-title {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-size: 18px;
+            margin-top: 40px;
+            display: flex;
+            align-items: center;
+            border-left: 6px solid var(--accent);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .station-meta {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            padding: 12px 20px;
+            font-size: 14px;
+            color: var(--text-main);
+            border-radius: 0 0 6px 6px;
+            margin-top: -5px;
+            margin-bottom: 25px;
+            border-left: 6px solid var(--accent);
+        }
+
+        /* 步骤卡片 */
+        .step-card {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .step-header {
+            background: #f1f5f9;
+            padding: 12px 20px;
+            font-weight: bold;
+            color: var(--primary);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .step-content { padding: 20px; font-size: 14px; }
+        
+        /* 指令列表 */
+        ul.action-list { list-style: none; padding-left: 0; margin: 0; }
+        ul.action-list li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 12px;
+            border-bottom: 1px dashed #e2e8f0;
+            padding-bottom: 12px;
+        }
+        ul.action-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        ul.action-list li::before {
+            content: '➤';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--accent);
+            font-size: 12px;
+        }
+        .highlight-text { color: var(--primary); font-weight: bold; background: var(--accent-light); padding: 2px 6px; border-radius: 4px; }
+
+        /* 表格规范 */
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 14px; }
+        th, td { border: 1px solid var(--border-color); padding: 12px; text-align: left; vertical-align: middle; }
+        th { background-color: var(--secondary); color: #ffffff; font-weight: 600; text-align: center; }
+        td.text-center { text-align: center; }
+        tr:nth-child(even) { background-color: #f8fafc; }
+
+        .badge { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; color: white; text-align: center;}
+        .badge.red { background-color: var(--red); }
+        .badge.green { background-color: var(--green); }
+        .badge.gold { background-color: var(--accent); color: var(--primary); }
+        .input-line { display: inline-block; border-bottom: 1px solid #000; width: 60px; margin: 0 5px; }
+
+        @media print {
+            body { background: #fff; padding: 0; }
+            .container { box-shadow: none; padding: 0; max-width: 100%; border-top: none; }
+            h2.station-title { background: #e2e8f0; color: #000; border-left: 6px solid #000; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            th { background-color: #cbd5e1; color: #000; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .highlight-text { background: transparent; border: 1px solid #000; }
+            .step-card { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>🥇 精英水上项目测试评估 SOP</h1>
+        <div class="subtitle">高水平运动表现与生理生化监控 (Elite Performance Profiling)</div>
+    </div>
+
+    <div class="step-card">
+        <div class="step-header"><span>📅 50人规模矩阵轮转与人员编组 (5天周期)</span></div>
+        <div class="step-content">
+            <p><strong>人员统筹：</strong> 1名总控 + 2名医疗人员 (Station 2) + 3名研究生 (Station 1/2) + 2名体能教练 (Station 3) + 3名仪器专家 (Station 4)。</p>
+            <p><strong>梯队划分：</strong> 全队50人分为A、B、C、D、E组，每组10人。保证所有代谢测试在无疲劳累积状态下进行，所有测试通过 SentrySuite 软件实现同库管理。</p>
+            <table>
+                <tr><th>日期</th><th>清晨 (06:30-08:30)</th><th>上午/下午</th><th>全天机动独立测试</th></tr>
+                <tr><td class="text-center">Day 1</td><td class="text-center">A组 (空腹REE)</td><td class="text-center">A/B组 (筛查+力量)</td><td class="text-center">--</td></tr>
+                <tr><td class="text-center">Day 2</td><td class="text-center">B组 (空腹REE)</td><td class="text-center">C/D组 (筛查+力量)</td><td class="text-center"><span class="highlight-text">A组极限心肺 CPET</span></td></tr>
+                <tr><td class="text-center">Day 3</td><td class="text-center">C组 (空腹REE)</td><td class="text-center">E组 (筛查+力量)</td><td class="text-center"><span class="highlight-text">B组极限心肺 CPET</span></td></tr>
+                <tr><td class="text-center">Day 4</td><td class="text-center">D组 (空腹REE)</td><td class="text-center">技术录像战术分析</td><td class="text-center"><span class="highlight-text">C组极限心肺 CPET</span></td></tr>
+                <tr><td class="text-center">Day 5</td><td class="text-center">E组 (空腹REE)</td><td class="text-center" colspan="2"><span class="highlight-text">D组 & E组极限心肺 CPET 并行处理</span></td></tr>
+            </table>
+        </div>
+    </div>
+
+    <h2 class="station-title">🔬 STATION 1：形态学与静息能量消耗 (REE)</h2>
+    <div class="station-meta">
+        <strong>🕒 时间：</strong> 清晨空腹状态 | <strong>👥 执行：</strong> 仪器专家 + 研究生<br>
+        <strong>🛠️ 设备：</strong> Vyntus CPX (搭载 Canopy 营养代谢模块), DEXA/皮褶计。
+    </div>
+    <div class="step-card">
+        <div class="step-header"><span>操作指令集</span></div>
+        <div class="step-content">
+            <ul class="action-list">
+                <li><strong>组装 Canopy：</strong> 风机不接触受试者呼出气体。为每位运动员更换一次性薄膜，极大降低交叉感染风险。</li>
+                <li><strong>执行 REE 测试：</strong> 运动员清晨空腹平躺，待达到稳态条件。系统自动捕捉 VCO2 和 VO2。通过文丘里效应自动测量静息 O2/CO2 交换。</li>
+                <li><strong>数据记录：</strong> 基础代谢率 (EE) <span class="input-line"></span> kcal/day，呼吸交换率 (RER，正常约 0.8) <span class="input-line"></span>，碳水/脂肪消耗比。</li>
+                <li><strong>形态学记录：</strong> 测量身高、体重、臂展、坐高。采用DEXA或皮褶厚度测体脂。水上项目要求核心杠杆 <strong>猿指数 (>1.03为佳)</strong>。男体脂 8-12%，女 14-18%。</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2 class="station-title">🛑 STATION 2：入口分流与功能筛查 (Triage & FMS)</h2>
+    <div class="station-meta">
+        <strong>🕒 时间：</strong> 09:00 - 11:30 | <strong>👥 执行：</strong> 队医 + 体育研究生
+    </div>
+    <div class="step-card">
+        <div class="step-header"><span>操作指令集</span></div>
+        <div class="step-content">
+            <ul class="action-list">
+                <li><strong>PAR-Q 问诊：</strong> 疼痛询问与关节红旗病征排查。若有痛，立即脱离大部队，由队医执行 SFMA 顶级评估寻找病灶；无痛则进入下一步 FMS 筛查。</li>
+                <li><strong>FMS 基础筛查：</strong> 7项动作模式评估，水上重点关注 ASLR (主动直腿抬高) 与 TSPU (躯干稳定性)。<strong>预警标准：</strong> 总分<14 或存在1分/单侧不对称。</li>
+                <li><strong>YBT 下肢动态平衡：</strong> 三方向到达距离测定。左右腿前方伸展差值 > 4cm 列入伤病高危名单。</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2 class="station-title">🏋️ STATION 3：专项神经肌肉与生物力学 (Biomechanics)</h2>
+    <div class="station-meta">
+        <strong>👥 执行：</strong> 2名体能教练 | <strong>📍 地点：</strong> 力量房
+    </div>
+    <div class="step-card">
+        <div class="step-header"><span>操作指令集</span></div>
+        <div class="step-content">
+            <ul class="action-list">
+                <li><strong>等长收缩大腿中段拉 (IMTP)：</strong> 在测力台上进行，模拟皮划艇/赛艇起航的极限蹬伸。捕获峰值力 (PF) 和发力率 (RFD)。<strong>达标线：</strong> PF > 45 N/kg。</li>
+                <li><strong>最大卧拉 (Bench Pull 1RM)：</strong> 使用 VBT (基于速度的训练) 测速仪监控杠铃轨迹。评估上肢后侧链绝对水平拉力。<strong>达标线：</strong> 男 1.3-1.5 倍体重，女 1.1-1.3 倍体重。</li>
+                <li><strong>深蹲与硬拉 (Back Squat & Deadlift)：</strong> 杠铃深蹲目标 1.8-2.0 倍体重；硬拉目标 2.0-2.2 倍体重。</li>
+                <li><strong>握力与核心抗旋：</strong> Jamar 握力计双侧测试 (双侧握力差 < 10%)；Pallof Press 最大抗阻测定。</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2 class="station-title">🫀 STATION 4：极限心肺与代谢监控 (Elite CPET Lab)</h2>
+    <div class="station-meta">
+        <strong>👥 执行：</strong> 3名器材与生理学专家 | <strong>🛠️ 核心设备：</strong> 测功仪 (Concept2/Dansprint), Vyntus CPX, SunTech Orbit-K, Vyntus ECG。
+    </div>
+    <div class="step-card">
+        <div class="step-header"><span>步骤 4.1：系统穿戴与定标</span></div>
+        <div class="step-content">
+            <ul class="action-list">
+                <li><strong>全自动容积定标：</strong> 在 SentrySuite 软件点击校准。全自动容积定标仅需 30 秒，无需 3L 定标筒，极其适合 50 人大规模连续作战。</li>
+                <li><strong>穿戴 Vyntus ECG：</strong> 重量仅 220g，12导联全系回顾，无引线干扰运动员划船。4000Hz 采样精度。</li>
+                <li><strong>穿戴 SunTech 血压袖带：</strong> 佩戴专利 Orbit-K 防滑袖带，开启 DKA (三维K氏音分析) 模式抵抗测功仪震动。</li>
+                <li><strong>佩戴气体面罩：</strong> 佩戴面罩与数字式容量传感器 (DVT) 进行每口气数据采集。搭载 75ms 超快氧气/红外二氧化碳分析器。</li>
+            </ul>
+        </div>
+    </div>
+    <div class="step-card">
+        <div class="step-header"><span>步骤 4.2：核心测试矩阵执行</span></div>
+        <div class="step-content">
+            <ul class="action-list">
+                <li><strong>7×4 阶梯极量测试：</strong> 采用 7x4 分钟阶梯递增，极量力竭。SentrySuite 软件集中控台。</li>
+                <li><strong>生化协同：</strong> 每阶间隔 30 秒采集指尖血或耳垂血。结合气体代谢数据，绘制血乳酸-心率-瓦数曲线，锁定 2mmol/L 与 4mmol/L 拐点瓦数。</li>
+                <li><strong>专项极限测功仪冲刺：</strong> 10秒峰值功率 (男 > 850W)；1分钟全力冲刺 (男 > 600W)；2000m 赛艇 / 1000m 划艇测试 (男公开级 < 5:50，女公开级 < 6:40)。</li>
+                <li><strong>高原低氧模拟 (选配)：</strong> 接入 High/Low FiO2 功能。降低氧浓度 (如 14-15% O2)，在平原实验室内模拟海拔约 2500m 的测功仪竞速，评估缺氧适应性。记录模拟海拔 2500m 完赛时 SpO2 下降百分比。</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2 class="station-title">📝 STATION 5：科学转化与训练干预处方 (Prescription Matrix)</h2>
+    <div class="station-meta">
+        <strong>核心指示：</strong> 测试数据的最终归宿是指导训练。以下为教练组与科研团队协同出具的科学干预逻辑库。
+    </div>
+    <table>
+        <tr>
+            <th width="15%">短板与异常</th>
+            <th width="40%">系统自动提取指标与成因</th>
+            <th width="45%">训练与医学干预指导建议</th>
+        </tr>
+        <tr>
+            <td class="text-center"><span class="badge gold">通气无氧阈<br>VT1/VT2 瓦数低</span></td>
+            <td>SentrySuite 自动利用不同参数确定 VT1, VT2, VT3。成因：基础有氧氧化能力弱或糖酵解无氧耐力不足。</td>
+            <td>重新划定日常配速区间。VT1 偏低：增加 LIT (低强度长距离) 训练时间。VT2 偏低：增加 HIT (高强度间歇) 训练，在 4mmol/L 临界点做阈值巡航。</td>
+        </tr>
+        <tr>
+            <td class="text-center"><span class="badge gold">IMTP/卧拉<br>低于标杆</span></td>
+            <td>最大力量储备不足或神经募集速率 (RFD) 慢。下肢向躯干传导能量流失。</td>
+            <td>开启最大力量/高爆发训练块。增加深蹲、硬拉等复合多关节动作；引入 VBT 测速训练 (目标速度 0.75-1.0 m/s)。</td>
+        </tr>
+        <tr>
+            <td class="text-center"><span class="badge red">SFMA 阳性或<br>FMS 痛/0分</span></td>
+            <td>存在结构性病变 (JMD) 或神经肌肉控制严重受限 (SMCD)。</td>
+            <td>停止负重与专项。队医介入，执行手法松解 (Reset)；体能教练应用 4x4 纠正矩阵，从 1x1 (仰卧自重) 开始重塑动作控制 (Retrain)。</td>
+        </tr>
+        <tr>
+            <td class="text-center"><span class="badge red">出现 EOV 或<br>O2 Pulse平稳/下降</span></td>
+            <td>Vyntus CPX 具备 EOV 自动识别功能。成因：心肌收缩储备在高负荷下受限。阳性预示极高心衰/过度训练风险。</td>
+            <td>拉响医疗红旗。暂停极限训练，安排心脏彩超等医学排查。调整为低负荷恢复性训练，监控睡眠与 HRV (心率变异性) 预防过度训练综合征。</td>
+        </tr>
+    </table>
+
+    <div style="margin-top: 50px; text-align: center; color: var(--text-light); font-size: 12px; border-top: 1px solid var(--border-color); padding-top: 20px;">
+        <p>基于顶级生理生化监控设备与临床科研规范体系集成 · 供内部团队严格受控执行</p>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#020617">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="EliteSOP Pro">
+  <title>EliteSOP Pro · SOP 数字化管理系统</title>
+  <link rel="manifest" href="manifest.json">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              600: "#ea580c",
+              500: "#f97316"
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <script src="data.js"></script>
+  <style>
+    @media print {
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        background: #ffffff;
+        color: #000000;
+      }
+      header,
+      #sidebar,
+      #mobileSidebarToggle,
+      #sidebarBackdrop {
+        display: none !important;
+      }
+      #sopContent {
+        max-height: none !important;
+        overflow: visible !important;
+        padding: 16px !important;
+      }
+    }
+  </style>
+</head>
+<body class="h-full bg-slate-950 text-slate-100">
+  <div class="min-h-screen flex flex-col">
+    <header class="flex items-center justify-between px-4 sm:px-6 py-3 border-b border-slate-800 bg-slate-950/95 backdrop-blur">
+      <div class="flex items-center gap-3">
+        <button id="mobileSidebarToggle" class="md:hidden inline-flex items-center justify-center rounded-lg border border-slate-700 bg-slate-900 px-3 py-2 text-slate-100 active:scale-95">
+          <span class="sr-only">切换导航</span>
+          <span class="h-0.5 w-5 bg-slate-100 mb-1"></span>
+          <span class="h-0.5 w-5 bg-slate-100 mb-1"></span>
+          <span class="h-0.5 w-5 bg-slate-100"></span>
+        </button>
+        <div>
+          <div class="text-base sm:text-lg font-semibold tracking-wide text-slate-50">EliteSOP Pro</div>
+          <div class="text-xs sm:text-sm text-slate-400">测试 · 筛查 · 监控 · 教练与科研一体化</div>
+        </div>
+      </div>
+      <div class="hidden sm:flex items-center gap-2 text-xs text-slate-400">
+        <button id="fontSmaller" type="button" class="px-2 py-1 rounded-lg border border-slate-700 bg-slate-900/80 text-[11px]">A-</button>
+        <button id="fontLarger" type="button" class="px-2 py-1 rounded-lg border border-slate-700 bg-slate-900/80 text-[11px]">A+</button>
+        <span class="px-2 py-1 rounded-full border border-slate-700 bg-slate-900/80">深色模式</span>
+      </div>
+    </header>
+
+    <div class="flex-1 flex overflow-hidden bg-slate-950">
+      <aside id="sidebar" class="w-72 max-w-xs flex-shrink-0 border-r border-slate-800 bg-slate-900/95 backdrop-blur flex flex-col transform transition-transform duration-200 ease-out md:translate-x-0 fixed inset-y-0 left-0 z-40 md:relative md:z-0 -translate-x-full md:flex">
+        <div class="px-4 pt-4 pb-3 border-b border-slate-800">
+          <div class="text-xs uppercase tracking-wide text-slate-400 mb-2">SOP 分类</div>
+          <nav id="categoryList" class="space-y-1 text-sm">
+          </nav>
+        </div>
+        <div class="px-4 py-3 border-b border-slate-800">
+          <div class="text-xs uppercase tracking-wide text-slate-400 mb-2">快速过滤</div>
+          <div class="relative">
+            <input id="searchInput" type="search" placeholder="按标题检索 SOP…" class="w-full rounded-xl bg-slate-950/80 border border-slate-700 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent">
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-slate-500">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4">
+                <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 103.473 9.8l3.113 3.114a.75.75 0 101.06-1.06l-3.113-3.114A5.5 5.5 0 009 3.5zM5.5 9a3.5 3.5 0 117 0 3.5 3.5 0 01-7 0z" clip-rule="evenodd" />
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="flex-1 overflow-y-auto px-3 py-3">
+          <div class="text-xs uppercase tracking-wide text-slate-400 px-1 mb-2">SOP 列表</div>
+          <div id="sopList" class="space-y-1">
+          </div>
+        </div>
+      </aside>
+
+      <div class="flex-1 flex flex-col md:ml-0 ml-0">
+        <div class="md:hidden fixed inset-y-0 left-0 right-0 bg-black/40 backdrop-blur-sm z-30 opacity-0 pointer-events-none transition-opacity duration-200" id="sidebarBackdrop"></div>
+
+        <main class="flex-1 flex flex-col md:ml-72">
+          <div class="px-4 sm:px-6 py-3 border-b border-slate-800 bg-slate-950/95 backdrop-blur flex items-center justify-between sticky top-0 z-10 md:ml-0">
+            <div class="text-xs sm:text-sm text-slate-400">
+              <span id="activeCategoryLabel" class="font-medium text-slate-100">全部分类</span>
+              <span class="mx-2 text-slate-600">/</span>
+              <span id="activeSopTitle" class="text-slate-400">请选择左侧 SOP</span>
+            </div>
+            <div class="hidden sm:flex items-center gap-2 text-[10px] sm:text-xs text-slate-500">
+              <button id="exportSummary" type="button" class="px-2 py-1 rounded-lg border border-brand-600 bg-brand-600/20 text-brand-400">
+                导出今日总结
+              </button>
+              <span class="px-2 py-1 rounded-lg border border-slate-700 bg-slate-900/80">勾选步骤自动保存</span>
+            </div>
+          </div>
+
+          <section class="flex-1 bg-slate-950">
+            <div class="h-[calc(100vh-4rem)] sm:h-[calc(100vh-4.25rem)] md:h-[calc(100vh-4.25rem)] flex flex-col">
+              <div id="timerBar" class="flex items-center justify-between px-4 sm:px-6 py-2 border-b border-slate-800 bg-slate-900/95 backdrop-blur text-xs sm:text-sm text-slate-200">
+                <div class="flex items-center gap-3">
+                  <span class="inline-flex items-center px-2 py-1 rounded-lg bg-slate-800 border border-slate-700 text-[11px] sm:text-xs tracking-wide">
+                    计时器
+                  </span>
+                  <span id="timerDisplay" class="font-mono text-base sm:text-lg text-emerald-400">
+                    00:00
+                  </span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <button id="timerToggle" type="button" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-xs sm:text-sm font-medium text-white border border-emerald-500 active:scale-95">
+                    开始
+                  </button>
+                  <button id="timerReset" type="button" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs sm:text-sm font-medium text-slate-100 border border-slate-600 active:scale-95">
+                    归零
+                  </button>
+                  <button id="overviewToggle" type="button" class="hidden sm:inline-flex px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs sm:text-sm font-medium text-slate-100 border border-slate-600 active:scale-95">
+                    今日概览
+                  </button>
+                  <button id="exportCurrent" type="button" class="hidden xs:inline-flex px-3 py-1.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-xs sm:text-sm font-medium text-white border border-sky-500 active:scale-95">
+                    导出 PDF/图片
+                  </button>
+                </div>
+              </div>
+              <div id="sopContent" class="flex-1 w-full bg-slate-900 overflow-y-auto px-4 sm:px-6 py-4 sm:py-6 text-sm text-slate-100"></div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const state = {
+      activeCategory: "all",
+      searchKeyword: "",
+      activeIndex: null
+    };
+
+    let fontScale = 1;
+
+    const crewPresets = [
+      { id: "w1x_a", label: "Women 1x A组" },
+      { id: "m2_minus_a", label: "Men 2- A组" },
+      { id: "m4x_a", label: "Men 4x A组" },
+      { id: "rehab_mix", label: "康复训练 / 混合组" }
+    ];
+
+    function getCategories() {
+      const map = new Map();
+      sopData.forEach(item => {
+        const key = item.category || "";
+        if (!map.has(key)) {
+          map.set(key, key);
+        }
+      });
+      return Array.from(map.entries()).map(([id, label]) => ({ id, label }));
+    }
+
+    function renderCategories() {
+      const categories = getCategories();
+      const container = document.getElementById("categoryList");
+      container.innerHTML = "";
+
+      const allButton = document.createElement("button");
+      allButton.type = "button";
+      allButton.textContent = "全部分类";
+      allButton.dataset.categoryId = "all";
+      allButton.className = getCategoryButtonClass("all");
+      allButton.addEventListener("click", () => {
+        state.activeCategory = "all";
+        syncActiveCategoryLabel();
+        renderCategories();
+        renderSopList();
+        closeSidebarOnMobile();
+      });
+      container.appendChild(allButton);
+
+      categories.forEach(cat => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.textContent = cat.label;
+        btn.dataset.categoryId = cat.id;
+        btn.className = getCategoryButtonClass(cat.id);
+        btn.addEventListener("click", () => {
+          state.activeCategory = cat.id;
+          syncActiveCategoryLabel();
+          renderCategories();
+          renderSopList();
+          closeSidebarOnMobile();
+        });
+        container.appendChild(btn);
+      });
+    }
+
+    function getCategoryButtonClass(categoryId) {
+      const isActive = state.activeCategory === categoryId;
+      const base = "w-full text-left px-3 py-2 rounded-xl text-[13px] sm:text-sm font-medium transition-colors border";
+      if (isActive) {
+        return base + " bg-brand-600 text-white border-brand-500 shadow-sm";
+      }
+      return base + " bg-slate-900 text-slate-200 border-slate-700 hover:bg-slate-800 hover:border-slate-600";
+    }
+
+    function renderSopList() {
+      const container = document.getElementById("sopList");
+      container.innerHTML = "";
+      const keyword = state.searchKeyword.trim().toLowerCase();
+
+      const filtered = sopData
+        .map((item, index) => ({ item, index }))
+        .filter(({ item }) => {
+        const matchCategory = state.activeCategory === "all" || (item.category || "") === state.activeCategory;
+        const matchKeyword = !keyword || (item.title || "").toLowerCase().includes(keyword);
+        return matchCategory && matchKeyword;
+      });
+
+      if (filtered.length === 0) {
+        const empty = document.createElement("div");
+        empty.className = "px-3 py-6 text-xs text-slate-500";
+        empty.textContent = "未找到匹配的 SOP，请调整分类或关键词。";
+        container.appendChild(empty);
+        return;
+      }
+
+      filtered.forEach(({ item, index }) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.dataset.sopIndex = String(index);
+        const isActive = state.activeIndex === index;
+        btn.className = getSopButtonClass(isActive);
+        btn.innerHTML = `
+          <div class="flex items-center justify-between gap-2">
+            <div class="flex-1 min-w-0">
+              <div class="truncate text-sm font-medium">${item.title}</div>
+              <div class="mt-0.5 text-[11px] text-slate-400">${item.category || "未分组"}</div>
+            </div>
+            <div class="ml-2 flex flex-col items-end gap-1">
+              <span class="inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] border ${
+                isActive
+                  ? "border-white/40 text-white/90 bg-white/10"
+                  : "border-slate-600 text-slate-300 bg-slate-800/80"
+              }">SOP</span>
+            </div>
+          </div>
+        `;
+        btn.addEventListener("click", () => {
+          state.activeIndex = index;
+          syncActiveSopTitle();
+          renderSopList();
+          loadSopIntoViewer(index);
+          closeSidebarOnMobile();
+        });
+        container.appendChild(btn);
+      });
+    }
+
+    function getSopButtonClass(isActive) {
+      const base = "w-full text-left px-3 py-2.5 rounded-xl text-xs sm:text-sm border transition transform active:scale-[0.98]";
+      if (isActive) {
+        return base + " bg-slate-100 text-slate-900 border-slate-100 shadow-sm";
+      }
+      return base + " bg-slate-900/90 text-slate-100 border-slate-700 hover:bg-slate-800 hover:border-slate-600";
+    }
+
+    function syncActiveCategoryLabel() {
+      const labelEl = document.getElementById("activeCategoryLabel");
+      if (state.activeCategory === "all") {
+        labelEl.textContent = "全部分类";
+        return;
+      }
+      const cat = getCategories().find(c => c.id === state.activeCategory);
+      if (!cat) {
+        labelEl.textContent = "全部分类";
+      } else if (!cat.label) {
+        labelEl.textContent = "未分组";
+      } else {
+        labelEl.textContent = cat.label;
+      }
+    }
+
+    function syncActiveSopTitle() {
+      const el = document.getElementById("activeSopTitle");
+      if (state.activeIndex === null || state.activeIndex < 0 || state.activeIndex >= sopData.length) {
+        el.textContent = "请选择左侧 SOP";
+        return;
+      }
+      const sop = sopData[state.activeIndex];
+      el.textContent = sop ? sop.title : "请选择左侧 SOP";
+    }
+
+    function loadSopIntoViewer(index) {
+      const container = document.getElementById("sopContent");
+      if (index === null || index < 0 || index >= sopData.length) {
+        container.innerHTML = "";
+        return;
+      }
+      const item = sopData[index];
+      localStorage.setItem("sop:lastSelectedIndex", String(index));
+      setActiveTimerIndex(index);
+      container.innerHTML = "";
+      attachSessionHeader(container);
+      attachScreeningBanner(container, item);
+      const sopWrapper = document.createElement("div");
+      sopWrapper.innerHTML = item && item.content ? item.content : "";
+      container.appendChild(sopWrapper);
+      applySopContentStyles(sopWrapper);
+      attachNotesArea(container, index);
+      const checkboxes = Array.from(container.querySelectorAll('input[type="checkbox"]'));
+      checkboxes.forEach((cb, cbIndex) => {
+        const baseKey = "sop:checkbox:" + index + ":" + (cb.name || cb.id || cbIndex);
+        const stored = localStorage.getItem(baseKey);
+        if (stored !== null) {
+          cb.checked = stored === "1";
+        }
+        cb.addEventListener("change", function () {
+          localStorage.setItem(baseKey, cb.checked ? "1" : "0");
+        });
+      });
+    }
+
+    function applySopContentStyles(root) {
+      const tables = Array.from(root.querySelectorAll("table"));
+      tables.forEach(table => {
+        table.classList.add("w-full", "border-collapse", "text-sm", "my-4", "rounded-lg", "overflow-hidden");
+        const theadCells = Array.from(table.querySelectorAll("thead th"));
+        const bodyHeaderCells = Array.from(table.querySelectorAll("th"));
+        const headerCells = theadCells.length > 0 ? theadCells : bodyHeaderCells;
+        headerCells.forEach(th => {
+          th.classList.add("bg-slate-800", "text-slate-100", "border", "border-slate-700", "px-3", "py-2", "text-left");
+        });
+        const tds = Array.from(table.querySelectorAll("td"));
+        tds.forEach(td => {
+          td.classList.add("border", "border-slate-700", "px-3", "py-2", "align-top", "text-slate-100");
+        });
+      });
+      const pres = Array.from(root.querySelectorAll("pre"));
+      pres.forEach(pre => {
+        pre.classList.add("bg-slate-900", "text-slate-100", "p-3", "rounded-lg", "overflow-x-auto", "text-xs", "font-mono", "my-3", "border", "border-slate-800");
+      });
+      const codes = Array.from(root.querySelectorAll("code"));
+      codes.forEach(code => {
+        code.classList.add("bg-slate-900", "text-emerald-300", "px-1.5", "py-0.5", "rounded", "text-xs", "font-mono");
+      });
+    }
+
+    function applyFontScale() {
+      const base = 16;
+      const value = Math.max(0.85, Math.min(1.3, fontScale || 1));
+      fontScale = value;
+      document.documentElement.style.fontSize = String(base * value) + "px";
+      localStorage.setItem("sop:fontScale", String(value));
+    }
+
+    function isScreeningSop(sop) {
+      if (!sop) {
+        return false;
+      }
+      const title = (sop.title || "").toLowerCase();
+      const category = sop.category || "";
+      if (category.indexOf("筛查") !== -1) {
+        return true;
+      }
+      if (title.indexOf("par-q") !== -1) {
+        return true;
+      }
+      if (title.indexOf("sfma") !== -1) {
+        return true;
+      }
+      if (title.indexOf("fms") !== -1) {
+        return true;
+      }
+      if (title.indexOf("筛查") !== -1 || title.indexOf("测试") !== -1 || title.indexOf("评估") !== -1) {
+        return true;
+      }
+      return false;
+    }
+
+    function attachScreeningBanner(root, sop) {
+      if (!isScreeningSop(sop)) {
+        return;
+      }
+      const banner = document.createElement("div");
+      banner.className = "mb-3 rounded-xl border border-amber-500/60 bg-amber-900/40 px-3 py-2 text-[11px] sm:text-xs text-amber-100";
+      banner.innerHTML = `
+        <div class="font-medium mb-0.5">筛查 / 监控安全提示</div>
+        <div>如在本 SOP 步骤中出现静息痛、神经症状、眩晕或其他红旗信号，请立即停止后续测试，并转介康复/医疗专业人员评估。</div>
+      `;
+      root.appendChild(banner);
+    }
+
+    function attachSessionHeader(root) {
+      const wrapper = document.createElement("div");
+      wrapper.className = "mb-4 pb-3 border-b border-slate-800";
+      wrapper.innerHTML = `
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 text-xs sm:text-sm">
+          <div>
+            <div class="flex items-center justify-between mb-1 gap-2">
+              <div class="text-slate-400 text-xs sm:text-sm">运动员姓名</div>
+              <select id="crewPresetSelect" class="rounded-md bg-slate-950/80 border border-slate-700 px-2 py-1 text-[10px] text-slate-100 focus:outline-none focus:ring-1 focus:ring-brand-500 focus:border-transparent">
+                <option value="">常用艇组</option>
+              </select>
+            </div>
+            <input data-field="athlete" type="text" class="w-full rounded-lg bg-slate-950/70 border border-slate-700 px-2 py-1.5 text-xs sm:text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent" placeholder="如：张三 / Women 1x A组">
+          </div>
+          <div>
+            <div class="text-slate-400 mb-1">日期</div>
+            <input data-field="date" type="date" class="w-full rounded-lg bg-slate-950/70 border border-slate-700 px-2 py-1.5 text-xs sm:text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent">
+          </div>
+          <div>
+            <div class="text-slate-400 mb-1">测试项目 / 站点</div>
+            <input data-field="session" type="text" class="w-full rounded-lg bg-slate-950/70 border border-slate-700 px-2 py-1.5 text-xs sm:text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent" placeholder="如：Station 2 / 2000m 测试">
+          </div>
+          <div>
+            <div class="text-slate-400 mb-1">教练 / 执行人</div>
+            <input data-field="coach" type="text" class="w-full rounded-lg bg-slate-950/70 border border-slate-700 px-2 py-1.5 text-xs sm:text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent" placeholder="如：主教练 / 体能教练">
+          </div>
+        </div>
+      `;
+      root.appendChild(wrapper);
+      const prefix = "sop:meta:";
+      const athleteInput = wrapper.querySelector('input[data-field="athlete"]');
+      const dateInput = wrapper.querySelector('input[data-field="date"]');
+      const sessionInput = wrapper.querySelector('input[data-field="session"]');
+      const coachInput = wrapper.querySelector('input[data-field="coach"]');
+      const presetSelect = wrapper.querySelector("#crewPresetSelect");
+
+      function bind(input, key) {
+        if (!input) {
+          return;
+        }
+        const fullKey = prefix + key;
+        const stored = localStorage.getItem(fullKey);
+        if (stored !== null) {
+          input.value = stored;
+        }
+        input.addEventListener("input", function () {
+          localStorage.setItem(fullKey, input.value || "");
+        });
+      }
+
+      bind(athleteInput, "athlete");
+      bind(dateInput, "date");
+      bind(sessionInput, "session");
+      bind(coachInput, "coach");
+
+      if (presetSelect && crewPresets && crewPresets.length > 0) {
+        crewPresets.forEach(item => {
+          const option = document.createElement("option");
+          option.value = item.label;
+          option.textContent = item.label;
+          presetSelect.appendChild(option);
+        });
+        presetSelect.addEventListener("change", function () {
+          if (!athleteInput) {
+            return;
+          }
+          if (!presetSelect.value) {
+            return;
+          }
+          athleteInput.value = presetSelect.value;
+          athleteInput.dispatchEvent(new Event("input"));
+        });
+      }
+    }
+
+    function attachNotesArea(root, index) {
+      const noteWrapper = document.createElement("div");
+      noteWrapper.className = "mt-6 pt-4 border-t border-slate-800";
+      noteWrapper.innerHTML = `
+        <div class="flex flex-col gap-2 mb-2">
+          <div class="flex flex-wrap items-center gap-3">
+            <div class="flex items-center gap-1 text-xs text-slate-300">
+              <span>RPE</span>
+              <select id="sopRpeSelect" class="rounded-md bg-slate-950/80 border border-slate-700 px-2 py-1 text-[11px] text-slate-100 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent">
+                <option value="">--</option>
+                <option value="4">4 轻松</option>
+                <option value="5">5 稍累</option>
+                <option value="6">6 有负荷</option>
+                <option value="7">7 明显吃力</option>
+                <option value="8">8 很吃力</option>
+                <option value="9">9 极限附近</option>
+                <option value="10">10 最大努力</option>
+              </select>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 text-[11px] text-slate-300">
+              <span>执行结果</span>
+              <label class="inline-flex items-center gap-1">
+                <input type="radio" name="sopOutcome" value="completed" class="h-3 w-3 text-emerald-500 border-slate-600 bg-slate-900">
+                <span>完成</span>
+              </label>
+              <label class="inline-flex items-center gap-1">
+                <input type="radio" name="sopOutcome" value="adjusted" class="h-3 w-3 text-amber-500 border-slate-600 bg-slate-900">
+                <span>调整</span>
+              </label>
+              <label class="inline-flex items-center gap-1">
+                <input type="radio" name="sopOutcome" value="stopped" class="h-3 w-3 text-rose-500 border-slate-600 bg-slate-900">
+                <span>终止</span>
+              </label>
+            </div>
+          </div>
+          <div class="text-xs sm:text-sm text-slate-300">
+            评估记录 / 执行心得
+            <span class="ml-1 text-[10px] text-slate-500">仅保存在本设备</span>
+          </div>
+        </div>
+        <textarea id="sopNoteArea" rows="4" class="w-full rounded-lg bg-slate-950/70 border border-slate-700 px-3 py-2 text-xs sm:text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent" placeholder="记录测试/筛查发现、关键指标、主观感受、风险提示等"></textarea>
+      `;
+      root.appendChild(noteWrapper);
+      const textarea = noteWrapper.querySelector("#sopNoteArea");
+      const key = "sop:note:" + index;
+      const stored = localStorage.getItem(key);
+      if (stored !== null) {
+        textarea.value = stored;
+      }
+      textarea.addEventListener("input", function () {
+        localStorage.setItem(key, textarea.value || "");
+      });
+
+      const rpeSelect = noteWrapper.querySelector("#sopRpeSelect");
+      const outcomeRadios = Array.from(noteWrapper.querySelectorAll('input[name="sopOutcome"]'));
+      const rpeKey = "sop:rpe:" + index;
+      const outcomeKey = "sop:outcome:" + index;
+      const storedRpe = localStorage.getItem(rpeKey);
+      if (storedRpe !== null && rpeSelect) {
+        rpeSelect.value = storedRpe;
+      }
+      if (rpeSelect) {
+        rpeSelect.addEventListener("change", function () {
+          localStorage.setItem(rpeKey, rpeSelect.value || "");
+        });
+      }
+      const storedOutcome = localStorage.getItem(outcomeKey);
+      if (storedOutcome) {
+        outcomeRadios.forEach(radio => {
+          if (radio.value === storedOutcome) {
+            radio.checked = true;
+          }
+        });
+      }
+      outcomeRadios.forEach(radio => {
+        radio.addEventListener("change", function () {
+          if (radio.checked) {
+            localStorage.setItem(outcomeKey, radio.value);
+          }
+        });
+      });
+    }
+
+    function setupSearch() {
+      const input = document.getElementById("searchInput");
+      input.addEventListener("input", function () {
+        state.searchKeyword = this.value;
+        renderSopList();
+      });
+    }
+
+    function setupFontSizeControls() {
+      const stored = localStorage.getItem("sop:fontScale");
+      if (stored) {
+        const value = parseFloat(stored);
+        if (!Number.isNaN(value) && value > 0.5 && value < 2) {
+          fontScale = value;
+        }
+      }
+      applyFontScale();
+      const smaller = document.getElementById("fontSmaller");
+      const larger = document.getElementById("fontLarger");
+      if (smaller) {
+        smaller.addEventListener("click", function () {
+          fontScale -= 0.05;
+          applyFontScale();
+        });
+      }
+      if (larger) {
+        larger.addEventListener("click", function () {
+          fontScale += 0.05;
+          applyFontScale();
+        });
+      }
+    }
+
+    function setupSidebarToggle() {
+      const sidebar = document.getElementById("sidebar");
+      const toggle = document.getElementById("mobileSidebarToggle");
+      const backdrop = document.getElementById("sidebarBackdrop");
+
+      function open() {
+        sidebar.classList.remove("-translate-x-full");
+        backdrop.classList.remove("opacity-0", "pointer-events-none");
+        backdrop.classList.add("opacity-100");
+      }
+
+      function close() {
+        sidebar.classList.add("-translate-x-full");
+        backdrop.classList.add("opacity-0", "pointer-events-none");
+        backdrop.classList.remove("opacity-100");
+      }
+
+      toggle.addEventListener("click", function () {
+        const isHidden = sidebar.classList.contains("-translate-x-full");
+        if (isHidden) {
+          open();
+        } else {
+          close();
+        }
+      });
+
+      backdrop.addEventListener("click", close);
+
+      window.addEventListener("resize", function () {
+        if (window.innerWidth >= 768) {
+          sidebar.classList.remove("-translate-x-full");
+          backdrop.classList.add("opacity-0", "pointer-events-none");
+        } else {
+          sidebar.classList.add("-translate-x-full");
+        }
+      });
+    }
+
+    function closeSidebarOnMobile() {
+      if (window.innerWidth < 768) {
+        const sidebar = document.getElementById("sidebar");
+        const backdrop = document.getElementById("sidebarBackdrop");
+        sidebar.classList.add("-translate-x-full");
+        backdrop.classList.add("opacity-0", "pointer-events-none");
+        backdrop.classList.remove("opacity-100");
+      }
+    }
+
+    function restoreLastSop() {
+      const storedIndex = localStorage.getItem("sop:lastSelectedIndex");
+      if (storedIndex === null) {
+        return;
+      }
+      const index = parseInt(storedIndex, 10);
+      if (Number.isNaN(index) || index < 0 || index >= sopData.length) {
+        return;
+      }
+      state.activeIndex = index;
+      const sop = sopData[index];
+      const categoryId = (sop && sop.category) || "";
+      state.activeCategory = categoryId || "all";
+      syncActiveCategoryLabel();
+      renderCategories();
+      renderSopList();
+      syncActiveSopTitle();
+      loadSopIntoViewer(index);
+      setActiveTimerIndex(index);
+    }
+
+    let timerSeconds = 0;
+    let timerInterval = null;
+    let currentTimerIndex = null;
+
+    function getTimerKey(index) {
+      return "sop:timer:seconds:" + index;
+    }
+
+    function formatTimer(seconds) {
+      const m = Math.floor(seconds / 60);
+      const s = seconds % 60;
+      const mm = String(m).padStart(2, "0");
+      const ss = String(s).padStart(2, "0");
+      return mm + ":" + ss;
+    }
+
+    function updateTimerDisplay() {
+      const el = document.getElementById("timerDisplay");
+      if (!el) {
+        return;
+      }
+      el.textContent = formatTimer(timerSeconds);
+    }
+
+    function persistTimer() {
+      if (currentTimerIndex === null) {
+        return;
+      }
+      localStorage.setItem(getTimerKey(currentTimerIndex), String(timerSeconds));
+    }
+
+    function setActiveTimerIndex(index) {
+      if (index === null || index < 0 || index >= sopData.length) {
+        if (timerInterval) {
+          clearInterval(timerInterval);
+          timerInterval = null;
+        }
+        currentTimerIndex = null;
+        timerSeconds = 0;
+        updateTimerDisplay();
+        return;
+      }
+      if (currentTimerIndex !== null && currentTimerIndex !== index) {
+        localStorage.setItem(getTimerKey(currentTimerIndex), String(timerSeconds));
+      }
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+        const toggle = document.getElementById("timerToggle");
+        if (toggle) {
+          toggle.textContent = "开始";
+          toggle.classList.remove("bg-red-600", "border-red-500");
+          toggle.classList.add("bg-emerald-600", "border-emerald-500");
+        }
+      }
+      currentTimerIndex = index;
+      const stored = localStorage.getItem(getTimerKey(index));
+      if (stored !== null) {
+        const value = parseInt(stored, 10);
+        if (!Number.isNaN(value) && value >= 0) {
+          timerSeconds = value;
+        } else {
+          timerSeconds = 0;
+        }
+      } else {
+        timerSeconds = 0;
+      }
+      updateTimerDisplay();
+    }
+
+    function ensureOverviewOverlay() {
+      let root = document.getElementById("overviewOverlay");
+      if (!root) {
+        root = document.createElement("div");
+        root.id = "overviewOverlay";
+        root.className = "fixed inset-0 z-50 hidden items-center justify-center bg-black/60";
+        root.innerHTML = `
+          <div class="max-w-4xl w-[92%] md:w-4/5 max-h-[80vh] rounded-2xl bg-slate-950/95 border border-slate-700 shadow-xl flex flex-col overflow-hidden">
+            <div class="flex items-center justify-between px-4 sm:px-6 py-3 border-b border-slate-800">
+              <div class="text-xs sm:text-sm text-slate-200">
+                今日测试 / 筛查概览
+                <span id="overviewMeta" class="ml-2 text-[11px] text-slate-400"></span>
+              </div>
+              <button id="overviewClose" type="button" class="px-2 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-[11px] text-slate-100 border border-slate-600">
+                关闭
+              </button>
+            </div>
+            <div class="flex-1 overflow-y-auto">
+              <table class="w-full border-collapse text-xs sm:text-sm">
+                <thead>
+                  <tr class="bg-slate-900 text-slate-200">
+                    <th class="px-3 py-2 border border-slate-800 text-left">SOP</th>
+                    <th class="px-3 py-2 border border-slate-800 text-left">分类</th>
+                    <th class="px-3 py-2 border border-slate-800 text-center">RPE</th>
+                    <th class="px-3 py-2 border border-slate-800 text-center">结果</th>
+                    <th class="px-3 py-2 border border-slate-800 text-center">计时</th>
+                    <th class="px-3 py-2 border border-slate-800 text-left">摘要</th>
+                  </tr>
+                </thead>
+                <tbody id="overviewBody" class="bg-slate-950/80"></tbody>
+              </table>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(root);
+        const close = root.querySelector("#overviewClose");
+        if (close) {
+          close.addEventListener("click", function () {
+            root.classList.add("hidden");
+          });
+        }
+        root.addEventListener("click", function (event) {
+          if (event.target === root) {
+            root.classList.add("hidden");
+          }
+        });
+      }
+      return root;
+    }
+
+    function ensureSummaryOverlay() {
+      let root = document.getElementById("summaryOverlay");
+      if (!root) {
+        root = document.createElement("div");
+        root.id = "summaryOverlay";
+        root.className = "fixed inset-0 z-50 hidden items-center justify-center bg-black/60";
+        root.innerHTML = `
+          <div class="max-w-3xl w-[92%] md:w-3/4 max-h-[70vh] rounded-2xl bg-slate-950/95 border border-slate-700 shadow-xl flex flex-col overflow-hidden">
+            <div class="flex items-center justify-between px-4 sm:px-6 py-3 border-b border-slate-800">
+              <div class="text-xs sm:text-sm text-slate-200">导出今日总结</div>
+              <button id="summaryClose" type="button" class="px-2 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-[11px] text-slate-100 border border-slate-600">
+                关闭
+              </button>
+            </div>
+            <div class="p-3 sm:p-4 flex-1 flex flex-col gap-2">
+              <div class="text-[11px] sm:text-xs text-slate-400">
+                以下为纯文本汇总，可全选后复制到微信或科研周报：
+              </div>
+              <textarea id="summaryText" class="flex-1 w-full rounded-lg bg-slate-950/80 border border-slate-700 px-3 py-2 text-xs sm:text-sm text-slate-100 font-mono resize-none"></textarea>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(root);
+        const close = root.querySelector("#summaryClose");
+        if (close) {
+          close.addEventListener("click", function () {
+            root.classList.add("hidden");
+          });
+        }
+        root.addEventListener("click", function (event) {
+          if (event.target === root) {
+            root.classList.add("hidden");
+          }
+        });
+      }
+      return root;
+    }
+
+    function openTextSummary() {
+      const overlay = ensureSummaryOverlay();
+      const textarea = overlay.querySelector("#summaryText");
+      if (!textarea) {
+        return;
+      }
+      const lines = [];
+      const date = localStorage.getItem("sop:meta:date") || "";
+      const athlete = localStorage.getItem("sop:meta:athlete") || "";
+      const session = localStorage.getItem("sop:meta:session") || "";
+      const coach = localStorage.getItem("sop:meta:coach") || "";
+      const headParts = [];
+      if (date) {
+        headParts.push("日期：" + date);
+      }
+      if (athlete) {
+        headParts.push("对象：" + athlete);
+      }
+      if (session) {
+        headParts.push("项目：" + session);
+      }
+      if (coach) {
+        headParts.push("记录人：" + coach);
+      }
+      if (headParts.length) {
+        lines.push("【今日测试 / 筛查概览】" + headParts.join(" ｜ "));
+        lines.push("");
+      }
+      for (let i = 0; i < sopData.length; i++) {
+        const sop = sopData[i];
+        const title = sop && sop.title ? sop.title : "";
+        const rpe = localStorage.getItem("sop:rpe:" + i) || "";
+        const outcomeRaw = localStorage.getItem("sop:outcome:" + i) || "";
+        const note = localStorage.getItem("sop:note:" + i) || "";
+        const secondsStr = localStorage.getItem(getTimerKey(i));
+        const seconds = secondsStr ? parseInt(secondsStr, 10) : 0;
+        if (!note && !rpe && !outcomeRaw && !seconds) {
+          continue;
+        }
+        let outcome = "";
+        if (outcomeRaw === "completed") {
+          outcome = "完成";
+        } else if (outcomeRaw === "adjusted") {
+          outcome = "调整";
+        } else if (outcomeRaw === "stopped") {
+          outcome = "终止";
+        }
+        const parts = [];
+        if (outcome) {
+          parts.push("结果：" + outcome);
+        }
+        if (rpe) {
+          parts.push("RPE：" + rpe);
+        }
+        if (seconds) {
+          parts.push("计时：" + formatTimer(seconds));
+        }
+        const head = parts.length ? "（" + parts.join(" ｜ ") + "）" : "";
+        const cleanNote = (note || "").replace(/\s+\n/g, "\n").trim();
+        lines.push("· " + title + head);
+        if (cleanNote) {
+          lines.push("  " + cleanNote);
+        }
+        lines.push("");
+      }
+      if (!lines.length) {
+        lines.push("今日尚未留下任何测试 / 筛查记录。");
+      }
+      textarea.value = lines.join("\n");
+      textarea.focus();
+      textarea.select();
+      overlay.classList.remove("hidden");
+      overlay.classList.add("flex");
+    }
+
+    function openOverview() {
+      const overlay = ensureOverviewOverlay();
+      const body = overlay.querySelector("#overviewBody");
+      const meta = overlay.querySelector("#overviewMeta");
+      if (!body) {
+        return;
+      }
+      body.innerHTML = "";
+      const athlete = localStorage.getItem("sop:meta:athlete") || "";
+      const date = localStorage.getItem("sop:meta:date") || "";
+      const session = localStorage.getItem("sop:meta:session") || "";
+      const coach = localStorage.getItem("sop:meta:coach") || "";
+      if (meta) {
+        const parts = [];
+        if (athlete) {
+          parts.push("运动员: " + athlete);
+        }
+        if (date) {
+          parts.push("日期: " + date);
+        }
+        if (session) {
+          parts.push("项目: " + session);
+        }
+        if (coach) {
+          parts.push("教练: " + coach);
+        }
+        meta.textContent = parts.join(" · ");
+      }
+      for (let i = 0; i < sopData.length; i++) {
+        const sop = sopData[i];
+        const title = sop && sop.title ? sop.title : "";
+        const category = sop && sop.category ? sop.category : "";
+        const rpe = localStorage.getItem("sop:rpe:" + i) || "";
+        const outcomeRaw = localStorage.getItem("sop:outcome:" + i) || "";
+        const note = localStorage.getItem("sop:note:" + i) || "";
+        const secondsStr = localStorage.getItem(getTimerKey(i));
+        const seconds = secondsStr ? parseInt(secondsStr, 10) : 0;
+        if (!rpe && !outcomeRaw && !note && !seconds) {
+          continue;
+        }
+        let outcome = "";
+        if (outcomeRaw === "completed") {
+          outcome = "完成";
+        } else if (outcomeRaw === "adjusted") {
+          outcome = "调整";
+        } else if (outcomeRaw === "stopped") {
+          outcome = "终止";
+        }
+        let brief = "";
+        if (note) {
+          const compact = note.replace(/\s+/g, " ");
+          brief = compact.slice(0, 40);
+          if (compact.length > 40) {
+            brief += "…";
+          }
+        }
+        const tr = document.createElement("tr");
+        tr.className = "border-t border-slate-800";
+        tr.innerHTML = `
+          <td class="px-3 py-2 align-top text-slate-100">${title}</td>
+          <td class="px-3 py-2 align-top text-slate-400">${category || "未分组"}</td>
+          <td class="px-3 py-2 align-top text-center text-slate-100">${rpe || "--"}</td>
+          <td class="px-3 py-2 align-top text-center text-slate-100">${outcome || "--"}</td>
+          <td class="px-3 py-2 align-top text-center text-slate-100">${seconds ? formatTimer(seconds) : "--"}</td>
+          <td class="px-3 py-2 align-top text-slate-300">${brief}</td>
+        `;
+        body.appendChild(tr);
+      }
+      if (!body.children.length) {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td colspan="6" class="px-3 py-4 text-center text-xs text-slate-400">
+            当前还没有任何记录，请先在各 SOP 中填写 RPE 或心得。
+          </td>
+        `;
+        body.appendChild(tr);
+      }
+      overlay.classList.remove("hidden");
+      overlay.classList.add("flex");
+    }
+
+    function setupTimer() {
+      const toggle = document.getElementById("timerToggle");
+      const reset = document.getElementById("timerReset");
+      const exportButton = document.getElementById("exportCurrent");
+      const overviewButton = document.getElementById("overviewToggle");
+      updateTimerDisplay();
+      if (toggle) {
+        toggle.addEventListener("click", function () {
+          if (currentTimerIndex === null) {
+            return;
+          }
+          if (timerInterval) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            toggle.textContent = "开始";
+            toggle.classList.remove("bg-red-600", "border-red-500");
+            toggle.classList.add("bg-emerald-600", "border-emerald-500");
+          } else {
+            timerInterval = setInterval(function () {
+              timerSeconds += 1;
+              updateTimerDisplay();
+              persistTimer();
+            }, 1000);
+            toggle.textContent = "暂停";
+            toggle.classList.remove("bg-emerald-600", "border-emerald-500");
+            toggle.classList.add("bg-red-600", "border-red-500");
+          }
+        });
+      }
+      if (reset) {
+        reset.addEventListener("click", function () {
+          if (currentTimerIndex === null) {
+            return;
+          }
+          timerSeconds = 0;
+          updateTimerDisplay();
+          persistTimer();
+        });
+      }
+      if (exportButton) {
+        exportButton.addEventListener("click", function () {
+          window.print();
+        });
+      }
+      if (overviewButton) {
+        overviewButton.addEventListener("click", function () {
+          openOverview();
+        });
+      }
+      const exportSummaryButton = document.getElementById("exportSummary");
+      if (exportSummaryButton) {
+        exportSummaryButton.addEventListener("click", function () {
+          openTextSummary();
+        });
+      }
+    }
+
+    function setupFloatingTimer() {
+      let seconds = 0;
+      let interval = null;
+      const key = "sop:floatingTimer:seconds";
+      const stored = localStorage.getItem(key);
+      if (stored) {
+        const value = parseInt(stored, 10);
+        if (!Number.isNaN(value) && value >= 0) {
+          seconds = value;
+        }
+      }
+      const root = document.createElement("div");
+      root.id = "floatingTimer";
+      root.className = "fixed right-3 bottom-3 sm:right-4 sm:bottom-4 z-40 flex items-center gap-2 rounded-full bg-slate-900/80 border border-slate-700 px-3 py-1.5 shadow-lg backdrop-blur text-[11px] sm:text-xs";
+      root.innerHTML = `
+        <span class="text-slate-300">秒表</span>
+        <span id="floatingTimerDisplay" class="font-mono text-emerald-400">${formatTimer(seconds)}</span>
+        <button id="floatingTimerToggle" type="button" class="px-2 py-0.5 rounded-full bg-emerald-600 text-white border border-emerald-500">开始</button>
+        <button id="floatingTimerReset" type="button" class="px-2 py-0.5 rounded-full bg-slate-800 text-slate-100 border border-slate-600">归零</button>
+      `;
+      document.body.appendChild(root);
+      const display = root.querySelector("#floatingTimerDisplay");
+      const toggle = root.querySelector("#floatingTimerToggle");
+      const reset = root.querySelector("#floatingTimerReset");
+
+      function update() {
+        if (display) {
+          display.textContent = formatTimer(seconds);
+        }
+        localStorage.setItem(key, String(seconds));
+      }
+
+      if (toggle) {
+        toggle.addEventListener("click", function () {
+          if (interval) {
+            clearInterval(interval);
+            interval = null;
+            toggle.textContent = "开始";
+            toggle.classList.remove("bg-red-600", "border-red-500");
+            toggle.classList.add("bg-emerald-600", "border-emerald-500");
+          } else {
+            interval = setInterval(function () {
+              seconds += 1;
+              update();
+            }, 1000);
+            toggle.textContent = "暂停";
+            toggle.classList.remove("bg-emerald-600", "border-emerald-500");
+            toggle.classList.add("bg-red-600", "border-red-500");
+          }
+        });
+      }
+      if (reset) {
+        reset.addEventListener("click", function () {
+          seconds = 0;
+          update();
+        });
+      }
+      update();
+    }
+
+    function init() {
+      renderCategories();
+      renderSopList();
+      syncActiveCategoryLabel();
+      syncActiveSopTitle();
+      setupSearch();
+      setupFontSizeControls();
+      setupSidebarToggle();
+      setupTimer();
+      setupFloatingTimer();
+      restoreLastSop();
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function () {
+          navigator.serviceWorker.register("sw.js").catch(function () {});
+        });
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", init);
+  </script>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Y-Balance Test (YBT) 下肢动态平衡测试：像素级SOP</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #34495e;
+            --accent: #e67e22;
+            --fn-color: #e74c3c; /* 红灯/高风险 */
+            --fp-color: #f1c40f; /* 黄灯/中风险 */
+            --dn-color: #2ecc71; /* 绿灯/低风险 */
+            --bg-light: #f8f9fa;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ecf0f1;
+        }
+        h1 {
+            text-align: center;
+            color: var(--primary);
+            border-bottom: 4px solid var(--primary);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: var(--secondary);
+            border-left: 5px solid var(--accent);
+            padding-left: 10px;
+            background: #fff;
+            padding: 10px 15px;
+            border-radius: 0 4px 4px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #fff;
+            font-size: 0.9em;
+            margin-right: 5px;
+        }
+        .badge-red { background-color: var(--fn-color); }
+        .badge-yellow { background-color: var(--fp-color); color: #333; }
+        .badge-green { background-color: var(--dn-color); }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        details {
+            background: var(--bg-light);
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+        summary {
+            font-weight: bold;
+            font-size: 1.1em;
+            cursor: pointer;
+            color: var(--primary);
+            outline: none;
+            padding: 5px 0;
+        }
+        summary:hover {
+            color: var(--accent);
+        }
+        .breakout-step {
+            margin-left: 20px;
+            border-left: 2px dashed var(--accent);
+            padding-left: 15px;
+            margin-top: 10px;
+        }
+        .measurement {
+            font-family: monospace;
+            background: #fff3e0;
+            color: #e65100;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        .formula-box {
+            background-color: #e1f5fe;
+            border-left: 4px solid #0277bd;
+            padding: 15px;
+            margin: 15px 0;
+            font-size: 1.1em;
+            font-family: monospace;
+        }
+        .warning {
+            background-color: #ffebee;
+            border-left: 4px solid #f44336;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>📐 Y-Balance Test (YBT) 下肢动态平衡测试：像素级SOP</h1>
+    
+    <div class="card">
+        <h2>一、 测试准备与基线数据测量</h2>
+        <p>YBT-LQ（下肢Y平衡测试）是一项在极限稳定状态下测试动态神经肌肉控制、力量、灵活性和不对称性的核心工具。在正式测试前，必须获取受试者的精确肢体长度，以用于后续数据的标准化计算。</p>
+        
+        <div class="breakout-step">
+            <p><strong>1. 环境与着装：</strong> 受试者必须脱去鞋袜（赤脚），穿着轻便运动服。测试需在平坦、防滑的地面上进行。</p>
+            <p><strong>2. 肢体长度测量 (Limb Length)：</strong> 
+                <ul>
+                    <li>受试者仰卧。</li>
+                    <li>使用软尺精确测量从 <strong>髂前上棘 (ASIS)</strong> 到 <strong>内踝最突点 (Medial Malleolus)</strong> 的距离。</li>
+                    <li>记录右腿（或双腿）的数据用于标准化计算，记录精度至 <span class="measurement">0.5 cm</span>。</li>
+                </ul>
+            </p>
+            <p><strong>3. 热身与练习：</strong> 在每个测试方向上，受试者被允许进行 <strong>4次练习 (Practice Trials)</strong>，以熟悉推块阻力、掌握动作并消除学习效应。</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>二、 像素级测试动作规范与犯规判定</h2>
+        <p class="warning">YBT测试的执行极为严格。受试者必须在单腿支撑的状态下，将推块推至极限并受控地回到起始位置。出现以下任何一种情况，该次成绩作废 (Void Trial)。</p>
+        
+        <table>
+            <tr>
+                <th>测试维度</th>
+                <th>像素级动作标准 (合格)</th>
+                <th>犯规动作 (作废/Void)</th>
+            </tr>
+            <tr>
+                <td><strong>起始姿势</strong></td>
+                <td>单脚赤足站在中心踏板上，脚趾刚好在红色起始线后方。双手必须牢牢叉腰。</td>
+                <td>脚趾越过红线；双手离开髋部（失去上肢的约束）。</td>
+            </tr>
+            <tr>
+                <td><strong>推块动作</strong></td>
+                <td>用悬空脚的脚趾或足部边缘轻轻推动红色指示块。指示块需停在受试者推出的最远端。</td>
+                <td>脚踩在指示块上方借力休息；用力踢出(Kicking)指示块使之滑行。</td>
+            </tr>
+            <tr>
+                <td><strong>支撑腿控制</strong></td>
+                <td>支撑腿需保持全身平衡，依靠核心和下肢三关节（髋、膝、踝）协同发力。</td>
+                <td>支撑脚的脚后跟抬离中心踏板 (Heel lifts off the platform)。</td>
+            </tr>
+            <tr>
+                <td><strong>身体回位</strong></td>
+                <td>悬空腿推完指示块后，必须在完全受控的情况下回到起始的单腿站立姿势。</td>
+                <td>悬空脚在移动中或回位时触碰地面 (Touching the floor) 或身体失去平衡摔倒。</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>三、 标准化测试顺序 (SOP)</h2>
+        <p>为了保证测试信度与一致性，受试者必须严格按照以下顺序，在3个方向上（前方、内后方、外后方）完成正式测试。每个方向完成 <strong>3次成功测试 (Successful Reaches)</strong>。</p>
+        
+        <details>
+            <summary>第1步：前方伸展 (Anterior Reach)</summary>
+            <div class="breakout-step">
+                <p>1. 右腿支撑，左脚向前推块（记录3次有效成绩）。<br>
+                2. 左腿支撑，右脚向前推块（记录3次有效成绩）。</p>
+                <p><em>专项意义：高度考验支撑腿的脚踝背屈能力、膝关节控制以及股四头肌离心力量。前方伸展的不对称性对下肢损伤预测极具价值。</em></p>
+            </div>
+        </details>
+
+        <details>
+            <summary>第2步：内后方伸展 (Posteromedial Reach)</summary>
+            <div class="breakout-step">
+                <p>3. 右腿支撑，左脚向右后方（内后方）推块（记录3次有效成绩）。<br>
+                4. 左腿支撑，右脚向左后方（内后方）推块（记录3次有效成绩）。</p>
+                <p><em>专项意义：挑战臀大肌、臀中肌的稳定控制力及骨盆抗旋转能力。</em></p>
+            </div>
+        </details>
+
+        <details>
+            <summary>第3步：外后方伸展 (Posterolateral Reach)</summary>
+            <div class="breakout-step">
+                <p>5. 右腿支撑，左脚向左后方（外后方）推块（记录3次有效成绩）。<br>
+                6. 左腿支撑，右脚向右后方（外后方）推块（记录3次有效成绩）。</p>
+                <p><em>专项意义：在髋关节极度屈曲和内旋的状态下，测试髂胫束张力及后外侧链的极限稳定性。</em></p>
+            </div>
+        </details>
+        
+        <p><strong>数据读取：</strong> 成绩读取为靠近受试者一侧的指示块边缘的刻度，精确到 <span class="measurement">0.5 cm</span>。取3次有效成绩中的 <strong>最大值 (Maximal Reach)</strong> 用于最终计算。</p>
+    </div>
+
+    <div class="card">
+        <h2>四、 数据计算与风险红绿灯系统</h2>
+        <p>绝对距离无法在不同身高的受试者之间进行横向比较。必须使用第一阶段测量的肢体长度（Limb Length）将成绩 <strong>标准化 (Normalized)</strong>，计算出综合得分 (Composite Score)。</p>
+        
+        <div class="formula-box">
+            <strong>综合得分公式：</strong><br>
+            Composite Score (%) = [ (前方最大值 + 内后方最大值 + 外后方最大值) / (3 × 肢体长度) ] × 100
+        </div>
+
+        <h3>🚦 YBT 损伤风险预测红绿灯预警模型</h3>
+        <table>
+            <tr>
+                <th>风险等级</th>
+                <th>指标与阈值</th>
+                <th>临床与运动表现意义</th>
+            </tr>
+            <tr>
+                <td><span class="badge badge-red">红灯：高风险</span></td>
+                <td>
+                    <strong>1. 前方伸展不对称性 ≥ 4 cm</strong><br>
+                    <strong>2. 综合得分 < 89%</strong>
+                </td>
+                <td>
+                    <strong>高危预警！</strong> 前方不对称性 ≥ 4 cm 的运动员，下肢非接触性损伤几率增加 <strong>2.2倍</strong> 以上。<br>
+                    综合得分低于 89%（或不同运动项目特异性阈值如94%）的运动员，其赛季中受伤的可能性显著升高。应视为纠正性训练的最高优先级。
+                </td>
+            </tr>
+            <tr>
+                <td><span class="badge badge-yellow">黄灯：中等风险</span></td>
+                <td><strong>综合得分 89% - 94%</strong></td>
+                <td>
+                    处于灰色地带。对于高水平竞技体育（如篮球、足球等），此得分仍可能属于风险区间。需要将神经肌肉控制训练加入日常热身中，并监控疲劳带来的微小不对称。
+                </td>
+            </tr>
+            <tr>
+                <td><span class="badge badge-green">绿灯：低风险</span></td>
+                <td><strong>综合得分 > 94% 且 各方向对称</strong></td>
+                <td>
+                    受试者具备了出色的极限动态平衡与功能对称性。已获得功能性放行许可 (Cleared)，可安全进阶到高强度的爆发力、敏捷与专项运动表现训练。
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+</html>

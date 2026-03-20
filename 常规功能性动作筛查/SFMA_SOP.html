@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SFMA 像素级临床操作标准指南 (SOP)</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #34495e;
+            --accent: #3498db;
+            --fn-color: #e74c3c; /* 红灯 */
+            --fp-color: #f1c40f; /* 黄灯 */
+            --dn-color: #2ecc71; /* 绿灯 */
+            --bg-light: #f8f9fa;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ecf0f1;
+        }
+        h1 {
+            text-align: center;
+            color: var(--primary);
+            border-bottom: 4px solid var(--primary);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: var(--secondary);
+            border-left: 5px solid var(--accent);
+            padding-left: 10px;
+            background: #fff;
+            padding: 10px 15px;
+            border-radius: 0 4px 4px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #fff;
+            font-size: 0.9em;
+            margin-right: 5px;
+        }
+        .badge-fn { background-color: var(--fn-color); }
+        .badge-fp, .badge-dp { background-color: var(--fp-color); color: #333; }
+        .badge-dn { background-color: var(--dn-color); }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        details {
+            background: var(--bg-light);
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+        summary {
+            font-weight: bold;
+            font-size: 1.1em;
+            cursor: pointer;
+            color: var(--primary);
+            outline: none;
+            padding: 5px 0;
+        }
+        summary:hover {
+            color: var(--accent);
+        }
+        .breakout-step {
+            margin-left: 20px;
+            border-left: 2px dashed var(--accent);
+            padding-left: 15px;
+            margin-top: 10px;
+        }
+        .measurement {
+            font-family: monospace;
+            background: #e1f5fe;
+            color: #0277bd;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        .diagnostic-result {
+            background-color: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 10px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        .warning {
+            background-color: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🩺 SFMA 像素级临床操作与决策标准 (SOP)</h1>
+    
+    <div class="card">
+        <h2>一、 核心评分规则与诊断术语</h2>
+        <table>
+            <tr>
+                <th>评分代码</th>
+                <th>定义</th>
+                <th>交通灯指示</th>
+                <th>临床操作指令 (SOP)</th>
+            </tr>
+            <tr>
+                <td><span class="badge badge-fn">FN</span> 功能良好且无痛</td>
+                <td>达到像素级动作标准，无代偿，无疼痛</td>
+                <td>🛑 <strong>红灯 (Stop)</strong></td>
+                <td>停止突破。此处硬件/软件正常，转至其他受限区域。</td>
+            </tr>
+            <tr>
+                <td><span class="badge badge-fp">FP</span> 功能良好但有痛</td>
+                <td>达到动作标准，但出现症状</td>
+                <td>⚠️ <strong>黄灯 (Caution)</strong></td>
+                <td>谨慎突破。记录为疼痛刺激标记，优先进行医疗/理疗干预。</td>
+            </tr>
+            <tr>
+                <td><span class="badge badge-dp">DP</span> 功能障碍且有痛</td>
+                <td>未达标/受限，且出现症状</td>
+                <td>⚠️ <strong>黄灯 (Caution)</strong></td>
+                <td>最后测试。优先处理化学性疼痛和炎症，切勿强行训练。</td>
+            </tr>
+            <tr>
+                <td><span class="badge badge-dn">DN</span> 功能障碍且无痛</td>
+                <td>未达标/受限/代偿，但无疼痛</td>
+                <td>🟢 <strong>绿灯 (Go)</strong></td>
+                <td><strong>核心发现！强制一路突破到底。</strong>使用分解测试寻找根源。</td>
+            </tr>
+        </table>
+        
+        <div class="diagnostic-result">
+            <strong>SFMA 最终功能诊断分类：</strong><br>
+            1. <strong>TED (组织延展性功能障碍)：</strong> 肌肉紧缩、筋膜紧张、神经张力异常、疤痕纤维化等软组织受限。<br>
+            2. <strong>JMD (关节灵活性功能障碍)：</strong> 关节囊紧绷、关节磨损、骨关节炎、粘连性关节囊炎等关节本身受限。<br>
+            3. <strong>SMCD (稳定性和/或动作控制功能障碍)：</strong> 关节与软组织(硬件)正常，但神经肌肉控制(软件)失调、核心不稳或存在高阈值代偿策略。
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>二、 10大顶级测试与像素级分解测试 (Breakouts)</h2>
+        <p class="warning">SOP前提：所有测试均在不穿鞋、不热身的情况下进行。仅对评分为 <span class="badge badge-dn">DN (功能障碍且无痛)</span> 的项目执行以下下拉菜单中的分解流程。</p>
+
+        <!-- 1. 颈椎屈曲 -->
+        <details>
+            <summary>1. 颈椎屈曲 (Cervical Flexion)</summary>
+            <p><strong>像素级标准：</strong> 双脚并拢站立，闭上嘴巴，下巴触碰胸骨。无过度用力或代偿。</p>
+            <div class="breakout-step">
+                <p><strong>DN 分解流程 (消除重力影响)：</strong></p>
+                <ol>
+                    <li><strong>仰卧主动颈椎屈曲：</strong> 患者仰卧，主动将下巴触碰胸骨。
+                        <ul>
+                            <li>若达标 (FN)：诊断为颈椎/躯干的 <span class="diagnostic-result">SMCD</span>（负重下的稳定性问题）。</li>
+                            <li>若受限 (DN)：继续下一步。</li>
+                        </ul>
+                    </li>
+                    <li><strong>仰卧被动颈椎屈曲：</strong> 医生被动屈曲患者颈部。
+                        <ul>
+                            <li>若被动达标 (FN)：诊断为主动的 <span class="diagnostic-result">SMCD</span>（动作控制障碍）。</li>
+                            <li>若被动受限 (DN)：继续隔离枕寰关节(OA)。</li>
+                        </ul>
+                    </li>
+                    <li><strong>主动/被动 OA 屈曲：</strong> 仅测试上颈椎的点头动作，目标角度 <span class="measurement">20°</span>。
+                        <ul>
+                            <li>若受限：诊断为 <strong>OA关节 JMD</strong> 或 <strong>上颈椎 TED</strong>。</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+        </details>
+
+        <!-- 2. 颈椎伸展 -->
+        <details>
+            <summary>2. 颈椎伸展 (Cervical Extension)</summary>
+            <p><strong>像素级标准：</strong> 头部后仰，面部必须与天花板平行 <span class="measurement">相差 < 10°</span>，且脊柱曲线均匀，无肩胛骨代偿上抬。</p>
+            <div class="breakout-step">
+                <p><strong>DN 分解流程：</strong></p>
+                <ol>
+                    <li><strong>仰卧主动颈椎伸展：</strong> 患者头部悬空于床外，主动后仰至面部与墙面垂直。
+                        <ul>
+                            <li>若达标 (FN)：诊断为颈部/姿势性 <span class="diagnostic-result">SMCD</span>。</li>
+                        </ul>
+                    </li>
+                    <li><strong>仰卧被动颈椎伸展：</strong> 医生托住头部被动后仰。
+                        <ul>
+                            <li>若被动受限 (DN)：诊断为 <strong>颈椎伸展 JMD</strong> 或 <strong>颈前侧 TED</strong>。</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+        </details>
+
+        <!-- 3. 颈椎旋转 -->
+        <details>
+            <summary>3. 颈椎旋转 (Cervical Rotation)</summary>
+            <p><strong>像素级标准：</strong> 仅转动头部，下巴/鼻子须与锁骨中线对齐。双侧要求对称。</p>
+            <div class="breakout-step">
+                <p><strong>DN 分解流程：</strong></p>
+                <ol>
+                    <li><strong>仰卧主动旋转：</strong> 目标角度 <span class="measurement">80°</span>。</li>
+                    <li><strong>仰卧被动旋转：</strong> 若主动受限，进行被动测试。</li>
+                    <li><strong>C1-C2 颈椎屈曲旋转测试：</strong> 将颈椎完全屈曲（锁定下颈椎）后被动旋转，目标角度 <span class="measurement">40°</span>。
+                        <ul>
+                            <li>若受限：诊断为 <strong>寰枢关节(C1-C2) JMD/TED</strong>。</li>
+                            <li>若达标：则问题出在 <strong>下颈椎 JMD/TED</strong>。</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+        </details>
+
+        <!-- 4. 上肢模式1 -->
+        <details>
+            <summary>4. 上肢模式 1 (内旋/伸展 - 摸对侧肩胛下角)</summary>
+            <p><strong>像素级标准：</strong> 手背从下往上摸对侧肩胛骨下角，无肩胛骨翼状突出，无躯干侧弯代偿。</p>
+            <div class="breakout-step">
+                <p><strong>DN 分解流程 (拆分为单关节单平面)：</strong></p>
+                <ol>
+                    <li><strong>俯卧主动上肢模式 1：</strong> 消除脊柱稳定需求。若 FN，则为姿势性 <span class="diagnostic-result">SMCD</span>。</li>
+                    <li><strong>被动俯卧模式 1：</strong> 若主动 DN，则被动测试。若FN，进入仰卧逆向模式测试。</li>
+                    <li><strong>俯卧肩关节 90/90 内旋 (IR)：</strong> 主动/被动测试。目标角度 <span class="measurement">60°</span>（或内外旋总弧度 <span class="measurement">150°</span>）。若受限为 IR JMD/TED。</li>
+                    <li><strong>俯卧肩关节伸展：</strong> 目标角度 <span class="measurement">50°</span>。若受限为 Ext JMD/TED。</li>
+                    <li><strong>俯卧肘关节屈曲：</strong> 拇指摸肩。鉴别肘部 JMD/TED。</li>
+                    <li><strong>腰椎锁定主动/被动 胸椎伸展/旋转：</strong> 目标 <span class="measurement">50°</span>。若受限，肩部代偿的根源为 <strong>胸椎 JMD/TED</strong>。</li>
+                </ol>
+            </div>
+        </details>
+
+        <!-- 5. 上肢模式2 -->
+        <details>
+            <summary>5. 上肢模式 2 (外旋/屈曲 - 摸对侧肩胛冈)</summary>
+            <p><strong>像素级标准：</strong> 手从上往下摸对侧肩胛骨冈（上部），无头前引或脊柱伸展代偿。</p>
+            <div class="breakout-step">
+                <p><strong>DN 分解流程：</strong></p>
+                <ol>
+                    <li><strong>俯卧主动/被动上肢模式 2：</strong> 同模式1逻辑。</li>
+                    <li><strong>俯卧肩关节 90/90 外旋 (ER)：</strong> 目标角度 <span class="measurement">90°</span>。若受限为 ER JMD/TED。</li>
+                    <li><strong>俯卧肩关节屈曲/外展：</strong> 目标角度 <span class="measurement">170°</span>。若受限为 Flex/Abd JMD/TED。</li>
+                    <li><strong>俯卧肘关节屈曲：</strong> 测试肘部受限。</li>
+                    <li><strong>腰椎锁定胸椎伸展/旋转：</strong> 确认区域相互依存，排查胸椎根源。</li>
+                </ol>
+            </div>
+        </details>
+
+        <!-- 6. 多部位屈曲 -->
+        <details>
+            <summary>6. 多部位屈曲 (Multi-Segmental Flexion)</summary>
+            <p><strong>像素级标准：</strong> 弯腰触碰脚趾。骶骨角 <span class="measurement">> 70°</span>，脊柱后凸均匀，重心必须向后转移。</p>
+            <div class="breakout-step">
+                <p><strong>DN 分解流程 (区分后侧链、髋关节与脊柱)：</strong></p>
+                <ol>
+                    <li><strong>单腿站立前屈：</strong> 检查左右不对称性。</li>
+                    <li><strong>长坐姿触脚趾：</strong> 去除下肢承重。若 FN，则为负重姿势下的 <span class="diagnostic-result">核心/髋 SMCD</span>。</li>
+                    <li><strong>主动直腿抬高 (ASLR) & 被动直腿抬高 (PSLR)：</strong> ASLR目标 <span class="measurement">70°</span>，PSLR目标 <span class="measurement">80°</span>。若被动受限，为 <strong>下肢后侧链 TED</strong> 或 <strong>髋关节 JMD</strong>。</li>
+                    <li><strong>俯卧摇摆 (Prone Rocking)：</strong> 臀部坐向脚后跟，评估无负重下脊柱和髋的屈曲。若受限为 <strong>髋 JMD 或 脊柱 JMD/TED</strong>。</li>
+                    <li><strong>仰卧抱大腿/小腿触胸：</strong> 进一步隔离膝关节、髋关节和脊柱。</li>
+                    <li><strong>翻滚测试 (Rolling)：</strong> 仰卧到俯卧。若无法完成，确认为基础神经发育层面的核心 <span class="diagnostic-result">SMCD</span>。</li>
+                </ol>
+            </div>
+        </details>
+
+        <!-- 7. 多部位伸展 -->
+        <details>
+            <summary>7. 多部位伸展 (Multi-Segmental Extension)</summary>
+            <p><strong>像素级标准：</strong> 双臂举过头顶后仰。ASIS必须越过脚趾，肩胛冈必须越过脚后跟，脊柱曲线均匀，肩屈曲维持 <span class="measurement">170°</span>。</p>
+            <div class="breakout-step">
+                <p><strong>DN 分解流程 (上半身与下半身双线排查)：</strong></p>
+                <ol>
+                    <li><strong>无上肢后仰 & 单腿后仰：</strong> 剥离肩部影响和双侧代偿。</li>
+                    <li><strong>俯卧撑起 (Prone Press Up)：</strong> ASIS 离开床面不超过 <span class="measurement">2英寸</span>。若 FN，排除了脊柱硬件问题，诊断为 <strong>前侧核心 TED 或 SMCD</strong>。</li>
+                    <li><strong>上半身 - 腰椎锁定伸展/旋转：</strong> 目标 <span class="measurement">50°</span>。排查 <strong>胸椎 JMD/TED</strong>。</li>
+                    <li><strong>下半身 - 俯卧主动/被动髋伸展：</strong> 目标 <span class="measurement">10°</span>。</li>
+                    <li><strong>FABER 测试 & 托马斯测试 (Modified Thomas)：</strong> 区分髋关节 JMD (FABER受限) 与 股直肌/髂腰肌/阔筋膜张肌 TED (Thomas受限)。</li>
+                </ol>
+            </div>
+        </details>
+
+        <!-- 8. 多部位旋转 -->
+        <details>
+            <summary>8. 多部位旋转 (Multi-Segmental Rotation)</summary>
+            <p><strong>像素级标准：</strong> 双脚不动，身体旋转。骨盆与肩膀均需旋转 <span class="measurement">> 50°</span>，无躯干侧屈偏移。</p>
+            <div class="breakout-step">
+                <p><strong>DN 分解流程 (自下而上拆解)：</strong></p>
+                <ol>
+                    <li><strong>坐姿躯干旋转：</strong> 目标 <span class="measurement">50°</span>。锁定骨盆，单独检查脊柱。</li>
+                    <li><strong>腰椎锁定伸展/旋转：</strong> 目标 <span class="measurement">50°</span>。隔离胸椎。</li>
+                    <li><strong>髋关节内外旋：</strong> 坐姿与俯卧位测试。目标外旋 <span class="measurement">40°</span>，内旋 <span class="measurement">30°</span>。区分髋关节 JMD/TED。</li>
+                    <li><strong>胫骨内/外旋：</strong> 坐姿下测试，目标 <span class="measurement">20°</span>。排查最容易被忽视的膝下旋转受限。</li>
+                </ol>
+            </div>
+        </details>
+
+        <!-- 9. 单腿站立 -->
+        <details>
+            <summary>9. 单腿站立 (Single Leg Stance)</summary>
+            <p><strong>像素级标准：</strong> 支撑腿无高度流失，髋膝呈90°，睁眼 <span class="measurement">≥ 10秒</span>，闭眼 <span class="measurement">≥ 10秒</span>。</p>
+            <div class="breakout-step">
+                <p><strong>DN 分解流程 (前庭、核心与踝关节排查)：</strong></p>
+                <ol>
+                    <li><strong>前庭测试 (CTSIB)：</strong> 稳定与不稳平面上的静态/动态头部测试。若受限，转介专科医生。</li>
+                    <li><strong>半跪姿窄基底测试：</strong> 若闭眼受限，说明存在负重下的下肢/核心 <span class="diagnostic-result">SMCD</span>。</li>
+                    <li><strong>翻滚测试 & 四足式对角线伸展：</strong> 退阶到无负重/多点支撑状态，检查基础运动控制。</li>
+                    <li><strong>脚跟走 & 脚尖走：</strong> 动态测试踝关节。</li>
+                    <li><strong>俯卧被动 踝背屈/跖屈：</strong> 背屈目标 <span class="measurement">20-30°</span>，跖屈目标 <span class="measurement">30-40°</span>。排查踝关节硬件 JMD/TED。</li>
+                </ol>
+            </div>
+        </details>
+
+        <!-- 10. 高举深蹲 -->
+        <details>
+            <summary>10. 高举深蹲 (Overhead Deep Squat)</summary>
+            <p><strong>像素级标准：</strong> 脚跟不离地，大腿降至低于水平，胫骨与躯干平行，双臂不掉落。</p>
+            <div class="breakout-step">
+                <p><strong>DN 分解流程 (从下到上寻找受限点)：</strong></p>
+                <ol>
+                    <li><strong>双手抱颈深蹲：</strong> 去除对肩部/胸椎的极限要求。若能完成，问题出在上半身(肩/胸椎)。</li>
+                    <li><strong>辅助深蹲 (抓手下蹲)：</strong> 去除对脚踝背屈极限及核心平衡的要求。若能完成，记录为核心 <span class="diagnostic-result">SMCD</span>。</li>
+                    <li><strong>半跪姿踝关节背屈测试：</strong> 膝盖必须超出脚趾 <span class="measurement">4-5英寸 (约10-12cm)</span>。若受限，为 <strong>踝关节 JMD 或 腓肠肌/比目鱼肌 TED</strong>。</li>
+                    <li><strong>仰卧抱小腿/大腿触胸：</strong> 若抱小腿受限但抱大腿正常，证明髋正常，受限在于 <strong>膝关节屈曲 JMD 或 股四头肌 TED</strong>。</li>
+                </ol>
+            </div>
+        </details>
+    </div>
+
+    <div class="card">
+        <h2>三、 纠正性运动处方制定 (3R 原则与 4x4 矩阵)</h2>
+        <p>评估出根源后，严格按照 <strong>3R顺序</strong> 进行干预：</p>
+        <ol>
+            <li><strong>Reset (重置)：</strong> 优先针对 JMD/TED 使用手法松解、干针、关节松动术恢复活动度。<em>灵活性胜过稳定性。</em></li>
+            <li><strong>Reinforce (强化)：</strong> 使用肌内效贴布或支具，维持重置后新获得的活动度。</li>
+            <li><strong>Retrain (重训)：</strong> 针对 SMCD（动作控制障碍），使用 <strong>4x4 矩阵</strong> 重新建立神经肌肉连接。</li>
+        </ol>
+        
+        <table>
+            <tr>
+                <th>姿势进阶 \ 阻力进阶</th>
+                <th>1. 无阻力+辅助 (PA)</th>
+                <th>2. 无阻力 (自重)</th>
+                <th>3. 有阻力+辅助 (PA)</th>
+                <th>4. 有阻力</th>
+            </tr>
+            <tr>
+                <td><strong>1. 无负重 (仰卧/俯卧)</strong></td>
+                <td>医生引导下的躯干翻滚</td>
+                <td>主动翻滚、死虫式</td>
+                <td>弹力带辅助下的抗阻卷起</td>
+                <td>独立抗阻核心训练</td>
+            </tr>
+            <tr>
+                <td><strong>2. 四足位 (抗重力)</strong></td>
+                <td>辅助下的四足对角伸展</td>
+                <td>鸟狗式 (Bird-Dog)</td>
+                <td>引导下的抗阻鸟狗式</td>
+                <td>弹力带抗阻鸟狗式</td>
+            </tr>
+            <tr>
+                <td><strong>3. 跪姿 (单侧窄基底)</strong></td>
+                <td>辅助下的半跪姿控制</td>
+                <td>半跪姿躯干主动旋转</td>
+                <td>辅助下的半跪姿砍树动作</td>
+                <td>滑轮/弹力带半跪姿抗阻砍树</td>
+            </tr>
+            <tr>
+                <td><strong>4. 站姿 (最高动态要求)</strong></td>
+                <td>辅助单腿触脚尖</td>
+                <td>自重箭步蹲、单腿硬拉</td>
+                <td>辅助站姿抗阻转体</td>
+                <td>站姿负重抗阻爆发训练</td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+</html>

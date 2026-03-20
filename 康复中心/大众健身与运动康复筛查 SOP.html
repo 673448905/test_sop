@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大众健身与运动康复：运动评估与筛查标准操作流程（SOP）</title>
+    <style>
+        :root {
+            --primary: #0f766e;    /* 深青色，代表健康、专业与治愈 */
+            --secondary: #14b8a6;  /* 亮青色 */
+            --accent: #f97316;     /* 活力橙色，用于强调和警示 */
+            --red: #ef4444;        /* 警示红 */
+            --green: #10b981;      /* 通行绿 */
+            --bg-color: #f8fafc;
+            --text-main: #334155;
+            --text-light: #64748b;
+            --border-color: #e2e8f0;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        /* 排版标题 */
+        h1 {
+            text-align: center;
+            color: var(--primary);
+            font-size: 28px;
+            border-bottom: 3px solid var(--secondary);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        .meta-info {
+            background: #f0fdfa;
+            border-left: 4px solid var(--secondary);
+            padding: 15px 20px;
+            margin-bottom: 30px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .meta-info p { margin: 5px 0; font-weight: 500; }
+
+        h2.phase-title {
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 20px;
+            margin-top: 40px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h3 { color: var(--primary); font-size: 16px; margin-top: 25px; border-left: 4px solid var(--secondary); padding-left: 10px; }
+
+        /* 提示说明框 */
+        .instruction-box {
+            background-color: #f8fafc;
+            border: 1px solid var(--border-color);
+            padding: 12px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .instruction-box strong { color: var(--text-main); }
+
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        th { background-color: #f1f5f9; color: var(--primary); font-weight: 600; text-align: center; }
+        
+        tr:hover { background-color: #f8fafc; }
+        
+        td.text-center { text-align: center; }
+
+        /* 标签卡片 */
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            color: white;
+        }
+        .badge.red { background-color: var(--red); }
+        .badge.green { background-color: var(--green); }
+        .badge.yellow { background-color: var(--accent); color: #fff; }
+
+        /* 流程图样式 */
+        .flowchart-container {
+            background: #0f172a;
+            color: #14b8a6;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', Courier, monospace;
+            overflow-x: auto;
+            white-space: pre;
+            line-height: 1.8;
+            font-size: 14px;
+            border-left: 4px solid var(--accent);
+        }
+
+        /* 公式与特殊区块 */
+        .formula-box {
+            background: #fff7ed;
+            border: 1px dashed var(--accent);
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 14px;
+            color: #9a3412;
+        }
+
+        /* 打印样式优化 */
+        @media print {
+            body { background: #fff; padding: 0; }
+            .container { box-shadow: none; padding: 0; max-width: 100%; }
+            .phase-title { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .badge { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .flowchart-container { background: #f8fafc; color: #000; border: 1px solid #ccc; border-left: 4px solid #000; }
+            table { page-break-inside: avoid; }
+            h2.phase-title { page-break-before: auto; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🏋️ 大众健身与运动康复：运动评估与筛查 SOP</h1>
+    
+    <div class="meta-info">
+        <p><strong>👥 适用对象：</strong> 大众健身人群、业余运动爱好者、久坐办公族、骨科术后及慢痛康复期会员。</p>
+        <p><strong>👨‍⚕️ 执行人员：</strong> 私人教练/体能教练（负责常规筛查与体能）、物理治疗师/康复师（负责疼痛处理与SFMA）。</p>
+    </div>
+
+    <h2 class="phase-title">🛑 第一阶段：健康问卷与红旗分流 (Triage Flowchart)</h2>
+    <div class="instruction-box">
+        <strong>【操作说明】</strong> 会员首次接触必须填写 PAR-Q（体力活动准备问卷）。严禁教练跨界诊断，见痛即转介。
+    </div>
+    <div class="flowchart-container">
+[入口问询]：目前是否有静息疼痛、运动发力时疼痛、或医生叮嘱未愈合的伤病？
+      │
+      ├─► 【是 (红灯)】 ──► 触发医疗边界，暂停常规体能测试，直接转介康复治疗师进行【SFMA临床评估】
+      │
+      └─► 【否 (绿灯)】 ──► 获准进入运动前筛查，私人教练开始执行【第二阶段：FMS基础筛查】
+    </div>
+
+    <h2 class="phase-title">🟢 第二阶段：功能动作筛查 (FMS)</h2>
+    <div class="instruction-box">
+        <strong>【操作说明】</strong> 用于评估无痛会员的基础动作质量。大众人群需重点关注 <strong>深蹲模式（下肢力学）</strong>、<strong>肩关节灵活性（久坐圆肩排查）</strong> 和 <strong>ASLR（久坐腘绳肌及下腰背排查）</strong>。
+    </div>
+    
+    <h3>【FMS 现场测试记录表】</h3>
+    <div class="instruction-box">注：若排除测试出现任何疼痛（阳性），对应主测试项直接记0分，并立即中止测试转介康复师。</div>
+    <table>
+        <tr>
+            <th width="30%">测试项目</th>
+            <th width="15%">左侧得分 (0-3)</th>
+            <th width="15%">右侧得分 (0-3)</th>
+            <th width="15%">最终得分</th>
+            <th width="25%">排除性测试 (痛=0分)</th>
+        </tr>
+        <tr>
+            <td>1. 深蹲 (Deep Squat)</td>
+            <td class="text-center">--</td>
+            <td class="text-center">--</td>
+            <td></td>
+            <td>无</td>
+        </tr>
+        <tr>
+            <td>2. 跨栏架步 (Hurdle Step)</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>无</td>
+        </tr>
+        <tr>
+            <td>3. 直线弓箭步 (In-Line Lunge)</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>无</td>
+        </tr>
+        <tr>
+            <td>4. 肩关节灵活性 (Shoulder Mob.)</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>撞击测试：阳性[ ] 阴性[ ]</td>
+        </tr>
+        <tr>
+            <td>5. 主动直腿抬高 (ASLR)</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>无</td>
+        </tr>
+        <tr>
+            <td>6. 躯干稳定性俯卧撑 (TSPU)</td>
+            <td class="text-center">--</td>
+            <td class="text-center">--</td>
+            <td></td>
+            <td>脊柱伸展：阳性[ ] 阴性[ ]</td>
+        </tr>
+        <tr>
+            <td>7. 旋转稳定性 (Rotary Stab.)</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>脊柱屈曲：阳性[ ] 阴性[ ]</td>
+        </tr>
+        <tr>
+            <td colspan="3" style="text-align: right;"><strong>总分 (Max: 21)</strong></td>
+            <td colspan="2" style="font-size: 18px; font-weight: bold; color: var(--primary);">/21</td>
+        </tr>
+        <tr>
+            <td colspan="5" class="text-center" style="background: #f0fdfa; color: #0f766e;">
+                （大众人群总分 <strong>< 14分</strong> 或 <strong>出现单边不对称(如左1右3)</strong> 时，受伤风险显著增加，禁忌大重量负重）
+            </td>
+        </tr>
+    </table>
+
+    <h2 class="phase-title">⚖️ 第三阶段：动态平衡与关节稳定性测试 (YBT-LQ)</h2>
+    <div class="instruction-box">
+        <strong>【操作说明】</strong> 重点评估下肢（踝/膝/髋）的动态平衡能力。对预防老年人跌倒、跑者膝损伤、踝关节扭伤康复者尤为重要。
+    </div>
+    
+    <div class="formula-box">
+        <strong>【综合得分计算】</strong><br>
+        综合得分 (%) = [(前方 + 内后 + 外后) / (3 × 实际下肢长度)] × 100
+    </div>
+
+    <h3>【YBT 下肢测试数据表】</h3>
+    <table>
+        <tr>
+            <th width="25%">测试方向</th>
+            <th width="15%">左腿支撑 (cm)</th>
+            <th width="15%">右腿支撑 (cm)</th>
+            <th width="15%">左右差值</th>
+            <th width="30%">大众健身/康复意义</th>
+        </tr>
+        <tr>
+            <td>肢体长度 (ASIS至内踝)</td>
+            <td></td>
+            <td></td>
+            <td class="text-center">--</td>
+            <td class="text-center">--</td>
+        </tr>
+        <tr>
+            <td>Anterior (前方伸展)</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>左右差 ≥ 4cm 预示非接触性损伤高风险</td>
+        </tr>
+        <tr>
+            <td>Posteromedial (内后方)</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>反映臀中肌/踝关节综合稳定能力</td>
+        </tr>
+        <tr>
+            <td>Posterolateral (外后方)</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>反映髋关节旋转控制力与核心抗扭转力</td>
+        </tr>
+        <tr>
+            <td><strong>综合得分 (Composite %)</strong></td>
+            <td class="text-center">%</td>
+            <td class="text-center">%</td>
+            <td class="text-center">--</td>
+            <td>健康标准：女性 > 94%，男性 > 89%</td>
+        </tr>
+    </table>
+
+    <h2 class="phase-title">📈 第四阶段：大众基础体能评估 (Fitness Assessment)</h2>
+    <div class="instruction-box">
+        <strong>【操作说明】</strong> 仅对无痛且FMS动作过关的会员进行。根据客户实际能力和年龄选择合适的回归/进阶测试动作。
+    </div>
+    <table>
+        <tr>
+            <th>测试维度</th>
+            <th>测试项目 (选其一)</th>
+            <th>测试结果记录</th>
+            <th>评估意义</th>
+        </tr>
+        <tr>
+            <td class="text-center"><strong>心肺耐力</strong></td>
+            <td>3分钟台阶测试 / 跑步机次极量心率测试</td>
+            <td>恢复心率：____ bmp <br>推算 VO2max：____</td>
+            <td>评估心血管健康与燃脂区间制定</td>
+        </tr>
+        <tr>
+            <td class="text-center"><strong>核心与局部耐力</strong></td>
+            <td>平板支撑 (Plank) / 卷腹测试</td>
+            <td>坚持时长：____ 秒 <br>完成次数：____ 次</td>
+            <td>腰椎稳定性与久坐背痛风险排查</td>
+        </tr>
+        <tr>
+            <td class="text-center"><strong>上肢相对力量</strong></td>
+            <td>标准俯卧撑 / 跪姿俯卧撑 (至力竭)</td>
+            <td class="text-center">____ 次</td>
+            <td>上肢推力及肩带稳定基础</td>
+        </tr>
+        <tr>
+            <td class="text-center"><strong>下肢绝对/相对力量</strong></td>
+            <td>自重深蹲(次) / 腿举 5RM 估算</td>
+            <td class="text-center">最大重量：____ KG <br>次数：____ 次</td>
+            <td>日常起居防跌倒能力与下肢肌量指标</td>
+        </tr>
+    </table>
+
+    <h2 class="phase-title">🩺 第五阶段：SFMA 临床评估 (康复师专属)</h2>
+    <div class="instruction-box">
+        <strong>【操作说明】</strong> 当客户在动作中感到疼痛，转由康复治疗师通过 SFMA 寻找诱发疼痛的生物力学根源。
+    </div>
+    
+    <h3>【SFMA 交通信号灯与顶级评估记录表】</h3>
+    <table>
+        <tr>
+            <th width="15%">诊断分类</th>
+            <th width="25%">含义</th>
+            <th width="15%">信号灯</th>
+            <th width="45%">康复师操作指令</th>
+        </tr>
+        <tr>
+            <td class="text-center"><strong>FN</strong></td>
+            <td>功能良好且无痛</td>
+            <td class="text-center"><span class="badge red">🛑 停止</span></td>
+            <td>问题不在此处，无需进一步分解测试。</td>
+        </tr>
+        <tr>
+            <td class="text-center"><strong>FP / DP</strong></td>
+            <td>有疼痛 (正常/受限)</td>
+            <td class="text-center"><span class="badge yellow">⚠️ 标记</span></td>
+            <td>记录疼痛刺激，暂停此模式突破，以消炎镇痛干预为主。</td>
+        </tr>
+        <tr>
+            <td class="text-center"><strong>DN</strong></td>
+            <td>功能障碍且无痛</td>
+            <td class="text-center"><span class="badge green">🟢 突破</span></td>
+            <td><strong>核心突破口。</strong>通过改变体位（如站姿变仰卧）或施加被动外力，鉴别是关节/软组织受限，还是神经肌肉控制障碍。</td>
+        </tr>
+    </table>
+
+    <div style="column-count: 2; column-gap: 40px; font-size: 14px; margin-bottom: 20px; background: #f8fafc; padding: 15px; border-radius: 8px;">
+        <p><strong>多部位屈曲 (弯腰触趾)</strong><br> [ ]FN  [ ]FP  [ ]DP  [ ]DN</p>
+        <p><strong>多部位伸展 (双手叉腰后仰)</strong><br> [ ]FN  [ ]FP  [ ]DP  [ ]DN</p>
+        <p><strong>单腿站立 (闭眼/睁眼)</strong><br> L: [ ]FN [ ]FP [ ]DP [ ]DN<br> R: [ ]FN [ ]FP [ ]DP [ ]DN</p>
+        <p><strong>颈部与上肢复合模式 (摸背/摸肩)</strong><br> L: [ ]FN [ ]FP [ ]DP [ ]DN<br> R: [ ]FN [ ]FP [ ]DP [ ]DN</p>
+    </div>
+
+    <h2 class="phase-title">🛠️ 第六阶段：纠正性训练处方与 4x4 矩阵</h2>
+    <div class="instruction-box">
+        <strong>【操作说明】</strong> 私教与康复师基于测试结果，遵循 <strong>“灵活性优先于稳定性，稳定性优先于力量”</strong> 的原则制定训练计划。
+    </div>
+
+    <h3>【4x4 康复与纠正性训练进阶矩阵】</h3>
+    <div class="instruction-box" style="background-color: #fff7ed; border-color: #fdba74; color: #c2410c;">
+        <strong>安全准则：</strong>一切重置训练从 1x1（低姿势、低神经负荷）开始。确保客户建立正确的发力记忆后，再向高姿势（站立）和高阻力进阶。
+    </div>
+    <table>
+        <tr>
+            <th width="20%">体位难度 \ 负荷</th>
+            <th width="20%">1. 无阻力+辅助 (唤醒)</th>
+            <th width="20%">2. 自重无辅助 (控制)</th>
+            <th width="20%">3. 加阻力+辅助 (强化)</th>
+            <th width="20%">4. 加阻力无辅助 (抗阻)</th>
+        </tr>
+        <tr>
+            <td style="background:#f1f5f9; font-weight:bold;">1. 仰卧/俯卧位<br><span style="font-size: 12px; font-weight: normal;">(消除重力影响)</span></td>
+            <td>辅助呼吸训练<br>教练辅助死虫式</td>
+            <td>主动死虫式<br>俯卧T字伸展</td>
+            <td>弹力带辅助臀桥<br>抗阻卷腹(教练托扶)</td>
+            <td>弹力带死虫式<br>负重臀桥</td>
+        </tr>
+        <tr>
+            <td style="background:#f1f5f9; font-weight:bold;">2. 四足/桥式<br><span style="font-size: 12px; font-weight: normal;">(多点支撑)</span></td>
+            <td>辅助猫牛式<br>对角线伸展(轻度)</td>
+            <td>标准鸟狗式<br>侧支撑(短力臂)</td>
+            <td>弹力带抗阻猫牛式</td>
+            <td>阻力带鸟狗式<br>标准平板支撑</td>
+        </tr>
+        <tr>
+            <td style="background:#f1f5f9; font-weight:bold;">3. 双膝/半跪姿<br><span style="font-size: 12px; font-weight: normal;">(核心高度参与)</span></td>
+            <td>半跪姿维持<br>(抓握固定物)</td>
+            <td>半跪姿躯干转动<br>高跪姿后仰</td>
+            <td>半跪姿木棍抗扭转</td>
+            <td>半跪姿绳索下拉/推举</td>
+        </tr>
+        <tr>
+            <td style="background:#f1f5f9; font-weight:bold;">4. 站立/动态位<br><span style="font-size: 12px; font-weight: normal;">(最高神经负荷)</span></td>
+            <td>TRX辅助深蹲<br>扶墙单腿硬拉</td>
+            <td>自重深蹲<br>弓箭步走</td>
+            <td>站姿弹力带转体<br>高脚杯深蹲(教练保护)</td>
+            <td>杠铃深蹲<br>负重单腿硬拉</td>
+        </tr>
+    </table>
+
+    <div class="formula-box" style="border-style: solid; background: #f0fdf4; border-color: var(--green); color: #166534;">
+        <strong>【实战处方示例：久坐办公族深蹲受限】</strong><br><br>
+        • <strong>情景 A（灵活性问题）</strong>：客户下蹲时脚跟抬起，被动测试发现踝背屈角度严重不足。<br>
+        👉 <strong>处方</strong>：执行手法/筋膜枪放松小腿三头肌，拉伸比目鱼肌。获得角度后，进入深蹲训练。<br><br>
+        • <strong>情景 B（稳定性问题）</strong>：客户下蹲时腰部反弓/骨盆翻转，但仰卧位测试髋关节灵活性极佳。<br>
+        👉 <strong>处方</strong>：说明核心无法在站立时稳定骨盆。从 4x4 矩阵的 <strong>1x2（死虫式激活核心）</strong> 开始，进阶到 <strong>3x2（半跪姿抗旋转）</strong>，最后回到 <strong>4x2（自重深蹲）</strong> 进行动作重构。
+    </div>
+
+</div>
+
+</body>
+</html>

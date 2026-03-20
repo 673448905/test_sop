@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STATION 5: 数据解析与训练干预处方 SOP</title>
+    <style>
+        :root {
+            --primary: #0a192f;    
+            --secondary: #172a45;  
+            --accent: #d4af37;     
+            --accent-light: #fef08a;
+            --red: #dc2626;
+            --green: #059669;
+            --bg-color: #f8fafc;
+            --text-main: #1e293b;
+            --border-color: #cbd5e1;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Helvetica Neue', 'PingFang SC', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(10, 25, 47, 0.1);
+            border-top: 8px solid var(--accent);
+        }
+
+        .header { display: flex; align-items: center; border-bottom: 3px solid var(--primary); padding-bottom: 20px; margin-bottom: 30px; }
+        .station-number { background: var(--accent); color: var(--primary); font-size: 36px; font-weight: bold; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-right: 25px; }
+        .header-text h1 { color: var(--primary); font-size: 28px; margin: 0 0 5px 0; letter-spacing: 1px; }
+        .header-text p { color: var(--text-main); font-size: 16px; margin: 0; font-weight: bold; text-transform: uppercase; }
+
+        .meta-bar { background: #f1f5f9; padding: 15px 20px; border-radius: 8px; display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 30px; border: 1px solid var(--border-color); }
+        .meta-item strong { color: var(--primary); }
+
+        .step-block { margin-bottom: 35px; }
+        .step-title { background: var(--primary); color: white; padding: 10px 20px; border-radius: 6px; font-size: 18px; margin-bottom: 15px; display: inline-block; border-left: 5px solid var(--accent); }
+        
+        .action-box { border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; }
+        .action-row { display: flex; border-bottom: 1px solid var(--border-color); }
+        .action-row:last-child { border-bottom: none; }
+        .action-checkbox { width: 50px; background: #f8fafc; display: flex; align-items: center; justify-content: center; border-right: 1px solid var(--border-color); }
+        .action-checkbox input[type="checkbox"] { transform: scale(1.5); cursor: pointer; accent-color: var(--primary); }
+        .action-detail { padding: 15px 20px; flex: 1; font-size: 15px; }
+        .action-detail strong { color: var(--primary); }
+        
+        .data-capture { background: #fffbeb; padding: 20px; border-radius: 8px; border-left: 4px solid var(--accent); margin-top: 20px; }
+        
+        table.score-table { width: 100%; border-collapse: collapse; margin-top: 10px; background: white; font-size: 14px; }
+        table.score-table th, table.score-table td { border: 1px solid var(--border-color); padding: 12px 15px; text-align: left; vertical-align: middle; }
+        table.score-table th { background-color: var(--secondary); color: white; font-weight: normal; text-align: center; }
+        
+        .highlight-text { color: var(--primary); font-weight: bold; background: var(--accent-light); padding: 2px 6px; border-radius: 4px; }
+        .badge { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; color: white; text-align: center; margin-bottom: 5px;}
+        .badge.red { background-color: var(--red); }
+        .badge.green { background-color: var(--green); }
+        .badge.gold { background-color: var(--accent); color: var(--primary); }
+
+        @media print {
+            body { background: #fff; padding: 0; }
+            .container { box-shadow: none; border-top: none; padding: 0; }
+            .action-box, .data-capture { page-break-inside: avoid; }
+            table.score-table th { background-color: #cbd5e1; color: #000; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .highlight-text { background: transparent; border: 1px solid #000; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <div class="station-number">05</div>
+        <div class="header-text">
+            <h1>数据解析与训练干预处方</h1>
+            <p>Data Analysis & Training Prescription Matrix</p>
+        </div>
+    </div>
+
+    <div class="meta-bar">
+        <div class="meta-item"><strong>🕒 执行时间：</strong> 每日测试结束后 / 集中复盘日</div>
+        <div class="meta-item"><strong>👥 岗位配置：</strong> 主教练 + 医疗主管 + 科研总控</div>
+        <div class="meta-item"><strong>🛠️ 核心平台：</strong> SentrySuite 数据库 + 运动员管理系统 (AMS)</div>
+    </div>
+
+    <div class="step-block">
+        <div class="step-title">步骤 1：医疗红旗与退赛预警复核 (医疗主管)</div>
+        <div class="action-box">
+            <label class="action-row">
+                <div class="action-checkbox"><input type="checkbox"></div>
+                <div class="action-detail">
+                    <strong>结构性损伤确认：</strong> 调取 Station 2 的 PAR-Q 与 FMS 排除性测试结果。凡标记为 <span class="highlight-text">SFMA 阳性 (有痛)</span> 的运动员，由队医直接开具康复处方，禁止其参与下一阶段的专项大负荷水上训练。
+                </div>
+            </label>
+            <label class="action-row">
+                <div class="action-checkbox"><input type="checkbox"></div>
+                <div class="action-detail">
+                    <strong>过度训练与心血管风险排查：</strong> 调取 Station 4 (CPET) 报告。核对 SentrySuite 软件是否触发 <strong>EOV (震荡呼吸)</strong> 警报，并检视最大负荷下的 <strong>氧脉搏 (O2 Pulse)</strong> 曲线是否出现异常平台期或下降。若发现异常，立即下达心脏彩超等转介排查指令。
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <div class="step-block">
+        <div class="step-title">步骤 2：有氧/无氧阈值划定与配速重构 (科研总控)</div>
+        <div class="action-box">
+            <label class="action-row">
+                <div class="action-checkbox"><input type="checkbox"></div>
+                <div class="action-detail">
+                    <strong>基线代谢提取：</strong> 将 Station 1 的 REE (静息能量消耗) 数据推转给随队营养师，重新校准重点运动员冬训期间的每日碳水与蛋白质摄入基线。
+                </div>
+            </label>
+            <label class="action-row">
+                <div class="action-checkbox"><input type="checkbox"></div>
+                <div class="action-detail">
+                    <strong>心肺阈值锁定：</strong> 在 SentrySuite 中利用 V-Slope (V-斜率法) 和 EQO2 (通气当量法) 确认 <strong>VT1 (第一通气阈)</strong> 和 <strong>VT2 (第二通气阈)</strong>。交叉比对 2mmol/L 与 4mmol/L 血乳酸拐点。
+                </div>
+            </label>
+            <label class="action-row">
+                <div class="action-checkbox"><input type="checkbox"></div>
+                <div class="action-detail">
+                    <strong>下发训练区间 (Training Zones)：</strong> 将 VT1 和 VT2 对应的 <strong>测功仪瓦数 (W) 和心率 (bpm)</strong> 录入 AMS 系统，作为该运动员未来 6 周训练的绝对监控指标。
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <div class="step-block">
+        <div class="step-title">步骤 3：弱点分析与体能处方开具 (主教练)</div>
+        
+        <div class="data-capture">
+            <strong>📋 科学干预指令库 (Actionable Prescriptions)</strong>
+            <table class="score-table">
+                <tr>
+                    <th width="20%">诊断短板</th>
+                    <th width="35%">生理与生物力学成因</th>
+                    <th width="45%">定向训练指令 (向教练组下达)</th>
+                </tr>
+                <tr>
+                    <td><span class="badge gold">VT1 瓦数偏低</span><br>(乳酸曲线左移)</td>
+                    <td>基础有氧氧化能力弱（线粒体密度及毛细血管网不足）。</td>
+                    <td><strong>严控恢复游配速：</strong> 增加 LIT (低强度长距离) 训练占比。明确要求在 U2/U1 训练区时，<strong>心率和瓦数绝对不可超过 VT1 极值</strong>，避免无谓的糖原消耗和乳酸堆积。</td>
+                </tr>
+                <tr>
+                    <td><span class="badge gold">VT2 瓦数偏低</span><br>(VO2Max 瓶颈)</td>
+                    <td>糖酵解无氧耐力不足，乳酸清除率低下。</td>
+                    <td><strong>增加阈值巡航训练：</strong> 安排基于 VT2 瓦数 (约 4mmol/L 临界点) 的高强度间歇 (HIT)。例如执行 4×4分钟 或 6×2分钟 的测功仪 AT 区间测验。</td>
+                </tr>
+                <tr>
+                    <td><span class="badge green">VO2 T1/2 恢复慢</span><br>(心率降幅极小)</td>
+                    <td>迷走神经张力恢复慢，疲劳清除机制受损。</td>
+                    <td><strong>强化间歇恢复：</strong> 在水上专项课中，延长高强度冲刺后的组间主动恢复时间。考虑辅以冷热浴或压缩衣促进循环。</td>
+                </tr>
+                <tr>
+                    <td><span class="badge red">卧拉 1RM 达标<br>但 IMTP PF 低</span></td>
+                    <td>最大力量 (Max Strength) 足够，但神经募集速率 (RFD - Rate of Force Development) 迟缓。</td>
+                    <td><strong>转换训练模块：</strong> 力量房训练从大重量低次数 (1-3RM) 转向 <strong>VBT 测速弹阻训练</strong>。要求负重降低至 40-60% 1RM，但向心动作速度必须 > 0.8m/s，提升起航前两桨的爆发力。</td>
+                </tr>
+                <tr>
+                    <td><span class="badge red">FMS 核心项 < 2分</span><br>(TSPU 极弱)</td>
+                    <td>躯干抗伸展能力差，骨盆中立位无法维持。</td>
+                    <td><strong>暂停水上大阻力划：</strong> 交由体能教练，从 4x4 矩阵的 1x2 (死虫式/仰卧抗阻) 开始重新激活深层核心。避免在船上因代偿导致腰椎间盘损伤。</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div style="margin-top: 50px; border-top: 2px dashed var(--border-color); padding-top: 20px; display: flex; justify-content: space-between; font-size: 15px;">
+        <div><strong>医疗主管审核：</strong> __________________</div>
+        <div><strong>科研总控审核：</strong> __________________</div>
+        <div><strong>主教练签发：</strong> __________________</div>
+    </div>
+</div>
+
+</body>
+</html>

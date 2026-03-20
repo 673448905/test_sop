@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Y-Balance Test Upper Quarter (YBT-UQ) 上肢动态平衡测试：像素级SOP</title>
+    <style>
+        :root {
+            --primary: #2980b9;
+            --secondary: #2c3e50;
+            --accent: #d35400;
+            --fn-color: #e74c3c; /* 高风险/不达标 */
+            --fp-color: #f39c12; /* 中风险/边界 */
+            --dn-color: #27ae60; /* 低风险/达标 */
+            --bg-light: #f4f6f7;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ecf0f1;
+        }
+        h1 {
+            text-align: center;
+            color: var(--primary);
+            border-bottom: 4px solid var(--primary);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: var(--secondary);
+            border-left: 5px solid var(--accent);
+            padding-left: 10px;
+            background: #fff;
+            padding: 10px 15px;
+            border-radius: 0 4px 4px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #fff;
+            font-size: 0.9em;
+            margin-right: 5px;
+        }
+        .badge-red { background-color: var(--fn-color); }
+        .badge-yellow { background-color: var(--fp-color); color: #fff; }
+        .badge-green { background-color: var(--dn-color); }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        details {
+            background: var(--bg-light);
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+        summary {
+            font-weight: bold;
+            font-size: 1.1em;
+            cursor: pointer;
+            color: var(--primary);
+            outline: none;
+            padding: 5px 0;
+        }
+        summary:hover {
+            color: var(--accent);
+        }
+        .breakout-step {
+            margin-left: 20px;
+            border-left: 2px dashed var(--accent);
+            padding-left: 15px;
+            margin-top: 10px;
+        }
+        .measurement {
+            font-family: monospace;
+            background: #fff3e0;
+            color: #e65100;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        .formula-box {
+            background-color: #e8f8f5;
+            border-left: 4px solid #1abc9c;
+            padding: 15px;
+            margin: 15px 0;
+            font-size: 1.1em;
+            font-family: monospace;
+        }
+        .warning {
+            background-color: #fcf3cf;
+            border-left: 4px solid #16a085;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <span style="display:none;">[1][2][3][4][5]</span>
+    <h1>🦾 Y-Balance Test Upper Quarter (YBT-UQ) 上肢动态平衡测试：像素级SOP</h1>
+    
+    <div class="card">
+        <h2>一、 测试核心目的与基线数据测量 (Limb Length)</h2>
+        <p>YBT-UQ 专为头顶作业运动员（如棒球、网球、游泳）和战术/特种职业人群设计。它在俯卧撑的极限稳定状态下，综合评估肩胛骨稳定性、盂肱关节灵活性、胸椎旋转能力以及核心稳定性。</p>
+        
+        <div class="breakout-step">
+            <p><strong>1. 测试环境与着装：</strong> 受试者需脱去鞋袜（赤脚），穿着轻便运动服。</p>
+            <p><strong>2. 上肢肢体长度测量 (Upper Quarter Limb Length)：</strong> 这是标准化计算得分的绝对前提。
+                <ul>
+                    <li>受试者背对测试者站立，双脚并拢。</li>
+                    <li>要求受试者将 <strong>右臂</strong> 向侧面水平伸展，掌心与面部朝向一致（肩外展90度）。</li>
+                    <li>定位受试者的 <strong>第七颈椎棘突 (C7)</strong>（颈部底部最突出的骨性标志；若难寻找，可让受试者做颈部屈伸，C7棘突会始终保持突出）。</li>
+                    <li>使用软尺，测量从 <strong>C7棘突</strong> 到 <strong>右手第三指（中指）最远端指尖</strong> 的距离。</li>
+                    <li>仅需测量右臂，记录精度至 <span class="measurement">0.5 cm</span>。</li>
+                </ul>
+            </p>
+            <p><strong>3. 练习次数 (Practice Trials)：</strong> 受试者有权在正式测试前，每只手臂向3个方向进行 <strong>2次练习</strong>，以熟悉动作和推块阻力。</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>二、 像素级测试动作规范与犯规判定</h2>
+        <p class="warning">YBT-UQ 是一项极具挑战的闭链测试。受试者必须在单臂支撑的俯卧撑状态下，将推块推至极限。出现以下任何一种代偿或犯规，该次成绩直接作废 (Void Trial)。</p>
+        
+        <table>
+            <tr>
+                <th>测试维度</th>
+                <th>像素级动作标准 (合格)</th>
+                <th>犯规动作 (作废/Void)</th>
+            </tr>
+            <tr>
+                <td><strong>起始姿势</strong></td>
+                <td>标准的俯卧撑姿势。双脚打开与肩同宽，双手正对肩膀下方。支撑手的大拇指对准红色起始线。</td>
+                <td>双脚间距过大；躯干未保持平直（塌腰或过度撅臀）。</td>
+            </tr>
+            <tr>
+                <td><strong>推块动作</strong></td>
+                <td>用非支撑手轻轻推动红色指示块，手必须停留在红色目标区域内进行推动。</td>
+                <td>用力将指示块抛出、推离 (Shoving/Kicking)；手离开红色目标区域。</td>
+            </tr>
+            <tr>
+                <td><strong>身体控制</strong></td>
+                <td>允许胸椎旋转和肩胛骨的运动，但必须保持整体的俯卧撑平衡构架。</td>
+                <td>支撑手发生移动；双脚发生移动或抬离地面。</td>
+            </tr>
+            <tr>
+                <td><strong>动作连贯性</strong></td>
+                <td>推块后必须受控地回到起始俯卧撑位置，并且三个方向必须 <strong>连续进行</strong>。</td>
+                <td>在推动过程中或回位时，非支撑手撑地休息；失去平衡摔倒。</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>三、 标准化测试顺序 (Testing Sequence)</h2>
+        <p><strong>注意：与下肢YBT不同，上肢YBT的三个方向必须以连贯的顺序进行，期间不能停顿休息！</strong> 完成一套连续的三个方向后，才算作1次完整测试。每只手臂需完成 <strong>3次有效测试</strong>。</p>
+        
+        <details>
+            <summary>第1步：右侧上肢测试 (Right Upper Extremity)</summary>
+            <div class="breakout-step">
+                <p>受试者以右臂为 <strong>支撑臂 (Stance Arm)</strong>，左手依次向以下三个方向推块（动作需连贯，推完一个方向立即回中并推下一个）：</p>
+                <p><strong>1. 内侧伸展 (Medial Reach)：</strong> 左手向右臂的内侧（身体下方）尽可能推远。<br>
+                <strong>2. 下外侧伸展 (Inferolateral Reach)：</strong> 左手向身体对角线的右下后方推远。<br>
+                <strong>3. 上外侧伸展 (Superolateral Reach)：</strong> 左手向身体对角线的右上前方推远。</p>
+                <p><em>专项意义：连续挑战肩带的回缩/前伸、胸椎旋转极限及核心的抗旋能力。完成3次成功的循环。</em></p>
+            </div>
+        </details>
+
+        <details>
+            <summary>第2步：左侧上肢测试 (Left Upper Extremity)</summary>
+            <div class="breakout-step">
+                <p>受试者换以左臂为 <strong>支撑臂 (Stance Arm)</strong>，右手依次连贯推向三个方向：</p>
+                <p><strong>1. 内侧伸展 (Medial Reach)</strong><br>
+                <strong>2. 下外侧伸展 (Inferolateral Reach)</strong><br>
+                <strong>3. 上外侧伸展 (Superolateral Reach)</strong></p>
+                <p><em>专项意义：对比左右肩胛带的动态稳定不对称性。完成3次成功的循环。</em></p>
+            </div>
+        </details>
+        
+        <p><strong>数据读取：</strong> 成绩读取为指示块最靠近受试者一侧的红色边缘刻度，精确到 <span class="measurement">0.5 cm</span>。取3次有效循环中，各个方向的 <strong>最大值 (Maximal Reach)</strong> 用于计算。</p>
+    </div>
+
+    <div class="card">
+        <h2>四、 数据计算与临床风险评估</h2>
+        <p>必须使用第一步测量的上肢肢体长度（Limb Length, C7至中指尖）对成绩进行标准化。</p>
+        
+        <div class="formula-box">
+            <strong>上肢综合得分公式 (Composite Score)：</strong><br>
+            Composite Score (%) = [ (内侧最大值 + 下外侧最大值 + 上外侧最大值) / (3 × 上肢肢体长度) ] × 100
+        </div>
+
+        <h3>🚦 YBT-UQ 临床干预与不对称性预警 (MDC 指南)</h3>
+        <p>与下肢不同，上肢YBT的绝对红线因运动专项差异较大，但临床上严格依赖 <strong>最小可觉察变化 (Minimal Detectable Change, MDC)</strong> 来判定受试者的不对称是否具有病理或表现受限意义：</p>
+        <table>
+            <tr>
+                <th>测试维度</th>
+                <th>异常/风险阈值 (MDC & Asymmetry)</th>
+                <th>临床与运动表现意义</th>
+            </tr>
+            <tr>
+                <td><span class="badge badge-red">综合得分不对称</span></td>
+                <td><strong>左右综合得分差异 > 6.5% - 6.9%</strong></td>
+                <td>
+                    <strong>高危预警：</strong> 超出了测量误差范围，表明两侧肩带/核心协同存在真实的病理性功能不对称。单侧头顶发力（投掷、扣球）受伤风险急剧增加。
+                </td>
+            </tr>
+            <tr>
+                <td><span class="badge badge-yellow">内侧伸展不对称</span></td>
+                <td><strong>左右差异 > 8.1 cm</strong></td>
+                <td>
+                    提示单侧胸小肌、前锯肌功能受限或胸椎旋转存在结构性卡压。需回到 SFMA 上肢模式进行降维排查。
+                </td>
+            </tr>
+            <tr>
+                <td><span class="badge badge-yellow">上/下外侧不对称</span></td>
+                <td><strong>上外侧差异 > 6.4 cm<br>下外侧差异 > 6.1 cm</strong></td>
+                <td>
+                    提示支撑侧的肩袖肌群动态稳定不足（离心控制差），或后表链/侧表链的筋膜张力不平衡。
+                </td>
+            </tr>
+            <tr>
+                <td><span class="badge badge-green">达标与出院放行</span></td>
+                <td><strong>各方向对称且无痛</strong></td>
+                <td>
+                    <strong>绿灯：</strong> 运动员的上肢闭链控制能力极佳，可安全放行 (Cleared to Play)，进行高强度的专项上肢爆发力及大重量过头举训练。
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+</html>

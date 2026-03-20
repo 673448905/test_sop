@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>国家队级：整合运动心肺/心电/血压的高水平测试 SOP</title>
+    <style>
+        :root {
+            --primary: #0a192f;    /* 深幽蓝 */
+            --secondary: #172a45;  
+            --accent: #d4af37;     /* 冠军金 */
+            --accent-light: #fef08a;
+            --red: #e11d48;        
+            --green: #059669;
+            --bg-color: #f4f6f8;
+            --text-main: #1e293b;
+            --border-color: #cbd5e1;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Helvetica Neue', 'PingFang SC', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(10, 25, 47, 0.1);
+        }
+
+        /* 头部排版 */
+        .header-section { text-align: center; margin-bottom: 30px; }
+        h1 { color: var(--primary); font-size: 30px; letter-spacing: 2px; margin-bottom: 10px; text-transform: uppercase; }
+        .subtitle { color: var(--accent); font-size: 18px; font-weight: 600; letter-spacing: 1px; border-bottom: 2px solid var(--accent); display: inline-block; padding-bottom: 10px; }
+
+        /* 模块标题 */
+        h2.phase-title {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-size: 18px;
+            margin-top: 40px;
+            border-left: 6px solid var(--accent);
+        }
+
+        h3 { color: var(--primary); border-bottom: 1px solid var(--border-color); padding-bottom: 5px; margin-top: 25px;}
+
+        /* 提示与排期框 */
+        .schedule-box {
+            background: #f8fafc;
+            border: 2px solid var(--primary);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .equipment-highlight {
+            background: #fffbeb;
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        /* 表格体系 */
+        table { width: 100%; border-collapse: collapse; margin-bottom: 25px; font-size: 14px; }
+        th, td { border: 1px solid var(--border-color); padding: 12px; text-align: center; vertical-align: middle; }
+        th { background-color: var(--primary); color: #ffffff; font-weight: 600; }
+        tr:nth-child(even) { background-color: #f8fafc; }
+        td.text-left { text-align: left; }
+
+        .input-line { display: inline-block; border-bottom: 1px solid #000; width: 50px; margin: 0 5px; }
+
+        .tag { font-size: 12px; padding: 2px 6px; border-radius: 4px; background: var(--secondary); color: white; margin-left: 5px;}
+
+        @media print {
+            body { background: #fff; padding: 0; }
+            .container { box-shadow: none; padding: 0; max-width: 100%; }
+            h2.phase-title { background: #e2e8f0; color: #000; border-left: 6px solid #000; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            th { background-color: #cbd5e1; color: #000; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .schedule-box { border-color: #000; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header-section">
+        <h1>精英水上项目：多维生理与运动能力测试 SOP</h1>
+        <div class="subtitle">融合 Vyntus CPX 心肺、十二导联心电与运动血压监测体系</div>
+    </div>
+
+    <div class="schedule-box">
+        <h3 style="margin-top:0; border:none;">🗓️ 50人梯队 4天流水线排期战略 (Cohort Scheduling)</h3>
+        <p style="font-size: 14px;"><strong>分组逻辑：</strong>将50名运动员分为 A、B、C、D 四个大组（每组约12-13人）。保证所有代谢测试在无疲劳累积状态下进行，所有测试通过 SentrySuite 软件实现同库管理。</p>
+        <table>
+            <tr>
+                <th>时间 / 分组</th>
+                <th>A组 (12人)</th>
+                <th>B组 (12人)</th>
+                <th>C组 (13人)</th>
+                <th>D组 (13人)</th>
+            </tr>
+            <tr>
+                <td><strong>Day 1</strong></td>
+                <td><strong>静息代谢 (REE)</strong> + 形态学<br><span style="font-size:12px; color:var(--text-light)">(清晨空腹)</span></td>
+                <td>力量与生物力学测试<br><span style="font-size:12px; color:var(--text-light)">(下午正常训练状态)</span></td>
+                <td>常规水上技术训练</td>
+                <td>常规水上技术训练</td>
+            </tr>
+            <tr>
+                <td><strong>Day 2</strong></td>
+                <td>力量与生物力学测试</td>
+                <td><strong>静息代谢 (REE)</strong> + 形态学</td>
+                <td>常规水上技术训练</td>
+                <td>常规水上技术训练</td>
+            </tr>
+            <tr>
+                <td><strong>Day 3</strong></td>
+                <td colspan="2" style="background:#fffbeb; font-weight:bold; color:#92400e;">全面心肺极限阶梯测试 (CPET + ECG + BP + 乳酸)</td>
+                <td><strong>静息代谢</strong> + 形态学</td>
+                <td>力量与生物力学</td>
+            </tr>
+            <tr>
+                <td><strong>Day 4</strong></td>
+                <td>常规/恢复训练</td>
+                <td>常规/恢复训练</td>
+                <td colspan="2" style="background:#fffbeb; font-weight:bold; color:#92400e;">全面心肺极限阶梯测试 (CPET + ECG + BP + 乳酸)</td>
+            </tr>
+        </table>
+    </div>
+
+    <h2 class="phase-title">🔬 第一阶段：静息能量消耗 (REE) 与形态学监测</h2>
+    <div class="equipment-highlight">
+        <strong>核心设备：</strong> Vyntus CPX (搭载 Canopy 营养代谢测试模块 [cite: 12, 103])。<br>
+        <strong>科学优势：</strong> 采用面罩或头罩测量脂肪、蛋白质和碳水化合物的相对贡献 [cite: 103, 111, 123]。由于风机不接触受试者呼出气体 [cite: 127, 137] 且采用一次性薄膜 [cite: 132]，一人一换，50人连续测试极大降低了交叉感染风险。
+    </div>
+    <table>
+        <tr>
+            <th width="25%">测试项目</th>
+            <th width="35%">操作规范</th>
+            <th width="40%">录入数据与标杆</th>
+        </tr>
+        <tr>
+            <td class="text-left"><strong>静息能量消耗 (REE)</strong></td>
+            <td class="text-left">清晨空腹平躺。戴上 Canopy 头罩，待患者达到稳态条件 [cite: 103]。系统自动捕捉 VCO2 和 VO2 [cite: 105, 106, 117, 118]。</td>
+            <td class="text-left">
+                • 基础代谢率 (EE): <span class="input-line"></span> kcal/day<br>
+                • 呼吸交换率 (RER): <span class="input-line"></span> <span style="font-size:12px">(正常约 0.8)</span><br>
+                • 碳水/脂肪消耗比: <span class="input-line"></span> % / <span class="input-line"></span> %
+            </td>
+        </tr>
+        <tr>
+            <td class="text-left"><strong>核心杠杆与形态</strong></td>
+            <td class="text-left">测量身高、体重、臂展、坐高。采用DEXA或皮褶厚度测体脂。</td>
+            <td class="text-left">
+                • 猿指数 (臂展/身高): <span class="input-line"></span> <span style="font-size:12px">(>1.03为佳)</span><br>
+                • 体脂率: <span class="input-line"></span> %
+            </td>
+        </tr>
+    </table>
+
+    <h2 class="phase-title">🫀 第二阶段：黄金级心肺综合评估 (CPET + ECG + BP + Lactate)</h2>
+    <div class="equipment-highlight">
+        <strong>核心设备连动方案：</strong> <br>
+        1. <strong>心电监测：</strong> 穿戴 Vyntus ECG 蓝牙采集模块（重量仅 220g [cite: 53]，12导联全系回顾，无引线干扰运动员划船）。<br>
+        2. <strong>运动血压：</strong> 佩戴 SunTech 专利 Orbit-K 防滑袖带，开启 DKA (三维K氏音分析) 模式 抵抗测功仪震动。<br>
+        3. <strong>气量代谢：</strong> 佩戴 Vyntus 面罩与数字式容量传感器 (DVT) [cite: 27] 进行每口气数据采集。<br>
+        <strong>操作效能：</strong> 全自动容积定标仅需30秒，无需3L定标筒，极其适合50人大规模连续作战。
+    </div>
+    
+    <h3>1. 测功仪 7×4 阶梯极量测试数据提取</h3>
+    <table>
+        <tr>
+            <th>负荷级</th>
+            <th>瓦数(W)</th>
+            <th>心率(BPM)</th>
+            <th>收缩压/舒张压</th>
+            <th>血乳酸 (mmol/L)</th>
+            <th>氧脉搏(VO2/HR)</th>
+        </tr>
+        <tr><td>Step 1-4</td><td>递增</td><td>自动同步</td><td>自动同步DKA</td><td>耳垂采血指认</td><td>自动抓取</td></tr>
+        <tr><td>Step 5-6</td><td>大强度</td><td>自动同步</td><td>自动同步DKA</td><td>耳垂采血指认</td><td>自动抓取</td></tr>
+        <tr>
+            <td style="color:var(--red); font-weight:bold;">MAX 极量</td>
+            <td><span class="input-line"></span> W</td>
+            <td><span class="input-line"></span> BPM</td>
+            <td><span class="input-line"></span> / <span class="input-line"></span></td>
+            <td><span class="input-line"></span> mmol</td>
+            <td><span class="input-line"></span> mL/b</td>
+        </tr>
+    </table>
+
+    <h3>2. SentrySuite 自动化临床数据诊断</h3>
+    <table>
+        <tr>
+            <th width="30%">高阶生理指标</th>
+            <th width="30%">测试结果自动抓取</th>
+            <th width="40%">精英赛艇/皮划艇标杆</th>
+        </tr>
+        <tr>
+            <td><strong>最大摄氧量 (VO2Max)</strong> <span class="tag">系统核心</span></td>
+            <td>绝对: <span class="input-line"></span> L/min<br>相对: <span class="input-line"></span> ml/kg/min</td>
+            <td class="text-left">男公开级 > 6.0 L/min 或 > 65 ml/kg/min<br>女公开级 > 4.5 L/min 或 > 55 ml/kg/min</td>
+        </tr>
+        <tr>
+            <td><strong>通气无氧阈 (VT1 / VT2)</strong> <span class="tag">自动斜率</span></td>
+            <td>VT1 对应负荷: <span class="input-line"></span> W<br>VT2 对应负荷: <span class="input-line"></span> W</td>
+            <td class="text-left">SentrySuite 自动利用不同参数确定 VT1, VT2, VT3 [cite: 242]。用于精准划分日常有氧/混氧/无氧训练区间。</td>
+        </tr>
+        <tr>
+            <td><strong>运动后恢复效能 (Recovery)</strong></td>
+            <td>VO2 T1/2: <span class="input-line"></span> 分钟 [cite: 210]<br>HRR 1min降幅: <span class="input-line"></span> bpm [cite: 217]</td>
+            <td class="text-left">系统自动计算 VO2 恢复半衰期 (VO2 T1/2) [cite: 210, 217]。半衰期越短，代谢清除能力越强。</td>
+        </tr>
+        <tr>
+            <td><strong>震荡呼吸 (EOV)</strong> <span class="tag">异常排查</span></td>
+            <td>系统判定: [ ] 阴性 [ ] 阳性</td>
+            <td class="text-left">Vyntus CPX具备EOV自动识别功能。阳性预示极高心衰/过度训练风险 [cite: 227]。</td>
+        </tr>
+    </table>
+
+    <h2 class="phase-title">🏋️ 第三/四阶段：专项力量与低氧环境模拟 (High-Performance)</h2>
+    <div class="equipment-highlight">
+        对于准备世锦赛/奥运会的顶尖梯队，可接入 Vyntus CPX 的 <strong>High/Low FiO2 功能（选配）</strong>[cite: 139]。通过降低氧浓度 (如 14-15% O2) [cite: 142]，可以直接在平原实验室内模拟海拔约 2500m [cite: 158] 的高原测功仪竞速，评估运动员的“缺氧适应性 (Hypoxia Tolerance)”与是否适合高海拔飞行/比赛 [cite: 157, 160, 161]。
+    </div>
+    <table>
+        <tr>
+            <th width="20%">测试类别</th>
+            <th width="30%">测试项目</th>
+            <th width="25%">实测记录</th>
+            <th width="25%">专项意义</th>
+        </tr>
+        <tr>
+            <td rowspan="2"><strong>专项神经肌肉力量</strong></td>
+            <td>最大卧拉 (Bench Pull 1RM)</td>
+            <td><span class="input-line"></span> KG (<span class="input-line"></span> 倍体重)</td>
+            <td>上肢划水水平绝对/相对力量</td>
+        </tr>
+        <tr>
+            <td>测力台等长中段拉 (IMTP)</td>
+            <td>峰值力(PF): <span class="input-line"></span> N</td>
+            <td>下肢起航蹬伸发力率(RFD)</td>
+        </tr>
+        <tr>
+            <td rowspan="2"><strong>测功仪专项与低氧</strong></td>
+            <td>无氧功率：1分钟全力冲刺</td>
+            <td>平均瓦数: <span class="input-line"></span> W</td>
+            <td>糖酵解耐力 / 冲刺接轨</td>
+        </tr>
+        <tr>
+            <td>Low FiO2 高原模拟测试 [cite: 159, 160]</td>
+            <td>模拟海拔2500m 完赛时:<br>SpO2下降至: <span class="input-line"></span> %</td>
+            <td>评估高原集训前的身体耐受度边界。</td>
+        </tr>
+    </table>
+
+    <div style="margin-top: 40px; border-top: 2px dashed var(--border-color); padding-top: 20px; display: flex; justify-content: space-between;">
+        <div><strong>主测教练签字：</strong> __________________</div>
+        <div><strong>医疗/科研主管签字：</strong> __________________</div>
+        <div><strong>日期：</strong> ____年__月__日</div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STATION 4: 极限心肺与代谢监控 (Elite CPET Lab) SOP</title>
+    <style>
+        :root {
+            --primary: #0a192f;    
+            --secondary: #172a45;  
+            --accent: #d4af37;     
+            --accent-light: #fef08a;
+            --red: #dc2626;
+            --green: #059669;
+            --bg-color: #f8fafc;
+            --text-main: #1e293b;
+            --border-color: #cbd5e1;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Helvetica Neue', 'PingFang SC', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(10, 25, 47, 0.1);
+            border-top: 8px solid var(--accent);
+        }
+
+        .header { display: flex; align-items: center; border-bottom: 3px solid var(--primary); padding-bottom: 20px; margin-bottom: 30px; }
+        .station-number { background: var(--accent); color: var(--primary); font-size: 36px; font-weight: bold; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; border-radius: 12px; margin-right: 25px; }
+        .header-text h1 { color: var(--primary); font-size: 28px; margin: 0 0 5px 0; letter-spacing: 1px; }
+        .header-text p { color: var(--text-main); font-size: 16px; margin: 0; font-weight: bold; text-transform: uppercase; }
+
+        .meta-bar { background: #f1f5f9; padding: 15px 20px; border-radius: 8px; display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 30px; border: 1px solid var(--border-color); }
+        .meta-item strong { color: var(--primary); }
+
+        .step-block { margin-bottom: 35px; }
+        .step-title { background: var(--primary); color: white; padding: 10px 20px; border-radius: 6px; font-size: 18px; margin-bottom: 15px; display: inline-block; border-left: 5px solid var(--accent); }
+        
+        .action-box { border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; }
+        .action-row { display: flex; border-bottom: 1px solid var(--border-color); }
+        .action-row:last-child { border-bottom: none; }
+        .action-checkbox { width: 50px; background: #f8fafc; display: flex; align-items: center; justify-content: center; border-right: 1px solid var(--border-color); }
+        .action-checkbox input[type="checkbox"] { transform: scale(1.5); cursor: pointer; accent-color: var(--primary); }
+        .action-detail { padding: 15px 20px; flex: 1; font-size: 15px; }
+        .action-detail strong { color: var(--primary); }
+        
+        .data-capture { background: #fffbeb; padding: 20px; border-radius: 8px; border-left: 4px solid var(--accent); margin-top: 20px; }
+        
+        table.score-table { width: 100%; border-collapse: collapse; margin-top: 10px; background: white; font-size: 14px; }
+        table.score-table th, table.score-table td { border: 1px solid var(--border-color); padding: 10px 12px; text-align: center; vertical-align: middle; }
+        table.score-table th { background-color: var(--secondary); color: white; font-weight: normal; }
+        table.score-table td.text-left { text-align: left; font-weight: bold; color: var(--primary); }
+        
+        .input-box { width: 60px; height: 30px; text-align: center; border: 1px solid var(--border-color); border-radius: 4px; font-size: 14px; font-weight: bold; color: var(--primary); outline: none; }
+        .input-line { border: none; border-bottom: 1px solid #000; background: transparent; width: 60px; text-align: center; font-size: 14px; outline: none; margin: 0 5px;}
+        
+        .highlight-text { color: var(--primary); font-weight: bold; background: var(--accent-light); padding: 2px 6px; border-radius: 4px; }
+        .badge-key { background: var(--secondary); color: white; padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 12px; }
+
+        @media print {
+            body { background: #fff; padding: 0; }
+            .container { box-shadow: none; border-top: none; padding: 0; }
+            .action-box, .data-capture { page-break-inside: avoid; }
+            table.score-table th { background-color: #cbd5e1; color: #000; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .highlight-text { background: transparent; border: 1px solid #000; }
+            .badge-key { border: 1px solid #000; color: #000; background: #eee; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <div class="station-number">04</div>
+        <div class="header-text">
+            <h1>极限心肺与代谢监控</h1>
+            <p>Elite CPET, ECG & Hemodynamic Lab</p>
+        </div>
+    </div>
+
+    <div class="meta-bar">
+        <div class="meta-item"><strong>🕒 执行时间：</strong> 全天独立机动排期 (约45分钟/人)</div>
+        <div class="meta-item"><strong>👥 岗位配置：</strong> 仪器专家 2名 + 队医 1名 (负责采血)</div>
+        <div class="meta-item"><strong>🛠️ 核心设备：</strong> Vyntus CPX [cite: 3], Vyntus ECG[cite: 51], SunTech BP, Concept2/Dansprint</div>
+    </div>
+
+    <div class="step-block">
+        <div class="step-title">步骤 1：系统预调与全自动校准 (仪器专家)</div>
+        <div class="action-box">
+            <label class="action-row">
+                <div class="action-checkbox"><input type="checkbox"></div>
+                <div class="action-detail">
+                    <strong>环境与气体定标：</strong> 开启 Vyntus CPX。系统内置温度、压力传感器进行实时 BTPS 补偿，气体定标采用单点自动定标 [cite: 2]。面板指示灯显示 <span class="highlight-text">蓝色常亮</span> 代表就绪 [cite: 183]。
+                </div>
+            </label>
+            <label class="action-row">
+                <div class="action-checkbox"><input type="checkbox"></div>
+                <div class="action-detail">
+                    <strong>全自动容积定标：</strong> 在 SentrySuite 软件点击容量定标。<strong>无需手动推拉 3L 定标筒</strong> [cite: 2, 169]，系统内置全自动校准模块，30秒内即可通过测试 [cite: 171]。
+                </div>
+            </label>
+            <label class="action-row">
+                <div class="action-checkbox"><input type="checkbox"></div>
+                <div class="action-detail">
+                    <strong>预设方案加载：</strong> 在同一 SentrySuite 软件界面加载 CPET、心电与血压联动模块 [cite: 2]。调出水上项目专属的 <span class="highlight-text">7 × 4 分钟测功仪阶梯递增方案</span>。
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <div class="step-block">
+        <div class="step-title">步骤 2：穿戴与信号核对 (全员协同)</div>
+        <div class="action-box">
+            <label class="action-row">
+                <div class="action-checkbox"><input type="checkbox"></div>
+                <div class="action-detail">
+                    <strong>12导联心电连接：</strong> 为运动员贴装电极。连接重量仅 220g 的 Vyntus 蓝牙 ECG 发射器 [cite: 53]。检查导联线接头 LED 指示灯：亮 <span class="highlight-text" style="color:#059669;">绿灯</span> 代表阻抗正常连接成功 [cite: 64]。
+                </div>
+            </label>
+            <label class="action-row">
+                <div class="action-checkbox"><input type="checkbox"></div>
+                <div class="action-detail">
+                    <strong>运动血压佩戴：</strong> 为运动员左臂佩戴专利 Orbit-K 防滑袖带 [cite: 2]。确认软件开启了 <strong>DKA（三维K氏音分析）运动模式</strong> 以抵抗测功仪带来的强震动噪音 [cite: 2]。
+                </div>
+            </label>
+            <label class="action-row">
+                <div class="action-checkbox"><input type="checkbox"></div>
+                <div class="action-detail">
+                    <strong>佩戴面罩与 DVT：</strong> 佩戴面罩并连接数字式容量传感器 (DVT)。注意将 DVT 的细网筛一侧朝向患者面部 [cite: 32]，连接采样管。
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <div class="step-block">
+        <div class="step-title">步骤 3：7×4 阶梯极量测试执行</div>
+        <div class="action-box">
+            <label class="action-row">
+                <div class="action-checkbox"><input type="checkbox"></div>
+                <div class="action-detail">
+                    <strong>启动采集：</strong> 软件点击开始，主机指示灯变为 <span class="highlight-text" style="color:#059669;">绿色常亮</span> [cite: 185]。屏幕左侧监视 9-Panel (Wasserman-9 图) [cite: 2, 75]。
+                </div>
+            </label>
+            <label class="action-row">
+                <div class="action-checkbox"><input type="checkbox"></div>
+                <div class="action-detail">
+                    <strong>指尖/耳垂采血 (队医)：</strong> <strong>每阶梯结束前 30 秒</strong>，队医采集耳垂血，滴入便携式乳酸分析仪，仪器专家将读数记入软件事件标记。
+                </div>
+            </label>
+            <label class="action-row">
+                <div class="action-checkbox"><input type="checkbox"></div>
+                <div class="action-detail">
+                    <strong>主观疲劳录入：</strong> 每一阶梯，按键盘 <span class="badge-key">F7</span> 键呼出 RPE 窗口 [cite: 101]。询问运动员疲劳度并录入 6-20 分级量表。
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <div class="step-block">
+        <div class="step-title">步骤 4：恢复期监控与高原低氧模拟 (可选)</div>
+        <div class="action-box">
+            <label class="action-row">
+                <div class="action-checkbox"><input type="checkbox"></div>
+                <div class="action-detail">
+                    <strong>恢复期追踪：</strong> 运动员力竭停止蹬踏后，要求保持平稳呼吸 3-5 分钟。系统将自动计算 <strong>VO2 T1/2 (摄氧量恢复半衰期)</strong> [cite: 210]。
+                </div>
+            </label>
+            <label class="action-row">
+                <div class="action-checkbox"><input type="checkbox"></div>
+                <div class="action-detail">
+                    <strong>High/Low FiO2 模块 (选配)：</strong> 若需测试缺氧适应性，连接低氧模块。在软件中设定降低氧浓度至 <strong>14-15% O2</strong> [cite: 142]，以模拟海拔约 2500m 气压环境 [cite: 158]。
+                </div>
+            </label>
+        </div>
+
+        <div class="data-capture">
+            <strong>📋 极限心肺与代谢核心数据提取 (入库 AMS)</strong>
+            <table class="score-table">
+                <tr>
+                    <th width="30%">生理测试指标</th>
+                    <th width="20%">实测数据</th>
+                    <th width="20%">体重复合比</th>
+                    <th width="30%">对应功率/负荷</th>
+                </tr>
+                <tr>
+                    <td class="text-left">最大摄氧量 (VO2Max)</td>
+                    <td><input type="text" class="input-box"> L/min</td>
+                    <td><input type="text" class="input-line" style="width:40px;"> mL/kg</td>
+                    <td>Max: <input type="text" class="input-line" style="width:40px;"> W</td>
+                </tr>
+                <tr>
+                    <td class="text-left">无氧阈 (LT2 / 4mmol/L)</td>
+                    <td><input type="text" class="input-box"> bpm</td>
+                    <td><input type="text" class="input-line" style="width:40px;"> mmol</td>
+                    <td>LT2: <input type="text" class="input-line" style="width:40px;"> W</td>
+                </tr>
+                <tr>
+                    <td class="text-left">第一通气阈 (VT1)</td>
+                    <td><input type="text" class="input-box"> bpm</td>
+                    <td>-</td>
+                    <td>VT1: <input type="text" class="input-line" style="width:40px;"> W</td>
+                </tr>
+                <tr>
+                    <td class="text-left">最大氧脉搏 (O2 Pulse)</td>
+                    <td><input type="text" class="input-box"> mL/beat</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td class="text-left">VO2 T1/2 恢复半衰期</td>
+                    <td><input type="text" class="input-box" style="width:80px;"> min</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div style="margin-top: 40px; border-top: 2px dashed var(--border-color); padding-top: 20px; display: flex; justify-content: space-between; font-size: 15px;">
+        <div><strong>仪器专家确认签字：</strong> __________________</div>
+        <div><strong>医疗采血确认签字：</strong> __________________</div>
+    </div>
+</div>
+
+</body>
+</html>

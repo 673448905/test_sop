@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAR-Q 体力活动准备问卷</title>
+    <style>
+        :root {
+            --primary: #0f766e;    
+            --secondary: #14b8a6;  
+            --accent: #f97316;     
+            --red: #ef4444;        
+            --green: #10b981;      
+            --bg-color: #f8fafc;
+            --text-main: #334155;
+            --text-light: #64748b;
+            --border-color: #e2e8f0;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary);
+            font-size: 26px;
+            border-bottom: 3px solid var(--secondary);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .intro-text {
+            font-size: 14px;
+            color: var(--text-light);
+            margin-bottom: 30px;
+            text-align: justify;
+        }
+
+        .instruction-box {
+            background-color: #f0fdfa;
+            border-left: 4px solid var(--secondary);
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .instruction-box strong { color: var(--primary); }
+
+        /* 表单区域样式 */
+        .client-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            flex: 1;
+            min-width: 200px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group label {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+
+        .input-group input[type="text"],
+        .input-group input[type="date"] {
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: var(--secondary);
+        }
+
+        /* 问卷表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            font-size: 15px;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        th { background-color: #f1f5f9; color: var(--primary); font-weight: 600; text-align: center; }
+        
+        tr:hover { background-color: #f8fafc; }
+
+        .radio-cell {
+            text-align: center;
+            width: 10%;
+        }
+
+        input[type="radio"] {
+            transform: scale(1.5);
+            cursor: pointer;
+            accent-color: var(--primary);
+        }
+
+        /* 结果指引区 */
+        .result-section {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .result-card {
+            flex: 1;
+            padding: 20px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .result-card.yes { background-color: #fef2f2; border: 1px solid #fca5a5; }
+        .result-card.yes h3 { color: var(--red); margin-top: 0; }
+        
+        .result-card.no { background-color: #f0fdf4; border: 1px solid #86efac; }
+        .result-card.no h3 { color: var(--green); margin-top: 0; }
+
+        /* 签名区 - 已修复对齐问题 */
+        .signature-box {
+            border-top: 2px dashed var(--border-color);
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start; /* 将 flex-end 改为 flex-start，确保顶部对齐 */
+            margin-top: 20px;
+        }
+
+        .sign-line {
+            width: 45%;
+        }
+
+        .sign-line span {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .sign-line .line {
+            border-bottom: 1px solid var(--text-main);
+            height: 30px;
+            width: 100%;
+        }
+
+        /* 打印样式 */
+        @media print {
+            body { background: #fff; padding: 0; }
+            .container { box-shadow: none; padding: 0; max-width: 100%; }
+            .result-card.yes { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .result-card.no { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            input[type="text"], input[type="date"] { border: none; border-bottom: 1px solid #000; border-radius: 0; padding: 5px 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>📝 PAR-Q 体力活动准备问卷 (2026 修订版)</h1>
+    
+    <div class="intro-text">
+        规律的体力活动充满乐趣且对健康有益，对绝大多数人而言，增加体力活动是极其安全的。然而，少部分人群在增加运动量前应当咨询医生的意见。本问卷旨在为您提供<strong>运动前的初步安全筛查</strong>，帮助甄别在运动前需要医疗转介的人群。
+    </div>
+
+    <div class="instruction-box">
+        <strong>填写说明：</strong> 如果您计划显著增加您的运动量，请仔细阅读以下 7 个问题，并根据您<strong>过去一个月的真实情况</strong>诚实作答。
+    </div>
+
+    <div class="client-info">
+        <div class="input-group">
+            <label>客户姓名 / Name</label>
+            <input type="text" placeholder="请输入姓名">
+        </div>
+        <div class="input-group">
+            <label>联系电话 / Phone</label>
+            <input type="text" placeholder="请输入电话号码">
+        </div>
+        <div class="input-group">
+            <label>出生日期 / DOB</label>
+            <input type="date">
+        </div>
+    </div>
+
+    <table>
+        <tr>
+            <th width="8%">序号</th>
+            <th width="72%">筛查问题内容 (请勾选 是 或 否)</th>
+            <th width="10%">是 (Yes)</th>
+            <th width="10%">否 (No)</th>
+        </tr>
+        <tr>
+            <td class="text-center"><strong>1</strong></td>
+            <td>您的医生是否曾经告诉过您，您患有<strong>心脏疾病</strong>，并且只能参加医生推荐的体力活动？</td>
+            <td class="radio-cell"><input type="radio" name="q1" value="yes"></td>
+            <td class="radio-cell"><input type="radio" name="q1" value="no"></td>
+        </tr>
+        <tr>
+            <td class="text-center"><strong>2</strong></td>
+            <td>当您进行体力活动时，是否会感到<strong>胸部疼痛</strong>？</td>
+            <td class="radio-cell"><input type="radio" name="q2" value="yes"></td>
+            <td class="radio-cell"><input type="radio" name="q2" value="no"></td>
+        </tr>
+        <tr>
+            <td class="text-center"><strong>3</strong></td>
+            <td>在过去的一个月内，您是否在<strong>没有进行</strong>体力活动时也经历过胸部疼痛？</td>
+            <td class="radio-cell"><input type="radio" name="q3" value="yes"></td>
+            <td class="radio-cell"><input type="radio" name="q3" value="no"></td>
+        </tr>
+        <tr>
+            <td class="text-center"><strong>4</strong></td>
+            <td>您是否曾因<strong>头晕</strong>而失去平衡，或者曾经<strong>失去意识/晕厥</strong>？</td>
+            <td class="radio-cell"><input type="radio" name="q4" value="yes"></td>
+            <td class="radio-cell"><input type="radio" name="q4" value="no"></td>
+        </tr>
+        <tr>
+            <td class="text-center"><strong>5</strong></td>
+            <td>您是否患有某种<strong>骨骼或关节问题</strong>（例如：背部、膝盖或髋关节），且该问题可能会因体力活动而恶化？</td>
+            <td class="radio-cell"><input type="radio" name="q5" value="yes"></td>
+            <td class="radio-cell"><input type="radio" name="q5" value="no"></td>
+        </tr>
+        <tr>
+            <td class="text-center"><strong>6</strong></td>
+            <td>您的医生目前是否正在为您开具治疗<strong>血压或心脏问题</strong>的处方药物（例如利尿剂/水丸）？</td>
+            <td class="radio-cell"><input type="radio" name="q6" value="yes"></td>
+            <td class="radio-cell"><input type="radio" name="q6" value="no"></td>
+        </tr>
+        <tr>
+            <td class="text-center"><strong>7</strong></td>
+            <td>您是否知道<strong>其他任何原因</strong>表明您不应该进行体力活动？</td>
+            <td class="radio-cell"><input type="radio" name="q7" value="yes"></td>
+            <td class="radio-cell"><input type="radio" name="q7" value="no"></td>
+        </tr>
+    </table>
+
+    <div class="result-section">
+        <div class="result-card yes">
+            <h3>🛑 如果您有 1 个或多个问题回答了“是”：</h3>
+            <p>在增加体力活动或进行体能评估前，<strong>请务必咨询您的医生</strong>。</p>
+            <p>告知医生您计划参加的运动，以及本问卷中您回答为“是”的问题。在获得医疗许路线以前，我们建议您暂停高强度训练，并由我们的持证物理治疗师为您进行保守干预。</p>
+        </div>
+        <div class="result-card no">
+            <h3>🟢 如果您对所有问题都回答了“否”：</h3>
+            <p>您可以合理确信自己能够安全地<strong>开始逐渐增加</strong>体力活动水平。</p>
+            <p>建议您直接进入我们的【基础运动功能筛查 (FMS)】与【体能测试】环节。如果在未来的训练中您的健康状况发生变化导致上述问题变成“是”，请立即告知您的教练。</p>
+        </div>
+    </div>
+
+    <div class="signature-box">
+        <div class="sign-line">
+            <span>客户签字声明 (Signature)：</span>
+            <div class="line"></div>
+            <p style="font-size: 12px; color: var(--text-light); margin-top: 5px;">我已阅读、理解并诚实回答了上述所有问题。</p>
+        </div>
+        <div class="sign-line">
+            <span>签署日期 (Date)：</span>
+            <div class="line"></div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
