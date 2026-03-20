@@ -341,26 +341,28 @@
       if (!root) {
         return;
       }
-      root.classList.add("space-y-6", "leading-loose", "max-w-3xl", "mx-auto");
+      root.classList.add("space-y-8", "leading-loose", "max-w-3xl", "mx-auto");
       const headings1 = Array.from(root.querySelectorAll("h1"));
       headings1.forEach(h => {
-        h.classList.add("mt-4", "mb-3", "text-lg", "sm:text-xl", "font-semibold", "text-slate-50", "border-b", "border-slate-700", "pb-2");
+        h.classList.add("mt-5", "mb-4", "text-lg", "sm:text-xl", "font-semibold", "text-slate-50", "border-b", "border-slate-700", "pb-2");
       });
       const headings2 = Array.from(root.querySelectorAll("h2"));
       headings2.forEach(h => {
-        h.classList.add("mt-4", "mb-2", "text-base", "sm:text-lg", "font-semibold", "text-slate-50");
+        h.classList.add("mt-5", "mb-3", "text-base", "sm:text-lg", "font-semibold", "text-slate-50");
       });
       const headings3 = Array.from(root.querySelectorAll("h3"));
       headings3.forEach(h => {
-        h.classList.add("mt-3", "mb-1.5", "text-sm", "sm:text-base", "font-semibold", "text-slate-100");
+        h.classList.add("mt-4", "mb-2", "text-sm", "sm:text-base", "font-semibold", "text-slate-100");
       });
       const paras = Array.from(root.querySelectorAll("p"));
       paras.forEach(p => {
-        p.classList.add("mt-2", "mb-3.5", "text-[14px]", "sm:text-sm", "leading-loose", "text-slate-100");
+        p.classList.add("mt-3", "mb-4", "text-[14px]", "sm:text-sm", "text-slate-100");
+        p.style.lineHeight = "2.1";
       });
       const lists = Array.from(root.querySelectorAll("ul, ol"));
       lists.forEach(list => {
-        list.classList.add("my-3.5", "ml-4", "sm:ml-6", "space-y-2.5", "text-[14px]", "sm:text-sm", "leading-loose", "text-slate-100");
+        list.classList.add("my-4", "ml-4", "sm:ml-6", "space-y-3", "text-[14px]", "sm:text-sm", "text-slate-100");
+        list.style.lineHeight = "2.1";
         if (list.tagName.toLowerCase() === "ul") {
           list.classList.add("list-disc");
         } else {
@@ -369,25 +371,25 @@
       });
       const listItems = Array.from(root.querySelectorAll("li"));
       listItems.forEach(li => {
-        li.classList.add("mt-0.5");
+        li.classList.add("mt-1");
       });
       const tables = Array.from(root.querySelectorAll("table"));
       tables.forEach(table => {
-        table.classList.add("w-full", "border-collapse", "text-sm", "my-4", "rounded-lg", "overflow-hidden");
+        table.classList.add("w-full", "border-collapse", "text-sm", "my-5", "rounded-lg", "overflow-hidden");
         const theadCells = Array.from(table.querySelectorAll("thead th"));
         const bodyHeaderCells = Array.from(table.querySelectorAll("th"));
         const headerCells = theadCells.length > 0 ? theadCells : bodyHeaderCells;
         headerCells.forEach(th => {
-          th.classList.add("bg-slate-800", "text-slate-100", "border", "border-slate-700", "px-3", "py-2", "text-left");
+          th.classList.add("bg-slate-800", "text-slate-100", "border", "border-slate-700", "px-3", "py-3", "text-left");
         });
         const tds = Array.from(table.querySelectorAll("td"));
         tds.forEach(td => {
-          td.classList.add("border", "border-slate-700", "px-3", "py-2", "align-top", "text-slate-100");
+          td.classList.add("border", "border-slate-700", "px-3", "py-3", "align-top", "text-slate-100");
         });
       });
       const pres = Array.from(root.querySelectorAll("pre"));
       pres.forEach(pre => {
-        pre.classList.add("bg-slate-900", "text-slate-100", "p-3", "rounded-lg", "overflow-x-auto", "text-xs", "font-mono", "my-3", "border", "border-slate-800");
+        pre.classList.add("bg-slate-900", "text-slate-100", "p-3", "rounded-lg", "overflow-x-auto", "text-xs", "font-mono", "my-4", "border", "border-slate-800");
       });
       const codes = Array.from(root.querySelectorAll("code"));
       codes.forEach(code => {
