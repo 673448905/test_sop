@@ -140,7 +140,7 @@
                   </button>
                 </div>
               </div>
-              <div id="sopContent" class="flex-1 w-full bg-slate-900 overflow-y-auto px-4 sm:px-6 py-4 sm:py-6 text-sm text-slate-100"></div>
+              <div id="sopContent" class="flex-1 w-full bg-slate-900 overflow-y-auto px-4 sm:px-6 py-4 sm:py-6 pb-24 sm:pb-8 text-sm text-slate-100"></div>
             </div>
           </section>
         </main>
@@ -338,6 +338,39 @@
     }
 
     function applySopContentStyles(root) {
+      if (!root) {
+        return;
+      }
+      root.classList.add("space-y-5", "leading-loose", "max-w-3xl", "mx-auto");
+      const headings1 = Array.from(root.querySelectorAll("h1"));
+      headings1.forEach(h => {
+        h.classList.add("mt-4", "mb-3", "text-lg", "sm:text-xl", "font-semibold", "text-slate-50", "border-b", "border-slate-700", "pb-2");
+      });
+      const headings2 = Array.from(root.querySelectorAll("h2"));
+      headings2.forEach(h => {
+        h.classList.add("mt-4", "mb-2", "text-base", "sm:text-lg", "font-semibold", "text-slate-50");
+      });
+      const headings3 = Array.from(root.querySelectorAll("h3"));
+      headings3.forEach(h => {
+        h.classList.add("mt-3", "mb-1.5", "text-sm", "sm:text-base", "font-semibold", "text-slate-100");
+      });
+      const paras = Array.from(root.querySelectorAll("p"));
+      paras.forEach(p => {
+        p.classList.add("mt-1.5", "mb-3", "text-[14px]", "sm:text-sm", "leading-loose", "text-slate-100");
+      });
+      const lists = Array.from(root.querySelectorAll("ul, ol"));
+      lists.forEach(list => {
+        list.classList.add("my-3", "ml-4", "sm:ml-6", "space-y-2", "text-[14px]", "sm:text-sm", "leading-loose", "text-slate-100");
+        if (list.tagName.toLowerCase() === "ul") {
+          list.classList.add("list-disc");
+        } else {
+          list.classList.add("list-decimal");
+        }
+      });
+      const listItems = Array.from(root.querySelectorAll("li"));
+      listItems.forEach(li => {
+        li.classList.add("mt-0.5");
+      });
       const tables = Array.from(root.querySelectorAll("table"));
       tables.forEach(table => {
         table.classList.add("w-full", "border-collapse", "text-sm", "my-4", "rounded-lg", "overflow-hidden");
